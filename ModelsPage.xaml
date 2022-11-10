@@ -1,0 +1,53 @@
+﻿<Page x:Class="_01electronics_marketing.ModelsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_01electronics_marketing"
+      mc:Ignorable="d" 
+      Title="ModelsPage">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*" MinWidth="240"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" MinHeight="300" Background="#105A97">
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+ 
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource sideNavigationItemStyle}" Name="ProductsLabel" Text="Products" MouseLeftButtonDown="OnButtonClickedProducts"/>
+
+
+        </Grid>
+
+        <Grid Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Name="ModelsGrid">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <ProgressBar Grid.Column="0" Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center" Name="downloadProgressBar" Style="{StaticResource ProgressBarStyle}"/>
+
+            <ScrollViewer Name="scrollViewer" Grid.Column="0" Grid.Row="1" Visibility="Collapsed" VerticalScrollBarVisibility ="Auto" VerticalAlignment ="Stretch" HorizontalAlignment="Stretch">
+                <WrapPanel Name="modelsWrapPanel"/>
+            </ScrollViewer>
+
+            <Canvas Visibility="Collapsed" Name="addBtn" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Panel.ZIndex="999" Margin="0,0,100,80"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Opacity="0.5"  MouseEnter="addBtnMouseEnter" MouseLeave="addBtnMouseLeave" MouseLeftButtonUp="onBtnAddClick">
+                <Path   Fill="#105A97" Data="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" Stretch="Fill"  Width="65" Height="65" />
+            </Canvas>
+
+        </Grid>
+
+    </Grid>
+</Page>

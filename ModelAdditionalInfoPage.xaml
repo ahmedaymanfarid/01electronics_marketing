@@ -1,0 +1,189 @@
+﻿<Page x:Class="_01electronics_marketing.ModelAdditionalInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_01electronics_marketing"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Model Additional Info">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#105A97">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Background="#105A97" Name="ModelHeader" Content="MODEL ADDITIONAL INFO" Style="{StaticResource secondaryHeaderTextStyle}"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource unselectedSecondaryTabBorder}" MouseLeftButtonDown="OnBtnClickBasicInfo">
+                <Label Content="Basic Info" Style="{StaticResource unselectedSecondaryTabLabelItem}"/>
+            </Border>
+            <Border Grid.Column="1" Style="{StaticResource unselectedSecondaryTabBorder}" MouseLeftButtonDown="OnBtnClickUpsSpecs">
+                <Label Name="SpecsType" Content="UPS Specs" Style="{StaticResource unselectedSecondaryTabLabelItem}"/>
+            </Border>
+            <Border Grid.Column="2" Style="{StaticResource selectedSecondaryTabBorder}">
+                <Label Content="Additional Info" Style="{StaticResource selectedSecondaryTabLabelItem}"/>
+            </Border>
+            <Border Grid.Column="3" Style="{StaticResource unselectedSecondaryTabBorder}" MouseLeftButtonDown="OnBtnClickUploadFiles">
+                <Label Content="Data Sheet" Style="{StaticResource unselectedSecondaryTabLabelItem}"/>
+            </Border>
+        </Grid>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="24,24,0,24">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" MinWidth="300" MinHeight="250">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Background="White" Margin="20" Grid.Row="0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid Grid.Row="0" Background="#105A97">
+
+                            <Label Content="STANDARD FEATURES" Margin="20,0,0,0" HorizontalAlignment="Left" Style="{StaticResource tableHeaderItem}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Name="standardFeaturesGrid" Tag="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="75"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Feature #1"  Margin="30,0,0,0" HorizontalAlignment="Left" Style="{StaticResource labelStyle}"/>
+                                <TextBox  Grid.Column="1" Style="{StaticResource textBoxStyle}" Margin="80,0,0,0" Name="standardFeaturesTextBox1" TextWrapping="Wrap" />
+                                <Image Grid.Column="2" Source="Icons\plus_icon.jpg" Width="20" Height="20" Margin="10,0,10,0" MouseLeftButtonDown="onClickHandler"/>
+                                <Label Style="{StaticResource labelStyle}" Name="standardFeaturesLabel1" Grid.Column="1"  Visibility="Collapsed" Margin="80,0,0,0" HorizontalAlignment="Left" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" MinWidth="300" MinHeight="250">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Background="White" Margin="20" Grid.Row="0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="#105A97">
+                            <Label Content="BENEFITS" Margin="20,0,0,0" HorizontalAlignment="Left" Style="{StaticResource tableHeaderItem}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Name="benefitsGrid" Tag="1" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="75"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Benefit #1"  Margin="30,0,0,0" HorizontalAlignment="Left" Style="{StaticResource labelStyle}"/>
+                                <TextBox Grid.Column="1" Style="{StaticResource textBoxStyle}" Name="benefitsTextBox1" TextWrapping="Wrap"/>
+                                <Image Grid.Column="2" Source="Icons\plus_icon.jpg" Width="20" Height="20" Margin="10,0,10,0" MouseLeftButtonDown="OnClickBenefitsImage"/>
+                                <Label Style="{StaticResource labelStyle}" Name="benefitsLabel1" Grid.Column="1"  Visibility="Collapsed" Margin="80,0,0,0" HorizontalAlignment="Left" />
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" MinWidth="300" MinHeight="250">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Background="White" Margin="20" Grid.Row="0" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="#105A97">
+                            <Label Content="APPLICATIONS" Margin="20,0,0,0" HorizontalAlignment="Left" Style="{StaticResource tableHeaderItem}"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Name="applicationsGrid" Tag="2" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="75"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Application #1" Width="200"  Margin="30,0,0,0" HorizontalAlignment="Left" Style="{StaticResource labelStyle}"/>
+                                <TextBox Grid.Column="1" Style="{StaticResource textBoxStyle}" Name="applicationsTextBox1" TextWrapping="Wrap"/>
+                                <Image Grid.Column="2"  Source="Icons\plus_icon.jpg" Width="20" Height="20" Margin="10,0,10,0" MouseLeftButtonDown="OnClickApplicationsImage"/>
+                                <Label Style="{StaticResource labelStyle}" Name="applicationsLabel1" Grid.Column="1"  Visibility="Collapsed" Margin="80,0,0,0" HorizontalAlignment="Left" />
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+        
+        <Grid Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Style="{StaticResource buttonStyle}" Name="backButto" Content="Back" Click="OnBtnClickBack" Margin="24"/>
+            <Button Grid.Column="1" Style="{StaticResource buttonStyle}" Name="nextButton" Content="Next" Click="OnBtnClickNext" Margin="24"/>
+            <Button Grid.Column="2" Style="{StaticResource buttonStyle}" Name="finishButton" Content="Finish" Click="OnBtnClickFinish" Margin="24"/>
+            <Button Grid.Column="3" Style="{StaticResource buttonStyle}" Name="cancelButton" Content="Cancel" Click="OnBtnClickCancel" Margin="24"/>
+
+        </Grid>
+
+    </Grid>
+</Page>
