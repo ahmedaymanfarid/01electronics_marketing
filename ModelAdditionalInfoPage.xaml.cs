@@ -205,7 +205,6 @@ namespace _01electronics_marketing
                     if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
                     {
 
-
                         product.setLogedInUser(loggedInUser);
                         if (!product.IssueNewModel())
                             return;
@@ -233,15 +232,12 @@ namespace _01electronics_marketing
                             viewproduct.Show();
                         }
 
-
                     }
                     else
                     {
                         NavigationWindow currentWindow = (NavigationWindow)this.Parent;
                         currentWindow.Close();
                     }
-
-
                 }
 
             }
