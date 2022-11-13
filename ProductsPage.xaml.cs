@@ -73,7 +73,7 @@ namespace _01electronics_marketing
 
         private void SyncDoWork(object sender, DoWorkEventArgs e)
         {
-           // ftpServer.upload();
+           ftpServer.UploadForSynchronization();
 
         }
 

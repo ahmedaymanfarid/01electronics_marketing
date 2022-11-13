@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\
+D:\01electronics_marketing\obj\Debug\
 _01electronics_marketing
 none
 false
 DEBUG;TRACE
-C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\App.xaml
+D:\01electronics_marketing\App.xaml
 201963472348
 
 251835237653
-17216637498
+17-521422944
 AddBrand.xaml;AddProductWindow.xaml;adminWindow.xaml;BrandsPage.xaml;CategoriesPage.xaml;ChangePasswordPage.xaml;ForgetPasswordPage.xaml;MainWindow.xaml;ModelAdditionalInfoPage.xaml;ModelBasicInfoPage.xaml;ModelGensetSpec.xaml;ModelsPage.xaml;ModelsWindow.xaml;ModelUploadFilesPage.xaml;ModelUpsSpecsPage.xaml;MoveModelWindow.xaml;ProductsPage.xaml;SignInPage.xaml;SignInWindow.xaml;SignUpPage.xaml;
 
 False
