@@ -75,9 +75,32 @@ namespace _01electronics_marketing
                 return;
             }
 
-
-
             employeePassword = employeePasswordTextBox.Password;
+
+            if (_01electronics_marketing.Properties.Settings.Default.PassWordCheck)
+            {
+                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
+                _01electronics_marketing.Properties.Settings.Default.PassWord = employeePasswordTextBox.Password;
+                _01electronics_marketing.Properties.Settings.Default.Save();
+            }
+            else
+            {
+                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
+                _01electronics_marketing.Properties.Settings.Default.Save();
+            }
+
+            if (_01electronics_marketing.Properties.Settings.Default.PassWordCheck)
+            {
+                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
+                _01electronics_marketing.Properties.Settings.Default.PassWord = employeePasswordTextBox.Password;
+                _01electronics_marketing.Properties.Settings.Default.Save();
+            }
+            else
+            {
+                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
+                _01electronics_marketing.Properties.Settings.Default.Save();
+            }
+
 
 
             if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID || loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID)
@@ -95,34 +118,6 @@ namespace _01electronics_marketing
                 return;
 
             }
-
-
-
-            if (_01electronics_marketing.Properties.Settings.Default.PassWordCheck)
-            {
-                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
-                _01electronics_marketing.Properties.Settings.Default.PassWord = employeePasswordTextBox.Password;
-                _01electronics_marketing.Properties.Settings.Default.Save();
-            }
-            else
-            {
-                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
-                _01electronics_marketing.Properties.Settings.Default.Save();
-            }
-
-            if (_01electronics_marketing.Properties.Settings.Default.PassWordCheck)
-            {
-                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
-                _01electronics_marketing.Properties.Settings.Default.PassWord = employeePasswordTextBox.Password;
-                _01electronics_marketing.Properties.Settings.Default.Save();
-            }
-            else
-            {
-                _01electronics_marketing.Properties.Settings.Default.Email = employeeEmailTextBox.Text;
-                _01electronics_marketing.Properties.Settings.Default.Save();
-            }
-
-
             MainWindow mainWindowOpen = new MainWindow(ref loggedInUser);
 
             NavigationWindow currentWindow = (NavigationWindow)this.Parent;
