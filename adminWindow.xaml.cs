@@ -72,17 +72,14 @@ namespace _01electronics_marketing
 
             salesCombo.Items.Add(loggedInUserFromLoginPage.GetEmployeeName());
 
-            selected = true;
             salesCombo.SelectedIndex = salesCombo.Items.Count - 1;
 
-            selected = false;
+   
         }
 
         private void salesComboSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (selected == true)
-                return;
-
+        
             if (salesCombo.SelectedIndex == salesCombo.Items.Count - 1)
                 loggedInUser.InitializeEmployeeInfo(loggedInUserFromLoginPage.GetEmployeeId());
 

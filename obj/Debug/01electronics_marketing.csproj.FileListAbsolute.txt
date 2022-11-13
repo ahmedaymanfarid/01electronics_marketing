@@ -56,3 +56,4 @@ C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01elec
 C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CopyComplete
 C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing.exe
 C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing.pdb
+C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing_Content.g.cs

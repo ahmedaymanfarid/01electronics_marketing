@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("photos/categories/10.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("photos/categories/11.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("photos/categories/8.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("photos/categories/9.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons/svg/plus-circle-fill.svg")]
 
 

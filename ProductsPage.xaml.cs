@@ -26,7 +26,7 @@ namespace _01electronics_marketing
 
         //BackgroundWorker background = new BackgroundWorker();
 
-        BackgroundWorker sync = new BackgroundWorker();
+        //BackgroundWorker sync = new BackgroundWorker();
 
 
         List<Image> productImages = new List<Image>();
@@ -65,15 +65,15 @@ namespace _01electronics_marketing
             InitializeProductSummaryPoints();
             SetUpPageUIElements();
 
-            sync.DoWork += SyncDoWork;
-            sync.RunWorkerAsync();
+            //sync.DoWork += SyncDoWork;
+            //sync.RunWorkerAsync();
 
 
         }
 
         private void SyncDoWork(object sender, DoWorkEventArgs e)
         {
-           // ftpServer.upload();
+           //ftpServer.UploadForSynchronization();
 
         }
 

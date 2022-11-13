@@ -52,8 +52,8 @@ namespace _01electronics_marketing
         protected FTPServer ftpObject;
 
 
-        public BackgroundWorker uploadBackground;
-        protected BackgroundWorker downloadBackground;
+        //public BackgroundWorker uploadBackground;
+        //protected BackgroundWorker downloadBackground;
 
         protected String serverFolderPath;
         protected String serverFileName;
@@ -92,26 +92,26 @@ namespace _01electronics_marketing
 
             product = mPrduct;
 
-        InitializeComponent();
+            InitializeComponent();
 
 
             ftpFiles = new List<string>(); progressBar.Style = (Style)FindResource("ProgressBarStyle");
             progressBar.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             progressBar.Width = 200;
 
-            uploadBackground = new BackgroundWorker();
-            uploadBackground.DoWork += BackgroundUpload;
-            uploadBackground.ProgressChanged += OnUploadProgressChanged;
-            uploadBackground.RunWorkerCompleted += OnUploadBackgroundComplete;
-            uploadBackground.WorkerReportsProgress = true;
+            //uploadBackground = new BackgroundWorker();
+            //uploadBackground.DoWork += BackgroundUpload;
+            //uploadBackground.ProgressChanged += OnUploadProgressChanged;
+            //uploadBackground.RunWorkerCompleted += OnUploadBackgroundComplete;
+            //uploadBackground.WorkerReportsProgress = true;
 
             uploadFilesStackPanel.Children.Clear();
 
-            downloadBackground = new BackgroundWorker();
-            downloadBackground.DoWork += BackgroundDownload;
-            downloadBackground.ProgressChanged += OnDownloadProgressChanged;
-            downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
-            downloadBackground.WorkerReportsProgress = true;
+            //downloadBackground = new BackgroundWorker();
+            //downloadBackground.DoWork += BackgroundDownload;
+            //downloadBackground.ProgressChanged += OnDownloadProgressChanged;
+            //downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
+            //downloadBackground.WorkerReportsProgress = true;
 
             serverFolderPath = product.GetModelFolderServerPath();
             
@@ -719,23 +719,28 @@ namespace _01electronics_marketing
                         //currentSelectedFile.Children.Add(progressBar);
                         //Grid.SetRow(progressBar, 3);
 
-                        uploadBackground.RunWorkerAsync();
+                        //uploadBackground.RunWorkerAsync();
 
-                        while (uploadBackground.IsBusy)
-                        {
-                            System.Windows.Forms.Application.DoEvents();
-                        }
+
+                        //commented
+                        //while (uploadBackground.IsBusy)
+                        //{
+                        //    System.Windows.Forms.Application.DoEvents();
+                        //}
 
                         uploadThisFile = false;
                     }
                     else if (uploadThisFile == true)
                     {
-                        uploadBackground.RunWorkerAsync();
+                        //commented
+                        //uploadBackground.RunWorkerAsync();
 
-                        while (uploadBackground.IsBusy)
-                        {
-                            System.Windows.Forms.Application.DoEvents();
-                        }
+                        //commented
+
+                        //while (uploadBackground.IsBusy)
+                        //{
+                        //    System.Windows.Forms.Application.DoEvents();
+                        //}
 
                         uploadThisFile = false;
                     }
@@ -956,7 +961,7 @@ namespace _01electronics_marketing
                 currentStatusLabel.Content = "DOWNLOADING";
                 currentStatusLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#FFFF00");
 
-                downloadBackground.RunWorkerAsync();
+                //downloadBackground.RunWorkerAsync();
             }
         }
         public void resizeImage(ref Image imgToResize, int width, int height)
@@ -968,57 +973,57 @@ namespace _01electronics_marketing
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///BACKGROUND FUNCTIONS
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        protected void BackgroundUpload(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker uploadBackground = sender as BackgroundWorker;
+        //protected void BackgroundUpload(object sender, DoWorkEventArgs e)
+        //{
+        //    BackgroundWorker uploadBackground = sender as BackgroundWorker;
 
-            // File.Delete(product.GetProductPhotoLocalPath());
+        //    // File.Delete(product.GetProductPhotoLocalPath());
 
-            String productFolderServerPath = String.Empty;
-            productFolderServerPath += BASIC_MACROS.MODELS_PHOTOS_PATH;
-            productFolderServerPath += product.GetProductID();
-            productFolderServerPath += "/";
+        //    String productFolderServerPath = String.Empty;
+        //    productFolderServerPath += BASIC_MACROS.MODELS_PHOTOS_PATH;
+        //    productFolderServerPath += product.GetProductID();
+        //    productFolderServerPath += "/";
 
-            if (!ftpObject.CheckExistingFolder(productFolderServerPath))
-            {
-                if (!ftpObject.CreateNewFolder(productFolderServerPath))
-                {
-                    InsertErrorRetryButton();
-                    return;
-                }
-            }
+        //    if (!ftpObject.CheckExistingFolder(productFolderServerPath))
+        //    {
+        //        if (!ftpObject.CreateNewFolder(productFolderServerPath))
+        //        {
+        //            InsertErrorRetryButton();
+        //            return;
+        //        }
+        //    }
 
-            if (!ftpObject.CheckExistingFolder(serverFolderPath))
-            {
-                if (!ftpObject.CreateNewFolder(serverFolderPath))
-                {
-                    InsertErrorRetryButton();
-                    return;
-                }
-            }
-            uploadBackground.ReportProgress(50);
+        //    if (!ftpObject.CheckExistingFolder(serverFolderPath))
+        //    {
+        //        if (!ftpObject.CreateNewFolder(serverFolderPath))
+        //        {
+        //            InsertErrorRetryButton();
+        //            return;
+        //        }
+        //    }
+        //    uploadBackground.ReportProgress(50);
             
-            if (ftpObject.UploadFile(localFolderPath, serverFolderPath + serverFileName, BASIC_MACROS.SEVERITY_HIGH, ref errorMessage))
-            {
-                fileUploaded = true;
-                //this.Dispatcher.Invoke(() =>
-                //{
-                //    this.Close();
-                //});
+        //    if (ftpObject.UploadFile(localFolderPath, serverFolderPath + serverFileName, BASIC_MACROS.SEVERITY_HIGH, ref errorMessage))
+        //    {
+        //        fileUploaded = true;
+        //        //this.Dispatcher.Invoke(() =>
+        //        //{
+        //        //    this.Close();
+        //        //});
 
-                //image1.Source = null;
-                //File.Delete(product.GetProductPhotoLocalPath());
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show(errorMessage, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                fileUploaded = false;
-            }
+        //        //image1.Source = null;
+        //        //File.Delete(product.GetProductPhotoLocalPath());
+        //    }
+        //    else
+        //    {
+        //        System.Windows.Forms.MessageBox.Show(errorMessage, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+        //        fileUploaded = false;
+        //    }
 
-            uploadBackground.ReportProgress(75);
+        //    uploadBackground.ReportProgress(75);
 
-            uploadBackground.ReportProgress(100);
-        }
+        //    uploadBackground.ReportProgress(100);
+        //}
 
         protected void BackgroundDownload(object sender, DoWorkEventArgs e)
         {
@@ -1050,52 +1055,52 @@ namespace _01electronics_marketing
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///BACKGROUND COMPLETE HANDLERS
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        protected void OnUploadBackgroundComplete(object sender, RunWorkerCompletedEventArgs e)
-        {
+        //protected void OnUploadBackgroundComplete(object sender, RunWorkerCompletedEventArgs e)
+        //{
 
-            localFolderPath = product.GetProductPhotoLocalPath();
+        //    localFolderPath = product.GetProductPhotoLocalPath();
 
-            File.Delete(product.GetProductPhotoLocalPath());
-            downloadBackground.RunWorkerAsync();
-            if (checkFileInServer == false)
-            {
-                if (wrapPanel.Children.Count != 0)
-                    wrapPanel.Children.RemoveAt(wrapPanel.Children.Count - 1);
+        //    File.Delete(product.GetProductPhotoLocalPath());
+        //    downloadBackground.RunWorkerAsync();
+        //    if (checkFileInServer == false)
+        //    {
+        //        if (wrapPanel.Children.Count != 0)
+        //            wrapPanel.Children.RemoveAt(wrapPanel.Children.Count - 1);
 
-                //currentSelectedFile.Children.Remove(progressBar);
+        //        //currentSelectedFile.Children.Remove(progressBar);
 
-                if (fileUploaded == true)
-                {
-                    InsertIconGrid("submitted", localFolderPath);
-                }
-                else
-                {
-                    InsertIconGrid("failed", localFolderPath);
-                }
+        //        if (fileUploaded == true)
+        //        {
+        //            InsertIconGrid("submitted", localFolderPath);
+        //        }
+        //        else
+        //        {
+        //            InsertIconGrid("failed", localFolderPath);
+        //        }
 
                 
-            }
+        //    }
 
-            else
-            {
-                overwriteFileGrid.Children.Remove(progressBar);
+        //    else
+        //    {
+        //        overwriteFileGrid.Children.Remove(progressBar);
             
-                BrushConverter brush = new BrushConverter();
-                Label overwriteFileLabel = (Label)overwriteFileGrid.Children[2];
+        //        BrushConverter brush = new BrushConverter();
+        //        Label overwriteFileLabel = (Label)overwriteFileGrid.Children[2];
                 
-                if (fileUploaded == true)
-                {
-                    overwriteFileLabel.Content = "SUBMITTED";
-                    overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#00FF00");
-                    //this.Close();
-                }
-                else
-                {
-                    overwriteFileLabel.Content = "Failed";
-                    overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#FF0000");
-                }
-            }
-        }
+        //        if (fileUploaded == true)
+        //        {
+        //            overwriteFileLabel.Content = "SUBMITTED";
+        //            overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#00FF00");
+        //            //this.Close();
+        //        }
+        //        else
+        //        {
+        //            overwriteFileLabel.Content = "Failed";
+        //            overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#FF0000");
+        //        }
+        //    }
+        //}
         protected void OnDownloadBackgroundComplete(object sender, RunWorkerCompletedEventArgs e)
         {
             UploadIconGrid.Children.Remove(progressBar);
@@ -1398,7 +1403,7 @@ namespace _01electronics_marketing
                     //currentSelectedFile.Children.Add(progressBar);
                     Grid.SetRow(progressBar, 3);
 
-                    uploadBackground.RunWorkerAsync();
+                    //uploadBackground.RunWorkerAsync();
 
                     uploadThisFile = false;
                 }

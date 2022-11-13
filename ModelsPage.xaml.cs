@@ -26,7 +26,7 @@ namespace _01electronics_marketing
         protected List<COMPANY_WORK_MACROS.MODEL_STRUCT> brandModels;
         private Model selectedProduct;
 
-        protected BackgroundWorker downloadBackground;
+        //protected BackgroundWorker downloadBackground;
 
         //Frame frame;
         protected FTPServer ftpServer;
@@ -49,18 +49,25 @@ namespace _01electronics_marketing
             commonQueries = new CommonQueries();
             brandModels = new List<COMPANY_WORK_MACROS.MODEL_STRUCT>();
 
-            downloadBackground = new BackgroundWorker();
-            downloadBackground.DoWork += BackgroundDownload;
-            downloadBackground.ProgressChanged += OnDownloadProgressChanged;
-            downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
-            downloadBackground.WorkerReportsProgress = true;
+            //downloadBackground = new BackgroundWorker();
+            //downloadBackground.DoWork += BackgroundDownload;
+            //downloadBackground.ProgressChanged += OnDownloadProgressChanged;
+            //downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
+            //downloadBackground.WorkerReportsProgress = true;
 
-            downloadProgressBar.Visibility = Visibility.Visible;
-            downloadBackground.RunWorkerAsync();
-           
-            
+            //downloadProgressBar.Visibility = Visibility.Visible;
+            //downloadBackground.RunWorkerAsync();
+
+            QueryGetModels();
+
+            SetUpPageUIElements();
+
+            scrollViewer.Visibility = Visibility.Visible;
+            downloadProgressBar.Visibility = Visibility.Collapsed;
+
+
             if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
-              loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
+                loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
             {
                 addBtn.Visibility = Visibility.Visible;
@@ -86,8 +93,6 @@ namespace _01electronics_marketing
 
         public void SetUpPageUIElements()
         {
-           
-
             Application.Current.Dispatcher.Invoke((Action)delegate
             {
                 Label productTitleLabel = new Label();
@@ -399,75 +404,75 @@ namespace _01electronics_marketing
         //EXTERNAL TABS
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //private void OnButtonClickedMyProfile(object sender, RoutedEventArgs e)
-        //{
-        //    //DeletePhotos();
-        //    StatisticsPage userPortal = new StatisticsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(userPortal);
-        //    //UserPortalPage userPortal = new UserPortalPage(ref loggedInUser);
-        //    //this.NavigationService.Navigate(userPortal);
-        //}
-        //private void OnButtonClickedContacts(object sender, RoutedEventArgs e)
-        //{
-        //    //DeletePhotos();
-        //    ContactsPage contacts = new ContactsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(contacts);
-        //}
+        private void OnButtonClickedMyProfile(object sender, RoutedEventArgs e)
+        {
+            //DeletePhotos();
+            //StatisticsPage userPortal = new StatisticsPage(ref loggedInUser);
+            //this.NavigationService.Navigate(userPortal);
+            //UserPortalPage userPortal = new UserPortalPage(ref loggedInUser);
+            //this.NavigationService.Navigate(userPortal);
+        }
+        private void OnButtonClickedContacts(object sender, RoutedEventArgs e)
+        {
+            //DeletePhotos();
+            //ContactsPage contacts = new ContactsPage(ref loggedInUser);
+            //this.NavigationService.Navigate(contacts);
+        }
         private void OnButtonClickedProducts(object sender, MouseButtonEventArgs e)
         {
             //DeletePhotos();
             CategoriesPage productsPage = new CategoriesPage(ref loggedInUser);
             this.NavigationService.Navigate(productsPage);
         }
-        //private void OnButtonClickedWorkOrders(object sender, MouseButtonEventArgs e)
-        //{
-        //    //DeletePhotos();
-        //    WorkOrdersPage workOrdersPage = new WorkOrdersPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(workOrdersPage);
-        //}
-        //private void OnButtonClickedWorkOffers(object sender, RoutedEventArgs e)
-        //{
-        //    ////DeletePhotos();
-        //    QuotationsPage workOffers = new QuotationsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(workOffers);
-        //}
-        //private void OnButtonClickedRFQs(object sender, RoutedEventArgs e)
-        //{
-        //    //DeletePhotos();
-        //    RFQsPage rFQsPage = new RFQsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(rFQsPage);
-        //}
-        //private void OnButtonClickedVisits(object sender, RoutedEventArgs e)
-        //{
-        //    //DeletePhotos();
-        //    ClientVisitsPage clientVisitsPage = new ClientVisitsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(clientVisitsPage);
-        //}
-        //private void OnButtonClickedCalls(object sender, RoutedEventArgs e)
-        //{
-        //    //DeletePhotos();
-        //    ClientCallsPage clientCallsPage = new ClientCallsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(clientCallsPage);
-        //}
-        //private void OnButtonClickedMeetings(object sender, RoutedEventArgs e)
-        //{
-        //    //DeletePhotos();
-        //    OfficeMeetingsPage officeMeetingsPage = new OfficeMeetingsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(officeMeetingsPage);
-        //}
+        private void OnButtonClickedWorkOrders(object sender, MouseButtonEventArgs e)
+        {
+            //DeletePhotos();
+            //WorkOrdersPage workOrdersPage = new WorkOrdersPage(ref loggedInUser);
+            //this.NavigationService.Navigate(workOrdersPage);
+        }
+        private void OnButtonClickedWorkOffers(object sender, RoutedEventArgs e)
+        {
+            ////DeletePhotos();
+            //QuotationsPage workOffers = new QuotationsPage(ref loggedInUser);
+            //this.NavigationService.Navigate(workOffers);
+        }
+        private void OnButtonClickedRFQs(object sender, RoutedEventArgs e)
+        {
+            //DeletePhotos();
+            //RFQsPage rFQsPage = new RFQsPage(ref loggedInUser);
+            //this.NavigationService.Navigate(rFQsPage);
+        }
+        private void OnButtonClickedVisits(object sender, RoutedEventArgs e)
+        {
+            //DeletePhotos();
+            //ClientVisitsPage clientVisitsPage = new ClientVisitsPage(ref loggedInUser);
+            //this.NavigationService.Navigate(clientVisitsPage);
+        }
+        private void OnButtonClickedCalls(object sender, RoutedEventArgs e)
+        {
+            //DeletePhotos();
+            //ClientCallsPage clientCallsPage = new ClientCallsPage(ref loggedInUser);
+            //this.NavigationService.Navigate(clientCallsPage);
+        }
+        private void OnButtonClickedMeetings(object sender, RoutedEventArgs e)
+        {
+            //DeletePhotos();
+            //OfficeMeetingsPage officeMeetingsPage = new OfficeMeetingsPage(ref loggedInUser);
+            //this.NavigationService.Navigate(officeMeetingsPage);
+        }
         private void OnButtonClickedStatistics(object sender, RoutedEventArgs e)
         {
 
         }
         //private void OnButtonClickedMaintenanceOffer(object sender, MouseButtonEventArgs e)
-        //{
-        //    MaintenanceOffersPage maintenanceOffersPage = new MaintenanceOffersPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(maintenanceOffersPage);
+        ////{
+        ////    MaintenanceOffersPage maintenanceOffersPage = new MaintenanceOffersPage(ref loggedInUser);
+        ////    this.NavigationService.Navigate(maintenanceOffersPage);
         //}
         //private void OnButtonClickedMaintenanceContracts(object sender, MouseButtonEventArgs e)
         //{
-        //    MaintenanceContractsPage maintenanceContractsPage = new MaintenanceContractsPage(ref loggedInUser);
-        //    this.NavigationService.Navigate(maintenanceContractsPage);
+        //    //MaintenanceContractsPage maintenanceContractsPage = new MaintenanceContractsPage(ref loggedInUser);
+        //    //this.NavigationService.Navigate(maintenanceContractsPage);
         //}
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -505,11 +510,11 @@ namespace _01electronics_marketing
         {
             QueryGetModels();
 
-            downloadBackground.ReportProgress(50);
+            //downloadBackground.ReportProgress(50);
 
             SetUpPageUIElements();
 
-            downloadBackground.ReportProgress(100);
+            //downloadBackground.ReportProgress(100);
         }
 
         protected void OnDownloadProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -641,8 +646,6 @@ namespace _01electronics_marketing
 
         private void addBtnMouseLeave(object sender, MouseEventArgs e)
         {
-
-
             Storyboard storyboard = new Storyboard();
             TimeSpan duration = new TimeSpan(0, 0, 0, 0, 200);
             DoubleAnimation animation = new DoubleAnimation();
@@ -677,7 +680,6 @@ namespace _01electronics_marketing
 
             modelsWrapPanel.Children.Clear();
 
-
             if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
               loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
@@ -685,16 +687,21 @@ namespace _01electronics_marketing
                 addBtn.Visibility = Visibility.Visible;
             }
 
-            downloadBackground = new BackgroundWorker();
-            Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/01 Electronics/" + selectedProduct.GetProductID() + "/" + selectedProduct.GetBrandID());
-            downloadBackground.DoWork += BackgroundDownload;
-            downloadBackground.ProgressChanged += OnDownloadProgressChanged;
-            downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
-            downloadBackground.WorkerReportsProgress = true;
+            QueryGetModels();
 
-            downloadProgressBar.Visibility = Visibility.Visible;
-            downloadBackground.RunWorkerAsync();
+            SetUpPageUIElements();
 
+            //commented to cancel backgroundWorker(Thread)
+            ////SetUpPageUIElements();
+            //downloadBackground = new BackgroundWorker();
+            ////Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/01 Electronics/" + selectedProduct.GetProductID() + "/" + selectedProduct.GetBrandID());
+            //downloadBackground.DoWork += BackgroundDownload;
+            //downloadBackground.ProgressChanged += OnDownloadProgressChanged;
+            //downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
+            //downloadBackground.WorkerReportsProgress = true;
+
+            //downloadProgressBar.Visibility = Visibility.Visible;
+            //downloadBackground.RunWorkerAsync();
 
         }
     }
