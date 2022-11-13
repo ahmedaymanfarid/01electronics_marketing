@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using _01electronics_library;
+using _01electronics_windows_library;
+
 
 namespace _01electronics_marketing
 {
@@ -68,6 +71,9 @@ namespace _01electronics_marketing
                 return;
             }
 
+
+          
+
             int productId = products[ProductsCombo.SelectedIndex].typeId;
             int brandId = brands[BrandComboBox.SelectedIndex].brandId;
 
@@ -86,10 +92,24 @@ namespace _01electronics_marketing
 
             newModel.SetModelBenefits(currentModell.GetModelBenefits());
             newModel.SetModelStandardFeatures(currentModell.GetModelStandardFeatures());
-            //newModel.SetGensetSpec(currentModell.GetGensetSpecs());
 
-            newModel.MoveModel(currentModell.GetProductID(),currentModell.GetBrandID(),currentModell.GetModelID(),currentModell.GetCategoryID());
-            currentModell.DeleteModel();
+            //newModel.MoveModel(currentModell.GetProductID(),currentModell.GetBrandID(),currentModell.GetModelID(),currentModell.GetCategoryID());
+            //currentModell.DeleteModel();
+
+            newModel.GetNewModelID();
+            currentModell.GetNewModelPhotoLocalPath();
+            newModel.GetNewModelPhotoLocalPath();
+
+
+            SystemWatcher.fromSoftware = true;
+            if (File.Exists(currentModell.GetModelPhotoLocalPath()))
+            {
+                if (!File.Exists(newModel.GetModelPhotoLocalPath())) {
+
+                    File.Copy(currentModell.GetModelPhotoLocalPath(), newModel.GetModelPhotoLocalPath());
+                    File.Delete(currentModell.GetModelPhotoLocalPath());
+                }                
+            }
 
             this.Close();
 

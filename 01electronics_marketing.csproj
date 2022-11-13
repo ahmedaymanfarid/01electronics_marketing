@@ -289,5 +289,8 @@
     <Resource Include="Photos\categories\8.jpg" />
     <Resource Include="Photos\categories\9.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\SVG\plus-circle-fill.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

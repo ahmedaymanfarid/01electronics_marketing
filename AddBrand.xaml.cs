@@ -18,13 +18,13 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows;
 using Button = System.Windows.Controls.Button;
 using Control = System.Windows.Controls.Control;
 using DataFormats = System.Windows.DataFormats;
 using DragDropEffects = System.Windows.DragDropEffects;
 using DragEventArgs = System.Windows.DragEventArgs;
 using Label = System.Windows.Controls.Label;
+using MessageBox = System.Windows.Forms.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using ProgressBar = System.Windows.Controls.ProgressBar;
 
@@ -53,13 +53,15 @@ namespace _01electronics_marketing
         protected int viewAddCondition;
 
 
-        protected BackgroundWorker uploadBackground;
-        protected BackgroundWorker downloadBackground;
+        //protected BackgroundWorker uploadBackground;
+        //protected BackgroundWorker downloadBackground;
 
         protected String serverFolderPath;
         protected String serverFileName;
 
         protected String localFolderPath;
+
+        protected String oldLocalFolderPath;
         protected String localFileName;
 
         protected bool fileUploaded;
@@ -103,29 +105,32 @@ namespace _01electronics_marketing
             progressBar.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             progressBar.Width = 200;
 
-            uploadBackground = new BackgroundWorker();
-            uploadBackground.DoWork += BackgroundUpload;
-            uploadBackground.ProgressChanged += OnUploadProgressChanged;
-            uploadBackground.RunWorkerCompleted += OnUploadBackgroundComplete;
-            uploadBackground.WorkerReportsProgress = true;
+            //uploadBackground = new BackgroundWorker();
+            //uploadBackground.DoWork += BackgroundUpload;
+            //uploadBackground.ProgressChanged += OnUploadProgressChanged;
+            //uploadBackground.RunWorkerCompleted += OnUploadBackgroundComplete;
+            //uploadBackground.WorkerReportsProgress = true;
 
             uploadFilesStackPanel.Children.Clear();
 
-            downloadBackground = new BackgroundWorker();
-            downloadBackground.DoWork += BackgroundDownload;
-            downloadBackground.ProgressChanged += OnDownloadProgressChanged;
-            downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
-            downloadBackground.WorkerReportsProgress = true;
+            //downloadBackground = new BackgroundWorker();
+            //downloadBackground.DoWork += BackgroundDownload;
+            //downloadBackground.ProgressChanged += OnDownloadProgressChanged;
+            //downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
+            //downloadBackground.WorkerReportsProgress = true;
 
             serverFolderPath = product.GetBrandFolderServerPath();
             commonQueriesObject.GetCompanyBrands(ref brands);
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
             {
+                editPictureButton.IsEnabled = false;
                 deleteSomeBrands();
 
             }
             else
             {
+                editPictureButton.IsEnabled = true;
+
                 product.SetBrandName(brands[brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID())].brandName);
 
                 ContactProfileHeader.Content = "VIEW BRAND";
@@ -188,8 +193,6 @@ namespace _01electronics_marketing
                 BrandNameComboBox.SelectedIndex = 0;
 
             }
-
-
         }
         /// /////////////////////////////////////////////////////////////////
         /// ////////Btn Click & Mouse Leave
@@ -200,11 +203,10 @@ namespace _01electronics_marketing
             {
                 product.SetBrandName(BrandNameComboBox.SelectedItem.ToString());
                 product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brandId);
-                product.AddBrandToProduct();
-                this.Close();
+                product.AddBrandToProduct();      
             }
-            else
-                uploadBackground.RunWorkerAsync();
+
+            this.Close();
 
         }
 
@@ -225,12 +227,13 @@ namespace _01electronics_marketing
             localFileName = System.IO.Path.GetFileName(localFolderPath);
 
             product.SetBrandPhotoServerPath(product.GetBrandFolderServerPath() + "/" + product.GetBrandID() + ".jpg");
+            oldLocalFolderPath = product.GetBrandPhotoLocalPath();
             product.SetBrandPhotoLocalPath(localFolderPath + "/" + localFileName);
 
 
             wrapPanel.Children.Clear();
             uploadFilesStackPanel.Children.Clear();
-            product.UploadPhotoToServer(product.GetBrandPhotoServerPath(),product.GetBrandPhotoLocalPath());
+            //product.UploadPhotoToServer(product.GetBrandPhotoServerPath(),product.GetBrandPhotoLocalPath());
 
             serverFileName = (String)product.GetBrandID().ToString() + ".jpg";
             //localFolderPath = product.GetBrandPhotoLocalPath();
@@ -248,6 +251,11 @@ namespace _01electronics_marketing
             //currentSelectedFile.Children.Add(progressBar);
             Grid.SetRow(progressBar, 3);
             UploadIconGrid.Children.Add(progressBar);
+
+            SystemWatcher.fromSoftware = true;
+
+            File.Delete(oldLocalFolderPath);
+            File.Copy(localFolderPath, oldLocalFolderPath);
 
             saveChangesButton.IsEnabled = true;
 
@@ -491,7 +499,7 @@ namespace _01electronics_marketing
                 currentStatusLabel.Content = "DOWNLOADING";
                 currentStatusLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#FFFF00");
 
-                downloadBackground.RunWorkerAsync();
+                //downloadBackground.RunWorkerAsync();
             }
         }
         public void resizeImage(ref Image imgToResize, int width, int height)
@@ -568,7 +576,7 @@ namespace _01electronics_marketing
             localFolderPath = product.GetBrandPhotoLocalPath();
 
             File.Delete(product.GetBrandPhotoLocalPath());
-            downloadBackground.RunWorkerAsync();
+            //downloadBackground.RunWorkerAsync();
             if (checkFileInServer == false)
             {
                 if (wrapPanel.Children.Count != 0)
@@ -891,7 +899,7 @@ namespace _01electronics_marketing
                     //currentSelectedFile.Children.Add(progressBar);
                     Grid.SetRow(progressBar, 3);
 
-                    uploadBackground.RunWorkerAsync();
+                    //uploadBackground.RunWorkerAsync();
 
                     uploadThisFile = false;
                 }

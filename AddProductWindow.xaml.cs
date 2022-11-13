@@ -38,15 +38,11 @@ namespace _01electronics_marketing
         protected IntegrityChecks integrityChecks;
         protected FTPServer ftpObject;
 
-
-        protected BackgroundWorker uploadBackground;
-        protected BackgroundWorker downloadBackground;
+        //protected BackgroundWorker uploadBackground;
+        //protected BackgroundWorker downloadBackground;
         
         protected int counter;
         protected int viewAddCondition;
-
-
-   
 
         protected String serverFolderPath;
         protected String serverFileName;
@@ -88,26 +84,26 @@ namespace _01electronics_marketing
             ftpObject = new FTPServer();
             integrityChecks = new IntegrityChecks();
             product = pProduct;
-             viewAddCondition = mViewAddCondition;
+            viewAddCondition = mViewAddCondition;
             
 
             ftpFiles = new List<string>(); progressBar.Style = (Style)FindResource("ProgressBarStyle");
             progressBar.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             progressBar.Width = 200;
 
-            uploadBackground = new BackgroundWorker();
-            uploadBackground.DoWork += BackgroundUpload;
-            uploadBackground.ProgressChanged += OnUploadProgressChanged;
-            uploadBackground.RunWorkerCompleted += OnUploadBackgroundComplete;
-            uploadBackground.WorkerReportsProgress = true;
+            //uploadBackground = new BackgroundWorker();
+            //uploadBackground.DoWork += BackgroundUpload;
+            //uploadBackground.ProgressChanged += OnUploadProgressChanged;
+            //uploadBackground.RunWorkerCompleted += OnUploadBackgroundComplete;
+            //uploadBackground.WorkerReportsProgress = true;
 
             uploadFilesStackPanel.Children.Clear();
 
-            downloadBackground = new BackgroundWorker();
-            downloadBackground.DoWork += BackgroundDownload;
-            downloadBackground.ProgressChanged += OnDownloadProgressChanged;
-            downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
-            downloadBackground.WorkerReportsProgress = true;
+            //downloadBackground = new BackgroundWorker();
+            //downloadBackground.DoWork += BackgroundDownload;
+            //downloadBackground.ProgressChanged += OnDownloadProgressChanged;
+            //downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
+            //downloadBackground.WorkerReportsProgress = true;
 
                serverFolderPath = product.GetProductFolderServerPath();
 
@@ -142,8 +138,6 @@ namespace _01electronics_marketing
                     uploadFilesStackPanel.Children.Add(wrapPanel);
 
                 }
-
-
                 catch
                 {
 
@@ -198,9 +192,14 @@ namespace _01electronics_marketing
                 }
 
                 product.SetProductName(ProductNameTextBox.Text);
-               // product.SetsummaryPoints(summerypointsTextBox.Text);
+                // product.SetsummaryPoints(summerypointsTextBox.Text);
 
-                product.IssueNewProduct();
+                if (!product.IssueNewProduct())
+                    return;
+                SystemWatcher.fromSoftware = true;
+                File.Copy(localFolderPath, product.GetProductPhotoLocalPath());
+                this.Close();
+    
             }
             else
             {
@@ -213,7 +212,7 @@ namespace _01electronics_marketing
 
             }
 
-            uploadBackground.RunWorkerAsync();
+            //uploadBackground.RunWorkerAsync();
         }
 
         private void summerypointsTextBoxTextChanged(object sender, TextChangedEventArgs e)
@@ -268,23 +267,23 @@ namespace _01electronics_marketing
                         //currentSelectedFile.Children.Add(progressBar);
                         //Grid.SetRow(progressBar, 3);
 
-                        uploadBackground.RunWorkerAsync();
+                        //uploadBackground.RunWorkerAsync();
 
-                        while (uploadBackground.IsBusy)
-                        {
-                            System.Windows.Forms.Application.DoEvents();
-                        }
+                        //while (uploadBackground.IsBusy)
+                        //{
+                        //    System.Windows.Forms.Application.DoEvents();
+                        //}
 
                         uploadThisFile = false;
                     }
                     else if (uploadThisFile == true)
                     {
-                        uploadBackground.RunWorkerAsync();
+                        //uploadBackground.RunWorkerAsync();
 
-                        while (uploadBackground.IsBusy)
-                        {
-                            System.Windows.Forms.Application.DoEvents();
-                        }
+                        //while (uploadBackground.IsBusy)
+                        //{
+                        //    System.Windows.Forms.Application.DoEvents();
+                        //}
 
                         uploadThisFile = false;
                     }
@@ -511,7 +510,7 @@ namespace _01electronics_marketing
                 currentStatusLabel.Content = "DOWNLOADING";
                 currentStatusLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#FFFF00");
 
-                downloadBackground.RunWorkerAsync();
+                //downloadBackground.RunWorkerAsync();
             }
         }
         public void resizeImage(ref Image imgToResize, int width, int height)
@@ -582,67 +581,67 @@ namespace _01electronics_marketing
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///BACKGROUND COMPLETE HANDLERS
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        protected void OnUploadBackgroundComplete(object sender, RunWorkerCompletedEventArgs e)
-        {
+        //protected void OnUploadBackgroundComplete(object sender, RunWorkerCompletedEventArgs e)
+        //{
 
-            localFolderPath = product.GetProductPhotoLocalPath();
+        //    localFolderPath = product.GetProductPhotoLocalPath();
 
-            File.Delete(product.GetProductPhotoLocalPath());
-            downloadBackground.RunWorkerAsync();
-            if (checkFileInServer == false)
-            {
-                if (wrapPanel.Children.Count != 0)
-                    wrapPanel.Children.RemoveAt(wrapPanel.Children.Count - 1);
+        //    File.Delete(product.GetProductPhotoLocalPath());
+        //    downloadBackground.RunWorkerAsync();
+        //    if (checkFileInServer == false)
+        //    {
+        //        if (wrapPanel.Children.Count != 0)
+        //            wrapPanel.Children.RemoveAt(wrapPanel.Children.Count - 1);
 
-                //currentSelectedFile.Children.Remove(progressBar);
+        //        //currentSelectedFile.Children.Remove(progressBar);
 
-                if (fileUploaded == true)
-                {
-                    InsertIconGrid("submitted", localFolderPath);
-                }
-                else
-                {
-                    InsertIconGrid("failed", localFolderPath);
-                }
+        //        if (fileUploaded == true)
+        //        {
+        //            InsertIconGrid("submitted", localFolderPath);
+        //        }
+        //        else
+        //        {
+        //            InsertIconGrid("failed", localFolderPath);
+        //        }
 
                 
-            }
+        //    }
 
-            else
-            {
-                overwriteFileGrid.Children.Remove(progressBar);
+        //    else
+        //    {
+        //        overwriteFileGrid.Children.Remove(progressBar);
             
-                BrushConverter brush = new BrushConverter();
-                Label overwriteFileLabel = (Label)overwriteFileGrid.Children[2];
+        //        BrushConverter brush = new BrushConverter();
+        //        Label overwriteFileLabel = (Label)overwriteFileGrid.Children[2];
                 
-                if (fileUploaded == true)
-                {
-                    overwriteFileLabel.Content = "SUBMITTED";
-                    overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#00FF00");
-                    //this.Close();
-                }
-                else
-                {
-                    overwriteFileLabel.Content = "Failed";
-                    overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#FF0000");
-                }
-            }
-        }
-        protected void OnDownloadBackgroundComplete(object sender, RunWorkerCompletedEventArgs e)
-        {
-            UploadIconGrid.Children.Remove(progressBar);
-            Label currentStatusLabel = (Label)UploadIconGrid.Children[2];
-            if (fileDownloaded == true)
-                currentStatusLabel.Content = "Downloaded";
-            else
-                currentStatusLabel.Content = "Failed";
+        //        if (fileUploaded == true)
+        //        {
+        //            overwriteFileLabel.Content = "SUBMITTED";
+        //            overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#00FF00");
+        //            //this.Close();
+        //        }
+        //        else
+        //        {
+        //            overwriteFileLabel.Content = "Failed";
+        //            overwriteFileLabel.Foreground = (System.Windows.Media.Brush)brush.ConvertFrom("#FF0000");
+        //        }
+        //    }
+        //}
+        //protected void OnDownloadBackgroundComplete(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    UploadIconGrid.Children.Remove(progressBar);
+        //    Label currentStatusLabel = (Label)UploadIconGrid.Children[2];
+        //    if (fileDownloaded == true)
+        //        currentStatusLabel.Content = "Downloaded";
+        //    else
+        //        currentStatusLabel.Content = "Failed";
 
 
-            this.Dispatcher.Invoke(() =>
-            {
-                this.Close();
-            });
-        }
+        //    this.Dispatcher.Invoke(() =>
+        //    {
+        //        this.Close();
+        //    });
+        //}
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///INSERT FUNCTIONS
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -808,6 +807,8 @@ namespace _01electronics_marketing
             //currentSelectedFile.Children.Add(progressBar);
             Grid.SetRow(progressBar, 3);
 
+
+
             //uploadBackground.RunWorkerAsync();
         }
 
@@ -911,7 +912,7 @@ namespace _01electronics_marketing
                     //currentSelectedFile.Children.Add(progressBar);
                     Grid.SetRow(progressBar, 3);
 
-                    uploadBackground.RunWorkerAsync();
+                    //uploadBackground.RunWorkerAsync();
 
                     uploadThisFile = false;
                 }
@@ -1043,8 +1044,6 @@ namespace _01electronics_marketing
 
             }
         }
-
-
         private void summerypointsTextBoxMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (canEdit)

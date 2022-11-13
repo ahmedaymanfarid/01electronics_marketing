@@ -56,6 +56,7 @@ C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01elec
 C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CopyComplete
 C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing.exe
 C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing.pdb
+<<<<<<< HEAD
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.AssemblyReference.cache
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.SuggestedBindingRedirects.cache
 D:\01electronics_marketing\obj\Debug\AddBrand.g.cs
@@ -114,3 +115,7 @@ D:\01electronics_marketing\obj\Debug\SignUpPage.baml
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.g.resources
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CoreCompileInputs.cache
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CopyComplete
+=======
+C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing_Content.g.cs
+>>>>>>> c0b18ad1bba20a47e330709a6b66f94c9ae6bc2f
+D:\01electronics_marketing\obj\Debug\01electronics_marketing_Content.g.cs

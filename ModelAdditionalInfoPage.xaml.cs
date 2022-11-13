@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -143,14 +141,15 @@ namespace _01electronics_marketing
                         if (!product.IssueNewModel())
                             return;
 
+                        SystemWatcher.fromSoftware = true;
+
                         Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos" + product.GetProductID() + "/" + product.GetBrandID());
                         product.GetNewModelPhotoLocalPath();
 
                         if (modelBasicInfoPage.localFolderPath != null)
                             File.Copy(modelBasicInfoPage.localFolderPath, product.GetModelPhotoLocalPath());
 
-                        BackgroundWorker Synchronize = new BackgroundWorker();
-                        Synchronize.DoWork += SynchronizeDoWork;
+                 
 
                         //commented
                         //modelBasicInfoPage.uploadBackground.RunWorkerAsync();
@@ -164,7 +163,6 @@ namespace _01electronics_marketing
                             viewproduct.Show();
                         }
 
-                        Synchronize.RunWorkerAsync();
                     }
                     else
                     {
@@ -211,6 +209,8 @@ namespace _01electronics_marketing
                         product.setLogedInUser(loggedInUser);
                         if (!product.IssueNewModel())
                             return;
+                        SystemWatcher.fromSoftware = true;
+
 
                         Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\" + product.GetProductID() + "/" + product.GetBrandID());
 
@@ -218,10 +218,7 @@ namespace _01electronics_marketing
                         product.GetNewModelPhotoLocalPath();
                         if(modelBasicInfoPage.localFolderPath!=null)
                         File.Copy(modelBasicInfoPage.localFolderPath, product.GetModelPhotoLocalPath());
-
-                        BackgroundWorker Synchronize=new BackgroundWorker();
-                        Synchronize.DoWork += SynchronizeDoWork;
-                  
+                 
 
                         //commented
 
@@ -236,7 +233,6 @@ namespace _01electronics_marketing
                             viewproduct.Show();
                         }
 
-                        Synchronize.RunWorkerAsync();
 
                     }
                     else
@@ -250,12 +246,10 @@ namespace _01electronics_marketing
 
             }
         }
-
         private void SynchronizeDoWork(object sender, DoWorkEventArgs e)
         {
             ftbServer.UploadForSynchronization();
         }
-
         private void OnBtnClickNext(object sender, RoutedEventArgs e)
         {
             modelUploadFilesPage.modelBasicInfoPage = modelBasicInfoPage;
@@ -264,7 +258,6 @@ namespace _01electronics_marketing
 
             NavigationService.Navigate(modelUploadFilesPage);
         }
-
         private void OnBtnClickBack(object sender, RoutedEventArgs e)
         {
 
@@ -283,7 +276,6 @@ namespace _01electronics_marketing
             //
             //NavigationService.Navigate(modelBasicInfoPage);
         }
-
         private void OnBtnClickCancel(object sender, RoutedEventArgs e)
         {
             NavigationWindow currentWindow = (NavigationWindow)this.Parent;
@@ -309,7 +301,6 @@ namespace _01electronics_marketing
 
             NavigationService.Navigate(modelUpsSpecsPage);
         }
-
         private void OnBtnClickUploadFiles(object sender, MouseButtonEventArgs e)
         {
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
@@ -321,7 +312,6 @@ namespace _01electronics_marketing
                 NavigationService.Navigate(modelUploadFilesPage);
             }
         }
-
         private void onClickHandler(object sender, MouseButtonEventArgs e)
         {
             Image addImage = sender as Image;
@@ -338,7 +328,6 @@ namespace _01electronics_marketing
                 AddNewStandardFeature(index, "Feature #", standardFeaturesGrid, parentGrid, standardFeatureId, onClickHandler);
             }
         }
-
         private void OnClickBenefitsImage(object sender, MouseButtonEventArgs e)
         {
             Image addImage = sender as Image;
@@ -357,7 +346,6 @@ namespace _01electronics_marketing
             
 
         }
-
         private void OnClickApplicationsImage(object sender, MouseButtonEventArgs e)
         {
             Image addImage = sender as Image;
@@ -488,8 +476,6 @@ namespace _01electronics_marketing
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
             {
 
-
-                
                 
                 if ((index+1 > product.GetModelStandardFeatures().Count && selectedGridiD == standardFeatureId)|| (index+1 > product.GetModelBenefits().Count && selectedGridiD == benefitId) || (index+1 > product.GetModelApplications().Count && selectedGridiD == applicationId))
 
@@ -529,8 +515,6 @@ namespace _01electronics_marketing
 
             }
 
-
-
             gridI.Children.Add(featureIdLabel);
             gridI.Children.Add(featureTextBox);
             gridI.Children.Add(deleteIcon);
@@ -539,7 +523,6 @@ namespace _01electronics_marketing
 
             mainGrid.Children.Add(gridI);
         }
-
         private void OnClickRemoveFeature(object sender, MouseButtonEventArgs e)
         {
             Image currentImage = (Image)sender;
@@ -667,9 +650,6 @@ namespace _01electronics_marketing
                 header.Content = content + (i + 1).ToString();
             }
         }
-
-
-
         public bool CheckGensetRequired()
         {
 
@@ -703,7 +683,6 @@ namespace _01electronics_marketing
             }
             return true;
         }
-
         public void InitializeStandardFeature()
         {
 
@@ -754,7 +733,6 @@ namespace _01electronics_marketing
             }
 
         }
-
         void InitializeApplications()
         {
             try
