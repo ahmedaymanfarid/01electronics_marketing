@@ -111,7 +111,17 @@ namespace _01electronics_marketing
             {
                 InsertDragAndDropOrBrowseGrid();
                 product.GetNewProductID();
-                File.Delete(product.GetProductPhotoLocalPath());
+                try
+                {
+                    File.Delete(product.GetProductPhotoLocalPath());
+
+
+                }
+
+                catch { 
+                
+                
+                }
             }
             else
             {

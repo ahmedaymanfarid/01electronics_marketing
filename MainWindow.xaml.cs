@@ -80,15 +80,14 @@ namespace _01electronics_marketing
             SystemWatcher watcher = new SystemWatcher(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics", BASIC_MACROS.CLIENT_ID,backgroundWorker);
 
 
-
            String[] instructions=File.ReadAllLines(Directory.GetCurrentDirectory() + "\\LastInstruction.txt");
             File.Delete(Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
            File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Server.txt", Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
 
           string[]serverInstructions=File.ReadAllLines(Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
 
-            DateTime dateTime=Convert.ToDateTime(serverInstructions[serverInstructions.Length - 1].Split(',')[0]);
-
+         
+       
 
             if (fileFound == false)
             {
@@ -98,21 +97,24 @@ namespace _01electronics_marketing
             }
 
 
-            if (instructions.Length != 0)
-            {
+           else if (serverInstructions.Length != 0) {
+
+                DateTime dateTime = Convert.ToDateTime(serverInstructions[serverInstructions.Length - 1].Split(',')[0]);
+
+                   if (instructions.Length != 0)
+                   {
 
 
-                if (Convert.ToDateTime(instructions[0]) != dateTime)
-                {
-                    ftpServer.UploadForSynchronization();
-                }
+                         if (Convert.ToDateTime(instructions[0]) != dateTime)
+                         {
 
-            }
-            else {
+                            ftpServer.UploadForSynchronization();
+                         }
 
-                ftpServer.UploadForSynchronization();
+                   }
 
-            }
+           }
+
 
 
 
