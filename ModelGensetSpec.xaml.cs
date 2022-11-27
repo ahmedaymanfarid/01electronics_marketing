@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace _01electronics_marketing
 {
@@ -43,7 +32,7 @@ namespace _01electronics_marketing
             Grid Header = new Grid() { Height = 50 };
             Header.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF105A97");
 
-            Label header = new Label() { Content = "SPEC "+(Home.Children.Count+1), Style = (Style)FindResource("tableHeaderItem") };
+            Label header = new Label() { Content = "SPEC " + (Home.Children.Count + 1), Style = (Style)FindResource("tableHeaderItem") };
             header.HorizontalAlignment = HorizontalAlignment.Left;
 
             Header.Children.Add(header);
@@ -80,9 +69,9 @@ namespace _01electronics_marketing
             Label ratedPowerLable = new Label() { Style = (Style)FindResource("labelStyle") };
             ratedPowerLable.Content = "Rated Power";
 
-            TextBox RatedPowerText = new TextBox() { Style = (Style)FindResource("textBoxStyle"),Width= 253 };
+            TextBox RatedPowerText = new TextBox() { Style = (Style)FindResource("textBoxStyle"), Width = 253 };
 
-            ComboBox ratedPowercombo = new ComboBox() { Style = (Style)FindResource("comboBoxStyle"),Width = 90 };
+            ComboBox ratedPowercombo = new ComboBox() { Style = (Style)FindResource("comboBoxStyle"), Width = 90 };
 
             WrapPanel ratedPowerPanel = new WrapPanel();
 
@@ -97,7 +86,7 @@ namespace _01electronics_marketing
             Label engineLabel = new Label() { Style = (Style)FindResource("labelStyle") };
             engineLabel.Content = "Engine";
 
-            ComboBox engineCombo = new ComboBox() { Style = (Style)FindResource("comboBoxStyle")};
+            ComboBox engineCombo = new ComboBox() { Style = (Style)FindResource("comboBoxStyle") };
 
             EnginePanel.Children.Add(engineLabel);
             EnginePanel.Children.Add(engineCombo);
@@ -107,10 +96,10 @@ namespace _01electronics_marketing
 
             WrapPanel modelPanel = new WrapPanel();
 
-            Label ModelLabel = new Label() {Style = (Style)FindResource("labelStyle") };
+            Label ModelLabel = new Label() { Style = (Style)FindResource("labelStyle") };
             ModelLabel.Content = "Model";
 
-            TextBox ModelText = new TextBox() {Style=(Style)FindResource("textBoxStyle")};
+            TextBox ModelText = new TextBox() { Style = (Style)FindResource("textBoxStyle") };
 
             modelPanel.Children.Add(ModelLabel);
             modelPanel.Children.Add(ModelText);
@@ -251,7 +240,7 @@ namespace _01electronics_marketing
 
             WrapPanel MainFeaturesPanel = new WrapPanel();
 
-            Label MainFeatureLabel = new Label() { Style = (Style)FindResource("labelStyle")};
+            Label MainFeatureLabel = new Label() { Style = (Style)FindResource("labelStyle") };
             MainFeatureLabel.Content = $"Main{'\n'}Feature";
 
             ComboBox MainComboBox = new ComboBox() { Style = (Style)FindResource("comboBoxStyle") };
@@ -303,8 +292,8 @@ namespace _01electronics_marketing
 
             WrapPanel AlternatorFeaturesPanel = new WrapPanel();
 
-            Label AlternatorFeaturesLable = new Label() { Style = (Style)FindResource("labelStyle")};
-            AlternatorFeaturesLable.Content = "Alternator"+'\n'+"Features";
+            Label AlternatorFeaturesLable = new Label() { Style = (Style)FindResource("labelStyle") };
+            AlternatorFeaturesLable.Content = "Alternator" + '\n' + "Features";
 
             ComboBox AlternatorFeatureComboBox = new ComboBox() { Style = (Style)FindResource("comboBoxStyle") };
 
@@ -325,7 +314,7 @@ namespace _01electronics_marketing
             BatteriesPanel.Children.Add(BatteriesLabel);
             BatteriesPanel.Children.Add(BatteriesComboBox);
 
-            Grid.SetRow(BatteriesPanel,19);
+            Grid.SetRow(BatteriesPanel, 19);
 
 
             WrapPanel ExhaustPanel = new WrapPanel();
