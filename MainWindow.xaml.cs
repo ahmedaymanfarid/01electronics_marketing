@@ -115,11 +115,6 @@ namespace _01electronics_marketing
 
            }
 
-
-
-
-
-
             //timer.Elapsed += (o, s) => Task.Factory.StartNew(() => OnTimerElapsed(o, s));
             //timer.Start();
 
