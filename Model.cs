@@ -1,21 +1,18 @@
 ﻿using _01electronics_library;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _01electronics_marketing
 {
-    public class Model:Brand
+    public class Model : Brand
     {
         private int modelID;
         private String modelName;
 
         protected String modelPhotoLocalPath;
         protected String modelPhotoServerPath;
-        int maxSpecId=0;
+        int maxSpecId = 0;
 
         public const int MAX_APPLICATIONS_PER_MODEL = 5;
         public const int MAX_BENEFITS_PER_MODEL = 6;
@@ -30,11 +27,13 @@ namespace _01electronics_marketing
 
         protected Employee LogedInUser;
 
+        public bool is_changed = false;
+
         //private List<BASIC_STRUCTS.UPS_SPECS_STRUCT> modelSpecs;
         //private List<BASIC_STRUCTS.GENSET_SPEC> GENSETSpecs;
 
-        public Model() {
-
+        public Model()
+        {
             modelSpecs = new List<BASIC_STRUCTS.MODEl_SPEC_STRUCT>();
             //modelSpecs = new List<BASIC_STRUCTS.UPS_SPECS_STRUCT>();
             //GENSETSpecs = new List<BASIC_STRUCTS.GENSET_SPEC>();
@@ -44,7 +43,6 @@ namespace _01electronics_marketing
 
             modelBenefits = new List<string>();
             modelStandardFeatures = new List<string>();
-
         }
 
 
@@ -86,17 +84,20 @@ namespace _01electronics_marketing
         {
             modelSummaryPoints = mModlSummeryPoints;
         }
-        public void SetModelApplications(List<string>ModelApplications) {
+        public void SetModelApplications(List<string> ModelApplications)
+        {
 
             modelApplications = ModelApplications;
         }
 
-        public void SetModelBenefits(List<string>modelbenefits) {
+        public void SetModelBenefits(List<string> modelbenefits)
+        {
 
-            modelBenefits = modelbenefits;    
+            modelBenefits = modelbenefits;
         }
 
-        public void SetModelStandardFeatures(List<string>StandardFeatures) {
+        public void SetModelStandardFeatures(List<string> StandardFeatures)
+        {
 
             modelStandardFeatures = StandardFeatures;
         }
@@ -113,7 +114,7 @@ namespace _01electronics_marketing
 
         public void setLogedInUser(Employee memployee)
         {
-             LogedInUser= memployee ;
+            LogedInUser = memployee;
         }
 
         ////////////////
@@ -204,6 +205,8 @@ namespace _01electronics_marketing
             modelPhotoServerPath += GetBrandID();
             modelPhotoServerPath += "/";
             modelPhotoServerPath += GetModelID();
+            modelPhotoServerPath += "/";
+            modelPhotoServerPath += GetModelID();
             modelPhotoServerPath += ".jpg";
 
             //photoServerPath = photoServerPath;
@@ -212,118 +215,118 @@ namespace _01electronics_marketing
 
         public bool GetUPSSpecss()
         {
-        //    modelSpecs.Clear();
-        //    String sqlQueryPart1 = @"SELECT  
-        //		category_id
-        //		,ups_specs.product_id
-        //		,ups_specs.brand_id
-        //		,ups_specs.model_id
-        //		,spec_id
-        //		,rating
-        //		,backup_time_50
-        //		,backup_time_70
-        //		,backup_time_100
+            //    modelSpecs.Clear();
+            //    String sqlQueryPart1 = @"SELECT  
+            //		category_id
+            //		,ups_specs.product_id
+            //		,ups_specs.brand_id
+            //		,ups_specs.model_id
+            //		,spec_id
+            //		,rating
+            //		,backup_time_50
+            //		,backup_time_70
+            //		,backup_time_100
 
-        //		,rated_power
+            //		,rated_power
 
-        //		,valid_until
+            //		,valid_until
 
-        //		,io_phase
-        //		,measure_units.measure_unit
-        //		,input_power_factor
-        //		,thdi
-        //		,input_nominal_voltage
-        //		,input_voltage
-        //		,voltage_tolerance
-        //		,output_power_factor
-        //		,thdv
-        //		,output_nominal_voltage
-        //		,output_dc_voltage_range
-        //		,overload_capability
-        //		,efficiency
-        //		,input_connection_type
-        //		,front_panel
-        //		,max_power
-        //		,certificates
-        //		,safety
-        //		,emc
-        //		,environmental_aspects
-        //		,test_performance
-        //		,protection_degree
-        //		,transfer_voltage_limit
-        //		,marking
+            //		,io_phase
+            //		,measure_units.measure_unit
+            //		,input_power_factor
+            //		,thdi
+            //		,input_nominal_voltage
+            //		,input_voltage
+            //		,voltage_tolerance
+            //		,output_power_factor
+            //		,thdv
+            //		,output_nominal_voltage
+            //		,output_dc_voltage_range
+            //		,overload_capability
+            //		,efficiency
+            //		,input_connection_type
+            //		,front_panel
+            //		,max_power
+            //		,certificates
+            //		,safety
+            //		,emc
+            //		,environmental_aspects
+            //		,test_performance
+            //		,protection_degree
+            //		,transfer_voltage_limit
+            //		,marking
 
-        //		FROM erp_system.dbo.ups_specs
-        //	left join erp_system.dbo.measure_units
-        //	on ups_specs.rating=measure_units.id
+            //		FROM erp_system.dbo.ups_specs
+            //	left join erp_system.dbo.measure_units
+            //	on ups_specs.rating=measure_units.id
 
-        //	where  ups_specs.product_id =";
+            //	where  ups_specs.product_id =";
 
-        //    String sqlQueryPart2 = " and ups_specs.brand_id = ";
-        //    String sqlQueryPart3 = " and ups_specs.model_id= ";
-        //    String sqlQueryPart4 = ";";
+            //    String sqlQueryPart2 = " and ups_specs.brand_id = ";
+            //    String sqlQueryPart3 = " and ups_specs.model_id= ";
+            //    String sqlQueryPart4 = ";";
 
 
-        //    sqlQuery = String.Empty;
-        //    sqlQuery += sqlQueryPart1;
-        //    sqlQuery += GetProductID();
-        //    sqlQuery += sqlQueryPart2;
-        //    sqlQuery += GetBrandID();
-        //    sqlQuery += sqlQueryPart3;
-        //    sqlQuery += GetModelID();
-        //    sqlQuery += sqlQueryPart4;
+            //    sqlQuery = String.Empty;
+            //    sqlQuery += sqlQueryPart1;
+            //    sqlQuery += GetProductID();
+            //    sqlQuery += sqlQueryPart2;
+            //    sqlQuery += GetBrandID();
+            //    sqlQuery += sqlQueryPart3;
+            //    sqlQuery += GetModelID();
+            //    sqlQuery += sqlQueryPart4;
 
-        //    BASIC_STRUCTS.SQL_COLUMN_COUNT_STRUCT queryColumns = new BASIC_STRUCTS.SQL_COLUMN_COUNT_STRUCT();
+            //    BASIC_STRUCTS.SQL_COLUMN_COUNT_STRUCT queryColumns = new BASIC_STRUCTS.SQL_COLUMN_COUNT_STRUCT();
 
-        //    queryColumns.sql_int = 9;
-        //    queryColumns.sql_money = 1;
-        //    queryColumns.sql_datetime = 1;
-        //    queryColumns.sql_string = 24;
+            //    queryColumns.sql_int = 9;
+            //    queryColumns.sql_money = 1;
+            //    queryColumns.sql_datetime = 1;
+            //    queryColumns.sql_string = 24;
 
-        //    if (!sqlDatabase.GetRows(sqlQuery, queryColumns))
-        //        return false;
+            //    if (!sqlDatabase.GetRows(sqlQuery, queryColumns))
+            //        return false;
 
-        //    for (int i = 0; i < sqlDatabase.rows.Count; i++)
-        //    {
-        //        BASIC_STRUCTS.UPS_SPECS_STRUCT tempItem = new BASIC_STRUCTS.UPS_SPECS_STRUCT();
-        //        tempItem.spec_id = sqlDatabase.rows[i].sql_int[4];
-        //        tempItem.rating_id = sqlDatabase.rows[i].sql_int[5];
-        //        tempItem.backup_time_50 = sqlDatabase.rows[i].sql_int[6];
-        //        tempItem.backup_time_70 = sqlDatabase.rows[i].sql_int[7];
-        //        tempItem.backup_time_100 = sqlDatabase.rows[i].sql_int[8];
+            //    for (int i = 0; i < sqlDatabase.rows.Count; i++)
+            //    {
+            //        BASIC_STRUCTS.UPS_SPECS_STRUCT tempItem = new BASIC_STRUCTS.UPS_SPECS_STRUCT();
+            //        tempItem.spec_id = sqlDatabase.rows[i].sql_int[4];
+            //        tempItem.rating_id = sqlDatabase.rows[i].sql_int[5];
+            //        tempItem.backup_time_50 = sqlDatabase.rows[i].sql_int[6];
+            //        tempItem.backup_time_70 = sqlDatabase.rows[i].sql_int[7];
+            //        tempItem.backup_time_100 = sqlDatabase.rows[i].sql_int[8];
 
-        //        tempItem.rated_power = sqlDatabase.rows[i].sql_money[0];
+            //        tempItem.rated_power = sqlDatabase.rows[i].sql_money[0];
 
-        //        tempItem.valid_until = sqlDatabase.rows[i].sql_datetime[0];
+            //        tempItem.valid_until = sqlDatabase.rows[i].sql_datetime[0];
 
-        //        tempItem.io_phase = sqlDatabase.rows[i].sql_string[0];
-        //        tempItem.rating = sqlDatabase.rows[i].sql_string[1];
-        //        tempItem.input_power_factor = sqlDatabase.rows[i].sql_string[2];
-        //        tempItem.thdi = sqlDatabase.rows[i].sql_string[3];
-        //        tempItem.input_nominal_voltage = sqlDatabase.rows[i].sql_string[4];
-        //        tempItem.input_voltage = sqlDatabase.rows[i].sql_string[5];
-        //        tempItem.voltage_tolerance = sqlDatabase.rows[i].sql_string[6];
-        //        tempItem.output_power_factor = sqlDatabase.rows[i].sql_string[7];
-        //        tempItem.thdv = sqlDatabase.rows[i].sql_string[8];
-        //        tempItem.output_nominal_voltage = sqlDatabase.rows[i].sql_string[9];
-        //        tempItem.output_dc_voltage_range = sqlDatabase.rows[i].sql_string[10];
-        //        tempItem.overload_capability = sqlDatabase.rows[i].sql_string[11];
-        //        tempItem.efficiency = sqlDatabase.rows[i].sql_string[12];
-        //        tempItem.input_connection_type = sqlDatabase.rows[i].sql_string[13];
-        //        tempItem.front_panel = sqlDatabase.rows[i].sql_string[14];
-        //        tempItem.max_power = sqlDatabase.rows[i].sql_string[15];
-        //        tempItem.certificates = sqlDatabase.rows[i].sql_string[16];
-        //        tempItem.safety = sqlDatabase.rows[i].sql_string[17];
-        //        tempItem.emc = sqlDatabase.rows[i].sql_string[18];
-        //        tempItem.environmental_aspects = sqlDatabase.rows[i].sql_string[19];
-        //        tempItem.test_performance = sqlDatabase.rows[i].sql_string[20];
-        //        tempItem.protection_degree = sqlDatabase.rows[i].sql_string[21];
-        //        tempItem.transfer_voltage_limit = sqlDatabase.rows[i].sql_string[22];
-        //        tempItem.marking = sqlDatabase.rows[i].sql_string[23];
+            //        tempItem.io_phase = sqlDatabase.rows[i].sql_string[0];
+            //        tempItem.rating = sqlDatabase.rows[i].sql_string[1];
+            //        tempItem.input_power_factor = sqlDatabase.rows[i].sql_string[2];
+            //        tempItem.thdi = sqlDatabase.rows[i].sql_string[3];
+            //        tempItem.input_nominal_voltage = sqlDatabase.rows[i].sql_string[4];
+            //        tempItem.input_voltage = sqlDatabase.rows[i].sql_string[5];
+            //        tempItem.voltage_tolerance = sqlDatabase.rows[i].sql_string[6];
+            //        tempItem.output_power_factor = sqlDatabase.rows[i].sql_string[7];
+            //        tempItem.thdv = sqlDatabase.rows[i].sql_string[8];
+            //        tempItem.output_nominal_voltage = sqlDatabase.rows[i].sql_string[9];
+            //        tempItem.output_dc_voltage_range = sqlDatabase.rows[i].sql_string[10];
+            //        tempItem.overload_capability = sqlDatabase.rows[i].sql_string[11];
+            //        tempItem.efficiency = sqlDatabase.rows[i].sql_string[12];
+            //        tempItem.input_connection_type = sqlDatabase.rows[i].sql_string[13];
+            //        tempItem.front_panel = sqlDatabase.rows[i].sql_string[14];
+            //        tempItem.max_power = sqlDatabase.rows[i].sql_string[15];
+            //        tempItem.certificates = sqlDatabase.rows[i].sql_string[16];
+            //        tempItem.safety = sqlDatabase.rows[i].sql_string[17];
+            //        tempItem.emc = sqlDatabase.rows[i].sql_string[18];
+            //        tempItem.environmental_aspects = sqlDatabase.rows[i].sql_string[19];
+            //        tempItem.test_performance = sqlDatabase.rows[i].sql_string[20];
+            //        tempItem.protection_degree = sqlDatabase.rows[i].sql_string[21];
+            //        tempItem.transfer_voltage_limit = sqlDatabase.rows[i].sql_string[22];
+            //        tempItem.marking = sqlDatabase.rows[i].sql_string[23];
 
-        //        modelSpecs.Add(tempItem);
+            //        modelSpecs.Add(tempItem);
 
-        //    }
+            //    }
 
             return true;
         }
@@ -489,7 +492,7 @@ namespace _01electronics_marketing
 
             if (!sqlDatabase.GetRows(sqlQuery, queryColumns))
                 return false;
-             
+
             for (int i = 0; i < sqlDatabase.rows.Count; i++)
             {
                 BASIC_STRUCTS.MODEl_SPEC_STRUCT tempItem = new BASIC_STRUCTS.MODEl_SPEC_STRUCT();
@@ -516,11 +519,11 @@ namespace _01electronics_marketing
                 tempItem.genset_prp_60 = sqlDatabase.rows[i].sql_money[3];
                 tempItem.genset_rated_power = sqlDatabase.rows[i].sql_int[4];
                 tempItem.ups_rated_power = sqlDatabase.rows[i].sql_money[5];
-                
+
                 tempItem.date_added = sqlDatabase.rows[i].sql_datetime[0];
                 tempItem.valid_until = sqlDatabase.rows[i].sql_datetime[1];
-                
-                
+
+
                 tempItem.spec_name = sqlDatabase.rows[i].sql_string[0];
                 tempItem.genset_rating_measure_unit = sqlDatabase.rows[i].sql_string[1];
                 tempItem.genset_ltb50_measure_unit = sqlDatabase.rows[i].sql_string[2];
@@ -555,7 +558,7 @@ namespace _01electronics_marketing
                 tempItem.ups_protection_degree = sqlDatabase.rows[i].sql_string[31];
                 tempItem.ups_transfer_voltage_limit = sqlDatabase.rows[i].sql_string[32];
                 tempItem.ups_marking = sqlDatabase.rows[i].sql_string[33];
-                
+
                 tempItem.is_valid = sqlDatabase.rows[i].sql_bit[0];
 
 
@@ -563,7 +566,7 @@ namespace _01electronics_marketing
                 modelSpecs.Add(tempItem);
             }
 
-            
+
             return true;
         }
 
@@ -677,7 +680,7 @@ namespace _01electronics_marketing
         {
             modelSummaryPoints.Clear();
             SetProductID(mProductID);
-            SetBrandID(mBrandID); 
+            SetBrandID(mBrandID);
             SetModelID(mModelID);
 
             //if (GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
@@ -689,7 +692,7 @@ namespace _01electronics_marketing
             //    //if (!this.GetUPSSpecss())
             //        return false;
             //}
-            
+
             if (!InitializeModelSpecs())
                 return false;
             if (!InitializeModelApplications())
@@ -707,7 +710,7 @@ namespace _01electronics_marketing
 
         public bool GetNewModelID()
         {
-            String sqlQueryPart1 = @"select max(model_id)
+            String sqlQueryPart1 = @"select model_id
                                    from erp_system.dbo.brands_models
                                    where brand_id = ";
             String sqlQueryPart2 = " and product_id = ";
@@ -724,16 +727,17 @@ namespace _01electronics_marketing
             if (!sqlDatabase.GetRows(sqlQuery, queryColumns, BASIC_MACROS.SEVERITY_HIGH))
                 return false;
 
-            modelID = sqlDatabase.rows[0].sql_int[0] + 1;
+            modelID = sqlDatabase.rows[sqlDatabase.rows.Count - 1].sql_int[0] + 1;
 
             return true;
         }
 
 
-        public bool GetNewSpecId() {
+        public bool GetNewSpecId()
+        {
 
 
-            string sqlQuery = $@"select max(spec_id)
+            string sqlQuery = $@"select i(spec_id)
                                    from erp_system.dbo.genset_specs
                                    where category_id ={GetCategoryID()} and product_id={GetProductID()} and brand_id={GetBrandID()} and model_id={GetModelID()}";
 
@@ -754,7 +758,7 @@ namespace _01electronics_marketing
         public void GetNewModelPhotoLocalPath()
         {
             modelPhotoLocalPath = String.Empty;
-            modelPhotoLocalPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\products_photos\\"+GetProductID()+"\\"+GetBrandID()+"\\"+GetModelID()+".jpg";
+            modelPhotoLocalPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\models\\" + GetProductID() + "\\" + GetBrandID() + "\\" + GetModelID() + "\\" + GetModelID() + ".jpg";
         }
         public void GetNewModelPhotoServerPath()
         {
@@ -763,6 +767,8 @@ namespace _01electronics_marketing
             modelPhotoServerPath += GetProductID();
             modelPhotoServerPath += "/";
             modelPhotoServerPath += GetBrandID();
+            modelPhotoServerPath += "/";
+            modelPhotoServerPath += GetModelID();
             modelPhotoServerPath += "/";
             modelPhotoServerPath += GetModelID();
             modelPhotoServerPath += ".jpg";
@@ -779,6 +785,8 @@ namespace _01electronics_marketing
             folderServerPath += "/";
             folderServerPath += GetBrandID();
             folderServerPath += "/";
+            folderServerPath += GetModelID();
+            folderServerPath += "/";
 
             return folderServerPath;
             //folderServerPath = folderServerPath;
@@ -788,7 +796,7 @@ namespace _01electronics_marketing
         public string GetModelFolderLocalPath()
         {
             modelPhotoLocalPath = String.Empty;
-            modelPhotoLocalPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\" + GetProductID() + "\\" + GetBrandID();
+            modelPhotoLocalPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\models\\" + GetProductID() + "\\" + GetBrandID() + "\\" + GetModelID() + "\\";
             return modelPhotoLocalPath;
         }
 
@@ -831,7 +839,7 @@ namespace _01electronics_marketing
 
             for (int i = 0; i < sqlDatabase.rows.Count; i++)
             {
-               int numberOfSavedModelSummaryPoints = sqlDatabase.rows[i].sql_int[0];
+                int numberOfSavedModelSummaryPoints = sqlDatabase.rows[i].sql_int[0];
 
                 if (numberOfSavedModelSummaryPoints > 0)
                     modelSummaryPoints.Add(sqlDatabase.rows[i].sql_string[0]);
@@ -848,7 +856,7 @@ namespace _01electronics_marketing
                 return false;
             if (!InsertIntoModelSummaryPoints())
                 return false;
-            
+
             if (!InsertIntoModelSpecs())
                 return false;
             if (!InsertIntoModelApplications())
@@ -1021,173 +1029,174 @@ namespace _01electronics_marketing
 
         public bool InsertIntoModelSpecs()
         {
-           
-            int max = modelSpecs.Count() - 1;
-            
 
-            String sqlQueryPart1 = @"  insert into erp_system.dbo.model_specs
+            for (int i = 0; i <= GetModelSpecs().Count - 1; i++)
+            {
+
+                String sqlQueryPart1 = @"  insert into erp_system.dbo.model_specs
                                         values(
 										GETDATE(),";
-            String comma = ",";
-            String genstCommas = "NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL ";
-            String upsCommas = "NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL";
-            String otherCommas = "NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL";
-            String sqlQueryPart2 = ");";
+                String comma = ",";
+                String genstCommas = "NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL ";
+                String upsCommas = "NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL";
+                String otherCommas = "NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL";
+                String sqlQueryPart2 = ");";
 
 
-            sqlQuery = String.Empty;
-            sqlQuery += sqlQueryPart1;
-            sqlQuery += GetEmployeeId();
-            sqlQuery += comma;
-            sqlQuery += GetCategoryID();
-            sqlQuery += comma;
-            sqlQuery += GetProductID();
-            sqlQuery += comma;
-            sqlQuery += GetBrandID();
-            sqlQuery += comma;
-            sqlQuery += GetModelID();
-            sqlQuery += comma;
-            sqlQuery += modelSpecs[max].spec_id;
-            sqlQuery += comma;
-            if (GetCategoryID() == 1)
-            {
-                sqlQuery += "'" + modelSpecs[max].ups_rated_power + modelSpecs[max].ups_rating_measure_unit + modelSpecs[max].ups_io_phase + "'";
+                sqlQuery = String.Empty;
+                sqlQuery += sqlQueryPart1;
+                sqlQuery += GetEmployeeId();
                 sqlQuery += comma;
-                sqlQuery += genstCommas;
+                sqlQuery += GetCategoryID();
                 sqlQuery += comma;
-
-
-                sqlQuery += "'" + modelSpecs[max].ups_io_phase + "'";
+                sqlQuery += GetProductID();
                 sqlQuery += comma;
-                sqlQuery += modelSpecs[max].ups_rated_power;
+                sqlQuery += GetBrandID();
                 sqlQuery += comma;
-                sqlQuery += modelSpecs[max].ups_rating_unit;
+                sqlQuery += GetModelID();
                 sqlQuery += comma;
-                sqlQuery += modelSpecs[max].ups_backup_time_50;
+                sqlQuery += modelSpecs[i].spec_id;
                 sqlQuery += comma;
-                sqlQuery += modelSpecs[max].ups_backup_time_70;
-                sqlQuery += comma;
-                sqlQuery += modelSpecs[max].ups_backup_time_100;
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_input_power_factor + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_thdi + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_input_nominal_voltage + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_input_voltage + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_voltage_tolerance + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_output_power_factor + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_thdv + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_output_nominal_voltage + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_output_dc_voltage_range + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_overload_capability + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_efficiency + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_input_connection_type + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_front_panel + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_max_power + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_certificates + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_safety + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_emc + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_environmental_aspects + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_test_performance + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_protection_degree + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_transfer_voltage_limit + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].ups_marking + "'";
-                sqlQuery += comma;
-                if (modelSpecs[max].is_valid == false)
+                if (GetCategoryID() == 1)
                 {
-                    sqlQuery += 0;
+                    sqlQuery += "'" + modelSpecs[i].ups_rated_power + modelSpecs[i].ups_rating_measure_unit + modelSpecs[i].ups_io_phase + "'";
+                    sqlQuery += comma;
+                    sqlQuery += genstCommas;
+                    sqlQuery += comma;
+
+
+                    sqlQuery += "'" + modelSpecs[i].ups_io_phase + "'";
+                    sqlQuery += comma;
+                    sqlQuery += modelSpecs[i].ups_rated_power;
+                    sqlQuery += comma;
+                    sqlQuery += modelSpecs[i].ups_rating_unit;
+                    sqlQuery += comma;
+                    sqlQuery += modelSpecs[i].ups_backup_time_50;
+                    sqlQuery += comma;
+                    sqlQuery += modelSpecs[i].ups_backup_time_70;
+                    sqlQuery += comma;
+                    sqlQuery += modelSpecs[i].ups_backup_time_100;
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_input_power_factor + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_thdi + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_input_nominal_voltage + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_input_voltage + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_voltage_tolerance + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_output_power_factor + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_thdv + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_output_nominal_voltage + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_output_dc_voltage_range + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_overload_capability + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_efficiency + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_input_connection_type + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_front_panel + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_max_power + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_certificates + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_safety + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_emc + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_environmental_aspects + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_test_performance + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_protection_degree + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_transfer_voltage_limit + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].ups_marking + "'";
+                    sqlQuery += comma;
+                    if (modelSpecs[i].is_valid == false)
+                    {
+                        sqlQuery += 0;
+                    }
+                    else
+                    {
+                        sqlQuery += 1;
+                    }
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].valid_until.ToString("yyyy-MM-dd") + "'"; ;
+                    sqlQuery += comma;
+                    sqlQuery += otherCommas;
+                    sqlQuery += sqlQueryPart2;
                 }
-                else
+                else if (GetCategoryID() == 2)
                 {
-                    sqlQuery += 1;
+                    sqlQuery += "'GensetSpecName'";
+
+                    sqlQuery += comma;
+                    sqlQuery += "" + modelSpecs[i].genset_rated_power + "";
+                    sqlQuery += comma;
+                    sqlQuery += "" + modelSpecs[i].genset_rating_unit + "";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_ltb_50 + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_ltb_50_unit + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_ltb_60 + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_ltb_60_unit + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_prp_50 + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_prp_50_unit + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_prp_60 + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_prp_60_unit + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_cooling + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_tank + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_load + "'";
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].genset_alternator + "'";
+                    sqlQuery += comma;
+
+
+
+                    sqlQuery += upsCommas;
+                    sqlQuery += comma;
+                    if (modelSpecs[i].is_valid == false)
+                    {
+                        sqlQuery += 0;
+                    }
+                    else
+                    {
+                        sqlQuery += 1;
+                    }
+                    sqlQuery += comma;
+                    sqlQuery += "'" + modelSpecs[i].valid_until.ToString("yyyy-MM-dd") + "'"; ;
+                    sqlQuery += comma;
+                    sqlQuery += otherCommas;
+                    sqlQuery += sqlQueryPart2;
+
                 }
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].valid_until.ToString("yyyy-MM-dd") + "'"; ;
-                sqlQuery += comma;
-                sqlQuery += otherCommas;
-                sqlQuery += sqlQueryPart2;
+
+
+
+
+
+                if (!sqlDatabase.InsertRows(sqlQuery))
+                    return false;
+
             }
-            else if(GetCategoryID() == 2)
-            {
-                sqlQuery += "'GensetSpecName'";
-
-                sqlQuery += comma;
-                sqlQuery += "" + modelSpecs[max].genset_rated_power + "";
-                sqlQuery += comma;
-                sqlQuery += "" + modelSpecs[max].genset_rating_unit + "";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_ltb_50 + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_ltb_50_unit + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_ltb_60 + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_ltb_60_unit + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_prp_50 + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_prp_50_unit + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_prp_60 + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_prp_60_unit + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_cooling + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_tank + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_load + "'";
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].genset_alternator + "'";
-                sqlQuery += comma;
-
-
-
-                sqlQuery += upsCommas;
-                sqlQuery += comma;
-                if (modelSpecs[max].is_valid == false)
-                {
-                    sqlQuery += 0;
-                }
-                else
-                {
-                    sqlQuery += 1;
-                }
-                sqlQuery += comma;
-                sqlQuery += "'" + modelSpecs[max].valid_until.ToString("yyyy-MM-dd") + "'"; ;
-                sqlQuery += comma;
-                sqlQuery += otherCommas;
-                sqlQuery += sqlQueryPart2;
-
-            }
-            
-
-
-
-
-            if (!sqlDatabase.InsertRows(sqlQuery))
-                return false;
-
 
 
             return true;
@@ -1197,10 +1206,10 @@ namespace _01electronics_marketing
 
         //public bool InsertIntoUPSSpecs()
         //{
-        //    int max = modelSpecs.Count() - 1;
-        //    if (max < 0)
+        //    int i = modelSpecs.Count() - 1;
+        //    if (i < 0)
         //    {
-        //        max = 0;
+        //        i = 0;
         //    }
 
         //    String sqlQueryPart1 = @"insert into erp_system.dbo.ups_specs
@@ -1220,65 +1229,65 @@ namespace _01electronics_marketing
         //    sqlQuery += comma;
         //    sqlQuery += GetModelID();
         //    sqlQuery += comma;
-        //    sqlQuery += modelSpecs[max].spec_id;
+        //    sqlQuery += modelSpecs[i].spec_id;
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].io_phase + "'";
+        //    sqlQuery += "'" + modelSpecs[i].io_phase + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += modelSpecs[max].rated_power;
+        //    sqlQuery += modelSpecs[i].rated_power;
         //    sqlQuery += comma;
-        //    sqlQuery += modelSpecs[max].rating_id;
+        //    sqlQuery += modelSpecs[i].rating_id;
         //    sqlQuery += comma;
-        //    sqlQuery += modelSpecs[max].backup_time_50;
+        //    sqlQuery += modelSpecs[i].backup_time_50;
         //    sqlQuery += comma;
-        //    sqlQuery += modelSpecs[max].backup_time_70;
+        //    sqlQuery += modelSpecs[i].backup_time_70;
         //    sqlQuery += comma;
-        //    sqlQuery += modelSpecs[max].backup_time_100;
+        //    sqlQuery += modelSpecs[i].backup_time_100;
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].input_power_factor + "'";
+        //    sqlQuery += "'" + modelSpecs[i].input_power_factor + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].thdi + "'";
+        //    sqlQuery += "'" + modelSpecs[i].thdi + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].input_nominal_voltage + "'";
+        //    sqlQuery += "'" + modelSpecs[i].input_nominal_voltage + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].input_voltage + "'";
+        //    sqlQuery += "'" + modelSpecs[i].input_voltage + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].voltage_tolerance + "'";
+        //    sqlQuery += "'" + modelSpecs[i].voltage_tolerance + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].output_power_factor + "'";
+        //    sqlQuery += "'" + modelSpecs[i].output_power_factor + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].thdv + "'";
+        //    sqlQuery += "'" + modelSpecs[i].thdv + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].output_nominal_voltage + "'";
+        //    sqlQuery += "'" + modelSpecs[i].output_nominal_voltage + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].output_dc_voltage_range + "'";
+        //    sqlQuery += "'" + modelSpecs[i].output_dc_voltage_range + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].overload_capability + "'";
+        //    sqlQuery += "'" + modelSpecs[i].overload_capability + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].efficiency + "'";
+        //    sqlQuery += "'" + modelSpecs[i].efficiency + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].input_connection_type + "'";
+        //    sqlQuery += "'" + modelSpecs[i].input_connection_type + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].front_panel + "'";
+        //    sqlQuery += "'" + modelSpecs[i].front_panel + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].max_power + "'";
+        //    sqlQuery += "'" + modelSpecs[i].max_power + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].certificates + "'";
+        //    sqlQuery += "'" + modelSpecs[i].certificates + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].safety + "'";
+        //    sqlQuery += "'" + modelSpecs[i].safety + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].emc + "'";
+        //    sqlQuery += "'" + modelSpecs[i].emc + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].environmental_aspects + "'";
+        //    sqlQuery += "'" + modelSpecs[i].environmental_aspects + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].test_performance + "'";
+        //    sqlQuery += "'" + modelSpecs[i].test_performance + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].protection_degree + "'";
+        //    sqlQuery += "'" + modelSpecs[i].protection_degree + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].transfer_voltage_limit + "'";
+        //    sqlQuery += "'" + modelSpecs[i].transfer_voltage_limit + "'";
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].marking + "'";
+        //    sqlQuery += "'" + modelSpecs[i].marking + "'";
         //    sqlQuery += comma;
-        //    if (modelSpecs[max].is_valid == false)
+        //    if (modelSpecs[i].is_valid == false)
         //    {
         //        sqlQuery += 0;
         //    }
@@ -1287,7 +1296,7 @@ namespace _01electronics_marketing
         //        sqlQuery += 1;
         //    }
         //    sqlQuery += comma;
-        //    sqlQuery += "'" + modelSpecs[max].valid_until.ToString("yyyy-MM-dd") + "'"; ;
+        //    sqlQuery += "'" + modelSpecs[i].valid_until.ToString("yyyy-MM-dd") + "'"; ;
         //    sqlQuery += comma;
         //    sqlQuery += sqlQueryPart2;
         //    sqlQuery += sqlQueryPart3;
@@ -1325,6 +1334,21 @@ namespace _01electronics_marketing
         /// UPDATE FUNCTIONS
         ////////////////////
 
+
+        public bool UpdateModel()
+        {
+            if (!UpdateSummryPointsModel(GetProductID(), GetBrandID(), GetModelID()))
+                return false;
+            if (!UpdateSpecsModel(GetCategoryID(), GetProductID(), GetBrandID(), GetModelID()))
+                return false;
+            if (!UpdatefeautersModel(GetCategoryID(), GetProductID(), GetBrandID(), GetModelID()))
+                return false;
+            if (!UpdateApplicationsModel(GetCategoryID(), GetProductID(), GetBrandID(), GetModelID()))
+                return false;
+            if (!UpdatebenifitsModel(GetCategoryID(), GetProductID(), GetBrandID(), GetModelID()))
+                return false;
+            return true;
+        }
         public bool MoveModel(int ProductId, int brandId, int ModelId, int categoryId)
         {
             if (!GetNewModelID())
@@ -1350,7 +1374,7 @@ namespace _01electronics_marketing
 
             if (!UpdateWorkOrdersProductsLogModel(ProductId, brandId, ModelId, categoryId))
                 return false;
-            
+
 
             if (!UpdateWorkOrdersProductsInfoModel(ProductId, brandId, ModelId, categoryId))
                 return false;
@@ -1523,8 +1547,162 @@ where product_category={categoryId} and product_type={ProductId} and product_bra
             return true;
         }
 
+        public bool UpdateSummryPointsModel(int ProductId, int brandId, int ModelId)
+        {
+            for (int i = 0; i < GetModelSummaryPoints().Count(); i++)
+            {
+                string sqlQuery = $@"UPDATE erp_system.dbo.models_summary_points set 
+                                    product_id={GetProductID()} 
+                                    ,brand_id={GetBrandID()} 
+                                    ,model_id={GetModelID()} 
+                                    ,points_id={i}
+                                    ,points='{GetModelSummaryPoints()[i]}' 
+                                        where product_id={ProductId} and brand_id={brandId} and model_id={ModelId} and points_id= {i}";
 
+                if (!sqlDatabase.InsertRows(sqlQuery))
+                    return false;
+            }
+            return true;
+        }
 
+        public bool UpdateSpecsModel(int categoryId, int ProductId, int brandId, int ModelId)
+        {
+            for (int i = 0; i < GetModelSpecs().Count(); i++)
+            {
+                string sqlQuery = "";
 
+                if (GetCategoryID() == COMPANY_WORK_MACROS.UPS_CATEGORY_ID)
+                {
+                    sqlQuery = String.Empty;
+
+                    sqlQuery = $@"UPDATE erp_system.dbo.model_specs set 
+                                    
+                                    date_added=GETDATE()
+                                    ,added_by={GetEmployeeId()}
+                                    ,category_id={categoryId}
+                                    ,product_id={ProductId}
+                                    ,brand_id={brandId}
+                                    ,model_id={ModelId}
+                                    ,spec_id={GetModelSpecs()[i].spec_id}
+                                    ,spec_name='{GetModelSpecs()[i].spec_name}'
+                                    ,ups_io_phase='{GetModelSpecs()[i].ups_io_phase}'
+                                    ,ups_rated_power={GetModelSpecs()[i].ups_rated_power}
+                                    ,ups_rating={GetModelSpecs()[i].ups_rating_unit}
+                                    ,ups_backup_time_50={GetModelSpecs()[i].ups_backup_time_50}
+                                    ,ups_backup_time_70={GetModelSpecs()[i].ups_backup_time_70}
+                                    ,ups_backup_time_100={GetModelSpecs()[i].ups_backup_time_100}
+                                    ,ups_input_power_factor='{GetModelSpecs()[i].ups_input_power_factor}'
+                                    ,ups_thdi='{GetModelSpecs()[i].ups_thdi}'
+                                    ,ups_input_nominal_voltage='{GetModelSpecs()[i].ups_input_nominal_voltage}'
+                                    ,ups_input_voltage='{GetModelSpecs()[i].ups_input_voltage}'
+                                    ,ups_voltage_tolerance='{GetModelSpecs()[i].ups_voltage_tolerance}'
+                                    ,ups_output_power_factor='{GetModelSpecs()[i].ups_output_power_factor}'
+                                    ,ups_thdv='{GetModelSpecs()[i].ups_thdv}'
+                                    ,ups_output_nominal_voltage='{GetModelSpecs()[i].ups_output_nominal_voltage}'
+                                    ,ups_output_dc_voltage_range='{GetModelSpecs()[i].ups_output_dc_voltage_range}'
+                                    ,ups_overload_capability='{GetModelSpecs()[i].ups_overload_capability}'
+                                    ,ups_efficiency='{GetModelSpecs()[i].ups_efficiency}'
+                                    ,ups_input_connection_type='{GetModelSpecs()[i].ups_input_connection_type}'
+                                    ,ups_front_panel='{GetModelSpecs()[i].ups_front_panel}'
+                                    ,ups_max_power='{GetModelSpecs()[i].ups_max_power}'
+                                    ,ups_certificates='{GetModelSpecs()[i].ups_certificates}'
+                                    ,ups_safety='{GetModelSpecs()[i].ups_safety}'
+                                    ,ups_emc='{GetModelSpecs()[i].ups_emc}'
+                                    ,ups_environmental_aspects='{GetModelSpecs()[i].ups_environmental_aspects}'
+                                    ,ups_test_performance='{GetModelSpecs()[i].ups_test_performance}'
+                                    ,ups_protection_degree='{GetModelSpecs()[i].ups_protection_degree}'
+                                    ,ups_transfer_voltage_limit='{GetModelSpecs()[i].ups_transfer_voltage_limit}'
+                                    ,ups_marking='{GetModelSpecs()[i].ups_marking}'
+                                    ,is_valid= 1
+                                    ,valid_until='{GetModelSpecs()[i].valid_until.ToString("yyyy-MM-dd")}'
+                                    where category_id={categoryId} and product_id={ProductId} and brand_id={brandId} and model_id={ModelId} and spec_id ={i}";
+
+                }
+                else if (GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
+                {
+                    sqlQuery = String.Empty;
+
+                    sqlQuery = $@"UPDATE erp_system.dbo.model_specs set 
+                                    
+                                    date_added=GETDATE()
+                                    ,added_by={GetEmployeeId()}
+                                    ,category_id={GetCategoryID()}
+                                    ,product_id={GetProductID()}
+                                    ,brand_id={GetBrandID()}
+                                    ,model_id={GetModelID()}
+                                    ,spec_id={GetModelSpecs()[i].spec_id}
+                                    ,spec_name='{GetModelSpecs()[i].spec_name}'
+                                    ,genset_rated_power={GetModelSpecs()[i].genset_rated_power}
+                                    ,genset_rating_unit={GetModelSpecs()[i].genset_rating_unit}
+                                    ,genset_ltb_50={GetModelSpecs()[i].genset_ltb_50}
+                                    ,genset_ltb_50_unit={GetModelSpecs()[i].genset_ltb_50_unit}
+                                    ,genset_ltb_60={GetModelSpecs()[i].genset_ltb_60}
+                                    ,genset_ltb_60_unit={GetModelSpecs()[i].genset_ltb_60_unit}
+                                    ,genset_prp_50={GetModelSpecs()[i].genset_prp_50}
+                                    ,genset_prp_50_unit={GetModelSpecs()[i].genset_prp_50_unit}
+                                    ,genset_prp_60={GetModelSpecs()[i].genset_prp_60}
+                                    ,genset_prp_60_unit={GetModelSpecs()[i].genset_prp_60_unit}
+                                    ,genset_cooling='{GetModelSpecs()[i].genset_cooling}'
+                                    ,genset_tank='{GetModelSpecs()[i].genset_tank}'
+                                    ,genset_load='{GetModelSpecs()[i].genset_load}'
+                                    ,genset_alternator='{GetModelSpecs()[i].genset_alternator}'
+                                    ,is_valid= 1
+                                    ,valid_until='{GetModelSpecs()[i].valid_until.ToString("yyyy-MM-dd")}'
+                                    where category_id={categoryId} and product_id={ProductId} and brand_id={brandId} and model_id={ModelId} and spec_id ={i}";
+
+                }
+                if (!sqlDatabase.InsertRows(sqlQuery))
+                    return false;
+
+                InsertIntoModelSpecs();
+                sqlQuery = $@"";
+
+            }
+            return true;
+        }
+
+        public bool UpdatefeautersModel(int categoryId, int ProductId, int brandId, int ModelId)
+        {
+
+            for (int i = 0; i < GetModelStandardFeatures().Count(); i++)
+            {
+                sqlQuery = $@"UPDATE erp_system.dbo.model_standard_features set 
+                                    
+									feature ='{GetModelStandardFeatures()[i]}' 
+									,date_added=GETDATE()
+
+									where produproduct_id={ProductId} and brand_id={brandId} and model_id={ModelId}  and feature_id ={i};";
+            }
+            return true;
+        }
+
+        public bool UpdateApplicationsModel(int categoryId, int ProductId, int brandId, int ModelId)
+        {
+
+            for (int i = 0; i < GetModelApplications().Count(); i++)
+            {
+                sqlQuery = $@"UPDATE erp_system.dbo.model_applications set 
+                                    
+									application ='{GetModelApplications()[i]}' 
+									,date_added=GETDATE()
+
+									where produproduct_id={ProductId} and brand_id={brandId} and model_id={ModelId}  and application_id ={i};";
+            }
+            return true;
+        }
+        public bool UpdatebenifitsModel(int categoryId, int ProductId, int brandId, int ModelId)
+        {
+
+            for (int i = 0; i < GetModelBenefits().Count(); i++)
+            {
+                sqlQuery = $@"UPDATE erp_system.dbo.model_benefits set 
+                                    
+									benefit ='{GetModelBenefits()[i]}' 
+									,date_added=GETDATE()
+
+									where produproduct_id={ProductId} and brand_id={brandId} and model_id={ModelId}  and benefit_id ={i};";
+            }
+            return true;
+        }
     }
 }

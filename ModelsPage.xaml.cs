@@ -105,7 +105,7 @@ namespace _01electronics_marketing
                 ModelsGrid.Children.Add(productTitleLabel);
                 Grid.SetRow(productTitleLabel, 0);
 
-              
+
                 for (int i = 0; i < brandModels.Count(); i++)
                 {
                     selectedProduct.SetModelID(brandModels[i].modelId);
@@ -135,12 +135,12 @@ namespace _01electronics_marketing
 
                         selectedProduct.GetNewModelPhotoLocalPath();
 
-                       Image brandImage = new Image();
+                        Image brandImage = new Image();
                         BitmapImage src = new BitmapImage();
                         src.BeginInit();
                         src.UriSource = new Uri(selectedProduct.GetModelPhotoLocalPath(), UriKind.Relative);
                         src.CacheOption = BitmapCacheOption.OnLoad;
-                      
+
 
                         if (File.Exists(selectedProduct.GetModelPhotoLocalPath()))
                         {
@@ -214,7 +214,7 @@ namespace _01electronics_marketing
 
                         expander.Expanded += new RoutedEventHandler(OnExpandExpander);
                         expander.Collapsed += new RoutedEventHandler(OnCollapseExpander);
-                        expander.Margin = new Thickness(10,0,0,0);
+                        expander.Margin = new Thickness(10, 0, 0, 0);
 
                         StackPanel expanderStackPanel = new StackPanel();
                         expanderStackPanel.Orientation = Orientation.Vertical;
@@ -591,7 +591,7 @@ namespace _01electronics_marketing
             selectedProduct.InitializeModelInfo(selectedProduct.GetProductID(), selectedProduct.GetBrandID(), selectedProduct.GetModelID());
             selectedProduct.SetModelName(brandModels[i].modelName);
             selectedProduct.InitializeModelSummaryPoints();
-            
+
 
             MoveModelWindow MoveModelWindow = new MoveModelWindow(selectedProduct);
             MoveModelWindow.Closed += OnCloseAddModelsWindow;
@@ -605,9 +605,9 @@ namespace _01electronics_marketing
 
             Button tempListBox = (Button)sender;
 
-            StackPanel currentStackPanel= (StackPanel)tempListBox.Parent;
+            StackPanel currentStackPanel = (StackPanel)tempListBox.Parent;
             Expander currentExpander = (Expander)currentStackPanel.Parent;
-            
+
             currentGrid = (Grid)currentExpander.Parent;
 
             viewAddCondition = COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION;
@@ -618,8 +618,9 @@ namespace _01electronics_marketing
             selectedProduct.InitializeModelInfo(selectedProduct.GetProductID(), selectedProduct.GetBrandID(), selectedProduct.GetModelID());
             selectedProduct.SetModelName(brandModels[i].modelName);
             selectedProduct.InitializeModelSummaryPoints();
-            
+
             ModelsWindow modelsWindow = new ModelsWindow(ref loggedInUser, ref selectedProduct, viewAddCondition, false);
+            modelsWindow.Closed += OnCloseAddModelsWindow;
             modelsWindow.Show();
         }
 
@@ -668,10 +669,10 @@ namespace _01electronics_marketing
             viewAddCondition = COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION;
             ModelsWindow modelsWindow = new ModelsWindow(ref loggedInUser, ref selectedProduct, viewAddCondition, false);
 
-            modelsWindow.Closed += OnCloseAddModelsWindow; 
+            modelsWindow.Closed += OnCloseAddModelsWindow;
             modelsWindow.Show();
 
-           
+
         }
 
         private void OnCloseAddModelsWindow(object sender, EventArgs e)
