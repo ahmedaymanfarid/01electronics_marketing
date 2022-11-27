@@ -65,7 +65,7 @@ namespace _01electronics_marketing
         private Grid overwriteFileGrid;
         private Label currentLabel;
         private String errorMessage = "";
-        public bool edit_photo = false ;
+        public bool edit_photo = false;
         public ModelBasicInfoPage(ref Employee mLoggedInUser, ref Model mPrduct, int mViewAddCondition)
         {
             loggedInUser = mLoggedInUser;
@@ -144,23 +144,23 @@ namespace _01electronics_marketing
 
 
                     product.SetModelPhotoServerPath(product.GetModelFolderServerPath() + "/" + product.GetModelID() + ".jpg");
-                    if (product.DownloadPhotoFromServer(product.GetModelPhotoServerPath(), product.GetModelPhotoLocalPath()))
-                    {
+                    //if (product.DownloadPhotoFromServer(product.GetModelPhotoServerPath(), product.GetModelPhotoLocalPath()))
+                    //{
 
-                        Image brandLogo = new Image();
-                        //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
-                        BitmapImage src = new BitmapImage();
-                        src.BeginInit();
-                        src.UriSource = new Uri(product.GetModelFolderLocalPath(), UriKind.Relative);
-                        src.CacheOption = BitmapCacheOption.OnLoad;
-                        src.EndInit();
-                        brandLogo.Source = src;
-                        brandLogo.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-                        brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
-                        wrapPanel.Children.Add(brandLogo);
+                    //    Image brandLogo = new Image();
+                    //    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                    //    BitmapImage src = new BitmapImage();
+                    //    src.BeginInit();
+                    //    src.UriSource = new Uri(product.GetModelFolderLocalPath(), UriKind.Relative);
+                    //    src.CacheOption = BitmapCacheOption.OnLoad;
+                    //    src.EndInit();
+                    //    brandLogo.Source = src;
+                    //    brandLogo.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                    //    brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
+                    //    wrapPanel.Children.Add(brandLogo);
 
-                        uploadFilesStackPanel.Children.Add(wrapPanel);
-                    }
+                    //    uploadFilesStackPanel.Children.Add(wrapPanel);
+                    //}
                 }
                 uploadFilesStackPanel.Children.Clear();
                 uploadFilesStackPanel.Children.Add(wrapPanel);
@@ -266,7 +266,7 @@ namespace _01electronics_marketing
 
             Image productImage = new Image();
 
-            if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION || edit_photo==true )
+            if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION || edit_photo == true)
             {
                 modelAdditionalInfoPage.finishButton.IsEnabled = true;
                 BitmapImage src = new BitmapImage();
@@ -729,7 +729,7 @@ namespace _01electronics_marketing
 
             wrapPanel.Children.Clear();
             uploadFilesStackPanel.Children.Clear();
-            product.UploadPhotoToServer(product.GetModelPhotoServerPath(), product.GetModelPhotoLocalPath());
+            //product.UploadPhotoToServer(product.GetModelPhotoServerPath(), product.GetModelPhotoLocalPath());
 
             serverFileName = (String)product.GetModelID().ToString() + ".jpg";
             //localFolderPath = product.GetProductPhotoLocalPath();
