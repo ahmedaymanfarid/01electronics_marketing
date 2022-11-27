@@ -114,7 +114,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Brand.cs" />
     <Compile Include="BrandsPage.xaml.cs">
       <DependentUpon>BrandsPage.xaml</DependentUpon>
     </Compile>
@@ -181,7 +180,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model.cs" />
     <Compile Include="ModelAdditionalInfoPage.xaml.cs">
       <DependentUpon>ModelAdditionalInfoPage.xaml</DependentUpon>
     </Compile>
@@ -206,7 +204,6 @@
     <Compile Include="MoveModelWindow.xaml.cs">
       <DependentUpon>MoveModelWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product.cs" />
     <Compile Include="ProductsPage.xaml.cs">
       <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>

@@ -85,7 +85,7 @@ namespace _01electronics_marketing
         Grid UploadIconGrid = new Grid();
 
         ProgressBar progressBar = new ProgressBar();
-        public AddBrand(ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<COMPANY_WORK_MACROS.BRAND_STRUCT> brandsList )
+        public AddBrand(ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<COMPANY_WORK_MACROS.BRAND_STRUCT> brandsList)
         {
 
             InitializeComponent();
@@ -141,22 +141,22 @@ namespace _01electronics_marketing
                 uploadFilesStackPanel.Children.Add(wrapPanel);
 
             }
-            
+
             InitializeBrandsComboBox();
             checkEmployee();
-            
-            }
-        
+
+        }
+
         /// /////////////////////////////////////////////////////////////////
         /// ////////cHECKERS
         /// /////////////////////////////////////////////////////////////////
-       
+
         private void deleteSomeBrands()
         {
             int index;
-            for (int i =0 ; i < mbrandsList.Count; i++)
+            for (int i = 0; i < mbrandsList.Count; i++)
             {
-                index= brands.FindIndex(x => x.brandId == mbrandsList[i].brandId );
+                index = brands.FindIndex(x => x.brandId == mbrandsList[i].brandId);
                 brands.Remove(brands[index]);
 
             }
@@ -177,12 +177,12 @@ namespace _01electronics_marketing
                 int index = brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID());
 
 
-                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID());  
+                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID());
                 BrandNameLabel.Content = product.GetBrandName();
                 BrandNameComboBox.Visibility = Visibility.Collapsed;
                 BrandNameLabel.Visibility = Visibility.Visible;
 
-                
+
                 picHint.Visibility = Visibility.Hidden;
                 editPictureButton.Visibility = Visibility.Visible;
 
@@ -203,7 +203,7 @@ namespace _01electronics_marketing
             {
                 product.SetBrandName(BrandNameComboBox.SelectedItem.ToString());
                 product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brandId);
-                product.AddBrandToProduct();      
+                product.AddBrandToProduct();
             }
 
             this.Close();
@@ -283,7 +283,7 @@ namespace _01electronics_marketing
             for (int i = 0; i < brands.Count; i++)
                 BrandNameComboBox.Items.Add(brands[i].brandName);
 
-            return true; 
+            return true;
         }
 
         private void InsertIconGrid(string mStatus, string localFolderPath)
@@ -964,40 +964,40 @@ namespace _01electronics_marketing
             {
 
 
-                product.SetBrandPhotoServerPath(product.GetBrandFolderServerPath() + "/" + product.GetBrandID()+ ".jpg");
-                if (product.DownloadPhotoFromServer(product.GetBrandPhotoServerPath(),product.GetBrandPhotoLocalPath()))
-                {
+                product.SetBrandPhotoServerPath(product.GetBrandFolderServerPath() + "/" + product.GetBrandID() + ".jpg");
+                //if (product.DownloadPhotoFromServer(product.GetBrandPhotoServerPath(),product.GetBrandPhotoLocalPath()))
+                //{
 
-                    Image brandLogo = new Image();
-                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
-                    BitmapImage src = new BitmapImage();
-                    src.BeginInit();
-                    src.UriSource = new Uri(product.GetBrandPhotoLocalPath(), UriKind.Relative);
-                    src.CacheOption = BitmapCacheOption.OnLoad;
-                    src.EndInit();
-                    brandLogo.Source = src;
-                    brandLogo.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
-                    //brandLogo.Width = 300;
-                    //brandLogo.Margin = new Thickness(80, 100, 12, 12);
-
-
-                    //if(brandsList[i].brandId == 0)
-                    //{
-                    //    Label othersLabel = new Label();
-                    //    othersLabel.Content = brandsList[i].brandName;
-                    //    othersLabel.Style = (Style)FindResource("tableHeaderItem");
-                    //    gridI.Children.Add(othersLabel);
-                    //}    
+                //    Image brandLogo = new Image();
+                //    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                //    BitmapImage src = new BitmapImage();
+                //    src.BeginInit();
+                //    src.UriSource = new Uri(product.GetBrandPhotoLocalPath(), UriKind.Relative);
+                //    src.CacheOption = BitmapCacheOption.OnLoad;
+                //    src.EndInit();
+                //    brandLogo.Source = src;
+                //    brandLogo.HorizontalAlignment = HorizontalAlignment.Stretch;
+                //    brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
+                //    //brandLogo.Width = 300;
+                //    //brandLogo.Margin = new Thickness(80, 100, 12, 12);
 
 
+                //    //if(brandsList[i].brandId == 0)
+                //    //{
+                //    //    Label othersLabel = new Label();
+                //    //    othersLabel.Content = brandsList[i].brandName;
+                //    //    othersLabel.Style = (Style)FindResource("tableHeaderItem");
+                //    //    gridI.Children.Add(othersLabel);
+                //    //}    
 
-                    wrapPanel.Children.Add(brandLogo);
-
-                    uploadFilesStackPanel.Children.Add(wrapPanel);
 
 
-                }
+                //    wrapPanel.Children.Add(brandLogo);
+
+                //    uploadFilesStackPanel.Children.Add(wrapPanel);
+
+
+                //}
             }
         }
     }
