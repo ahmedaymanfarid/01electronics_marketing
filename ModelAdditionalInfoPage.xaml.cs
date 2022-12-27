@@ -599,8 +599,8 @@ namespace _01electronics_marketing
                     if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
                     {
 
-                        product.setLogedInUser(loggedInUser);
-
+                        product.SetLoggedInUser(loggedInUser);
+                        
                         if (!product.IssueNewModel())
                             return;
 
@@ -634,7 +634,7 @@ namespace _01electronics_marketing
                     }
                     else
                     {
-                        product.setLogedInUser(loggedInUser);
+                        product.SetLoggedInUser(loggedInUser);
 
                         product.UpdateModel();
 

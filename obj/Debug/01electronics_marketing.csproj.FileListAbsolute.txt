@@ -135,11 +135,10 @@ F:\Raouf\Projects\01electronics_marketing\obj\Debug\ForgetPasswordPage.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\MainWindow.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelAdditionalInfoPage.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelBasicInfoPage.g.cs
-F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelGensetSpec.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelsPage.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelsWindow.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelUploadFilesPage.g.cs
-F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelUpsSpecsPage.g.cs
+F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelSpecsPage.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\MoveModelWindow.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ProductsPage.g.cs
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\SignInPage.g.cs
@@ -160,11 +159,10 @@ F:\Raouf\Projects\01electronics_marketing\obj\Debug\ForgetPasswordPage.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\MainWindow.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelAdditionalInfoPage.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelBasicInfoPage.baml
-F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelGensetSpec.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelsPage.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelsWindow.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelUploadFilesPage.baml
-F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelUpsSpecsPage.baml
+F:\Raouf\Projects\01electronics_marketing\obj\Debug\ModelSpecsPage.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\MoveModelWindow.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\ProductsPage.baml
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\SignInPage.baml

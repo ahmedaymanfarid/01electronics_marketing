@@ -28,7 +28,6 @@ namespace _01electronics_marketing
         public SignInPage()
         {
             InitializeComponent();
-
             loggedInUser = new Employee();
 
             if (_01electronics_marketing.Properties.Settings.Default.Email != null)

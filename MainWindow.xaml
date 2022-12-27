@@ -6,5 +6,6 @@
         xmlns:local="clr-namespace:_01electronics_marketing"
         mc:Ignorable="d"
         Background="#EDEDED"
-        Title="01 Electronics - CRM - Portal Window" Height="730" Width="1200">
+        Title="01 Electronics - Marketing - Window" 
+                  Height="730" Width="1200">
 </NavigationWindow>
