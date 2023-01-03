@@ -37,7 +37,7 @@
                 Name="ModelHeader"
                 Grid.Column="0"
                 Background="#105A97"
-                Content="MODEL ADDITIONAL INFO"
+                Content="ADDITIONAL INFO"
                 Style="{StaticResource secondaryHeaderTextStyle}" />
 
         </Grid>
@@ -62,7 +62,7 @@
                 Style="{StaticResource unselectedSecondaryTabBorder}">
                 <Label
                     Name="SpecsType"
-                    Content="UPS Specs"
+                    Content="Model Specs"
                     Style="{StaticResource unselectedSecondaryTabLabelItem}" />
             </Border>
             <Border Grid.Column="2" Style="{StaticResource selectedSecondaryTabBorder}">

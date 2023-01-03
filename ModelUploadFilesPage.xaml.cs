@@ -222,13 +222,7 @@ namespace _01electronics_marketing
 
 
 
-            //    if (product.GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
-            //    {
-
-            //        SpecsType.Content = "Genset Specs";
-
-            //    }
-            //}
+       
         }
 
 
