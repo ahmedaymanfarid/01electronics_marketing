@@ -73,6 +73,10 @@ namespace _01electronics_marketing
                     InitializeNewCardEnclosuresAndCabinets();
 
                 }
+                else if (COMPANY_WORK_MACROS.UPS_CATEGORY_ID == product.GetCategoryID())
+                {
+
+                }
                 else
                 {
                     ModelHeader.Content = "MODEL SPECS";
@@ -467,8 +471,7 @@ namespace _01electronics_marketing
                     else
                         model_spec.panel_phase = PanelPhaseTextBox.Text.ToString();
 
-                    /***/
-
+                    
                     WrapPanel wrap3 = card.Children[3] as WrapPanel;
 
                     WrapPanel PanelPolePanel = wrap3.Children[0] as WrapPanel;
