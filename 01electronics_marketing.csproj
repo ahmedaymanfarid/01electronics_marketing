@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +49,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>MAIN_LOGO.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -111,7 +133,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Brand.cs" />
     <Compile Include="BrandsPage.xaml.cs">
       <DependentUpon>BrandsPage.xaml</DependentUpon>
     </Compile>
@@ -136,10 +157,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ModelGensetSpec.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="ModelsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -152,7 +169,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ModelUpsSpecsPage.xaml">
+    <Page Include="ModelSpecsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -178,15 +195,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model.cs" />
     <Compile Include="ModelAdditionalInfoPage.xaml.cs">
       <DependentUpon>ModelAdditionalInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelBasicInfoPage.xaml.cs">
       <DependentUpon>ModelBasicInfoPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ModelGensetSpec.xaml.cs">
-      <DependentUpon>ModelGensetSpec.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelsPage.xaml.cs">
       <DependentUpon>ModelsPage.xaml</DependentUpon>
@@ -197,13 +210,12 @@
     <Compile Include="ModelUploadFilesPage.xaml.cs">
       <DependentUpon>ModelUploadFilesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModelUpsSpecsPage.xaml.cs">
-      <DependentUpon>ModelUpsSpecsPage.xaml</DependentUpon>
+    <Compile Include="ModelSpecsPage.xaml.cs">
+      <DependentUpon>ModelSpecsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MoveModelWindow.xaml.cs">
       <DependentUpon>MoveModelWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Product.cs" />
     <Compile Include="ProductsPage.xaml.cs">
       <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>
@@ -291,6 +303,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\SVG\plus-circle-fill.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

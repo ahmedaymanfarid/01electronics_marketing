@@ -48,7 +48,7 @@ namespace _01electronics_marketing
         {
             InitializeComponent();
 
-           
+
 
             //background.DoWork += Dd;
 
@@ -73,7 +73,7 @@ namespace _01electronics_marketing
 
         private void SyncDoWork(object sender, DoWorkEventArgs e)
         {
-           ftpServer.UploadForSynchronization();
+            ftpServer.UploadForSynchronization();
         }
 
         private void InitializeProducts()
@@ -105,7 +105,7 @@ namespace _01electronics_marketing
                 RowDefinition imageRow = new RowDefinition();
                 gridI.RowDefinitions.Add(imageRow);
 
-                selectedProduct.SetProductID(products[i].typeId);               
+                selectedProduct.SetProductID(products[i].typeId);
 
                 Image productImage = new Image();
 
@@ -137,12 +137,14 @@ namespace _01electronics_marketing
                     Grid.SetRow(border1, 0);
 
                 }
-                else {
-                          try
-                          {
-                              src.EndInit();
-                          }
-                          catch (Exception c) {
+                else
+                {
+                    try
+                    {
+                        src.EndInit();
+                    }
+                    catch (Exception c)
+                    {
 
                         foundImage = false;
                         Border border1 = new Border();
@@ -155,12 +157,12 @@ namespace _01electronics_marketing
                         BrushConverter converter = new BrushConverter();
                         border1.BorderBrush = (Brush)converter.ConvertFrom("#105A97");
                         border1.Background = (Brush)converter.ConvertFrom("#EDEDED");
-                        border1.Tag= products[i].typeId.ToString();
-                            border1.MouseLeftButtonDown += BorderMouseLeftButtonDown;
-                            gridI.Children.Add(border1);
-                            Grid.SetRow(border1, 0);
+                        border1.Tag = products[i].typeId.ToString();
+                        border1.MouseLeftButtonDown += BorderMouseLeftButtonDown;
+                        gridI.Children.Add(border1);
+                        Grid.SetRow(border1, 0);
 
-                          }
+                    }
                 }
 
                 productImage.Tag = products[i].typeId.ToString();
@@ -169,13 +171,14 @@ namespace _01electronics_marketing
                 productImage.VerticalAlignment = VerticalAlignment.Stretch;
                 productImage.MouseDown += ImageMouseDown;
 
-                if (foundImage == true) {
+                if (foundImage == true)
+                {
 
                     gridI.Children.Add(productImage);
                     Grid.SetRow(productImage, 0);
 
                 }
-              
+
 
                 Expander expander = new Expander();
                 expander.Tag = products[i].typeId.ToString();
@@ -226,7 +229,7 @@ namespace _01electronics_marketing
                 headerGrid.RowDefinitions.Add(headerGridRow);
                 Grid.SetRow(headerGrid, 0);
 
-                TextBlock headerLabel = new TextBlock() { TextWrapping=TextWrapping.WrapWithOverflow};
+                TextBlock headerLabel = new TextBlock() { TextWrapping = TextWrapping.WrapWithOverflow };
                 headerLabel.Foreground = new SolidColorBrush(Color.FromRgb(16, 90, 151));
                 headerLabel.FontFamily = new FontFamily("Sans Serif");
                 headerLabel.FontSize = 17;
@@ -266,9 +269,9 @@ namespace _01electronics_marketing
                 //}
             }
 
-            if(loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
+            if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
                 loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
-                ( loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
+                (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
             {
                 addBtn.Visibility = Visibility.Visible;
             }
@@ -313,7 +316,7 @@ namespace _01electronics_marketing
 
         //    });
 
-      
+
         //}
         //private void OnButtonClickedContacts(object sender, RoutedEventArgs e)
         //{
@@ -388,7 +391,7 @@ namespace _01electronics_marketing
             selectedProduct.SetProductID(int.Parse(tmp));
             //selectedProduct.SetCategoryID(selectedProduct.GetCategoryID());
 
-            Brand selectedBrand=new Brand();
+            Brand selectedBrand = new Brand();
             selectedBrand.SetProductID(selectedProduct.GetProductID());
             selectedBrand.SetCategoryID(selectedProduct.GetCategoryID());
             selectedBrand.SetProductName(selectedProduct.GetProductName());
@@ -427,7 +430,6 @@ namespace _01electronics_marketing
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Expander HANDLERS
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         private void OnExpandExpander(object sender, RoutedEventArgs e)
         {
             if (currentExpander != null)
@@ -442,7 +444,6 @@ namespace _01electronics_marketing
 
             currentExpander.VerticalAlignment = VerticalAlignment.Top;
         }
-
         private void OnCollapseExpander(object sender, RoutedEventArgs e)
         {
             Expander currentExpander = (Expander)sender;
@@ -450,7 +451,6 @@ namespace _01electronics_marketing
             currentExpander.VerticalAlignment = VerticalAlignment.Top;
             currentExpander.Margin = new Thickness(12);
         }
-
         private void addBtnMouseEnter(object sender, MouseEventArgs e)
         {
             Storyboard storyboard = new Storyboard();
@@ -468,10 +468,9 @@ namespace _01electronics_marketing
 
             storyboard.Begin(this);
         }
-
         private void addBtnMouseLeave(object sender, MouseEventArgs e)
         {
-           
+
             Storyboard storyboard = new Storyboard();
             TimeSpan duration = new TimeSpan(0, 0, 0, 0, 200);
             DoubleAnimation animation = new DoubleAnimation();
@@ -500,26 +499,20 @@ namespace _01electronics_marketing
             addProductWindow.Closed += OnCloseAddPRoductsWindow;
             addProductWindow.Show();
         }
-       
         private void onBtnAddClick(object sender, MouseButtonEventArgs e)
         {
             mViewAddCondition = COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION;
-            AddProductWindow addProductWindow = new AddProductWindow(ref selectedProduct , ref loggedInUser , ref mViewAddCondition);
+            AddProductWindow addProductWindow = new AddProductWindow(ref selectedProduct, ref loggedInUser, ref mViewAddCondition);
             addProductWindow.Closed += OnCloseAddPRoductsWindow;
             addProductWindow.Show();
         }
-
         private void OnCloseAddPRoductsWindow(object sender, EventArgs e)
         {
             products.Clear();
-            
+
             InitializeProducts();
             InitializeProductSummaryPoints();
             SetUpPageUIElements();
         }
-
-    
     }
-
-
 }
