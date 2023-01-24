@@ -252,10 +252,12 @@ namespace _01electronics_marketing
             Grid.SetRow(progressBar, 3);
             UploadIconGrid.Children.Add(progressBar);
 
-            SystemWatcher.fromSoftware = true;
+            //SystemWatcher.fromSoftware = true;
 
             File.Delete(oldLocalFolderPath);
             File.Copy(localFolderPath, oldLocalFolderPath);
+            ftpObject.Delete(oldLocalFolderPath);
+            ftpObject.Create(oldLocalFolderPath);
 
             saveChangesButton.IsEnabled = true;
 

@@ -22,6 +22,8 @@ namespace _01electronics_marketing
         List<COMPANY_WORK_MACROS.PRODUCT_CATEGORY_STRUCT> categories=new List<COMPANY_WORK_MACROS.PRODUCT_CATEGORY_STRUCT>();
         List<COMPANY_WORK_MACROS.PRODUCT_STRUCT> products = new List<COMPANY_WORK_MACROS.PRODUCT_STRUCT>();
         List<COMPANY_WORK_MACROS.BRAND_STRUCT> brands = new List<COMPANY_WORK_MACROS.BRAND_STRUCT>();
+
+        FTPServer ftbServer = new FTPServer();
         public MoveModelWindow(Model CurrentModel)
         {
             InitializeComponent();
@@ -101,13 +103,16 @@ namespace _01electronics_marketing
             newModel.GetNewModelPhotoLocalPath();
 
 
-            SystemWatcher.fromSoftware = true;
+            //SystemWatcher.fromSoftware = true;
             if (File.Exists(currentModell.GetModelPhotoLocalPath()))
             {
                 if (!File.Exists(newModel.GetModelPhotoLocalPath())) {
 
                     File.Copy(currentModell.GetModelPhotoLocalPath(), newModel.GetModelPhotoLocalPath());
                     File.Delete(currentModell.GetModelPhotoLocalPath());
+                    ftbServer.Create(newModel.GetModelPhotoLocalPath());
+                    ftbServer.Delete(currentModell.GetModelPhotoLocalPath());
+
                 }                
             }
 

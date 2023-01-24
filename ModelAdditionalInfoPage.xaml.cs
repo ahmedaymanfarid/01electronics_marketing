@@ -141,15 +141,18 @@ namespace _01electronics_marketing
                         if (!product.IssueNewModel())
                             return;
 
-                        SystemWatcher.fromSoftware = true;
+                        //SystemWatcher.fromSoftware = true;
 
                         Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos" + product.GetProductID() + "/" + product.GetBrandID());
                         product.GetNewModelPhotoLocalPath();
 
-                        if (modelBasicInfoPage.localFolderPath != null)
+                        if (modelBasicInfoPage.localFolderPath != null) {
                             File.Copy(modelBasicInfoPage.localFolderPath, product.GetModelPhotoLocalPath());
+                            ftbServer.Create(product.GetModelPhotoLocalPath());
 
-                 
+                        }
+
+
 
                         //commented
                         //modelBasicInfoPage.uploadBackground.RunWorkerAsync();
@@ -208,15 +211,17 @@ namespace _01electronics_marketing
                         product.setLogedInUser(loggedInUser);
                         if (!product.IssueNewModel())
                             return;
-                        SystemWatcher.fromSoftware = true;
+                        //SystemWatcher.fromSoftware = true;
 
 
                         Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\" + product.GetProductID() + "/" + product.GetBrandID());
 
 
                         product.GetNewModelPhotoLocalPath();
-                        if(modelBasicInfoPage.localFolderPath!=null)
-                        File.Copy(modelBasicInfoPage.localFolderPath, product.GetModelPhotoLocalPath());
+                        if (modelBasicInfoPage.localFolderPath != null) {
+                            File.Copy(modelBasicInfoPage.localFolderPath, product.GetModelPhotoLocalPath());
+                            ftbServer.Create(product.GetModelPhotoLocalPath());
+                        }
                  
 
                         //commented

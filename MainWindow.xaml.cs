@@ -4,7 +4,6 @@ using System.ComponentModel;
 using _01electronics_windows_library;
 using System.IO;
 using System.Windows;
-using System.Timers;
 using System.Threading;
 using _01electronics_marketing;
 
@@ -22,8 +21,7 @@ namespace _01electronics_marketing
         private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
 
-        //Timer timer=new Timer(60000);
-
+        System.Timers.Timer timer = new System.Timers.Timer(300000);
         FTPServer ftpServer = new FTPServer();
         bool fileFound = true;
         public MainWindow(ref Employee mLoggedInUser)
@@ -77,7 +75,7 @@ namespace _01electronics_marketing
 
             }
 
-            SystemWatcher watcher = new SystemWatcher(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics", BASIC_MACROS.CLIENT_ID,backgroundWorker);
+            //SystemWatcher watcher = new SystemWatcher(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics", BASIC_MACROS.CLIENT_ID,backgroundWorker);
 
 
            String[] instructions=File.ReadAllLines(Directory.GetCurrentDirectory() + "\\LastInstruction.txt");
@@ -86,8 +84,6 @@ namespace _01electronics_marketing
 
           string[]serverInstructions=File.ReadAllLines(Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
 
-         
-       
 
             if (fileFound == false)
             {
@@ -96,38 +92,51 @@ namespace _01electronics_marketing
                 backgroundWorker.RunWorkerAsync();
             }
 
-
            else if (serverInstructions.Length != 0) {
 
                 DateTime dateTime = Convert.ToDateTime(serverInstructions[serverInstructions.Length - 1].Split(',')[0]);
 
                    if (instructions.Length != 0)
                    {
-
-
                          if (Convert.ToDateTime(instructions[0]) != dateTime)
                          {
+                            BackgroundWorker synchronize = new BackgroundWorker();
+                            synchronize.DoWork += SynchronizeDoWork;
 
-                            ftpServer.UploadForSynchronization();
+                            synchronize.RunWorkerAsync();
                          }
 
                    }
-
            }
 
-
-
-
-
-
-            //timer.Elapsed += (o, s) => Task.Factory.StartNew(() => OnTimerElapsed(o, s));
-            //timer.Start();
+            timer.Elapsed += TimerElapsed;
+            timer.Start();
 
             CategoriesPage statisticsPage = new CategoriesPage(ref mLoggedInUser);
             this.NavigationService.Navigate(statisticsPage);
 
         }
 
+        private void TimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (backgroundWorker.IsBusy == true)
+                return;
+
+            BackgroundWorker sync = new BackgroundWorker();
+            sync.DoWork += SyncDoWork;
+            sync.RunWorkerAsync();
+        
+        }
+
+        private void SyncDoWork(object sender, DoWorkEventArgs e)
+        {
+            ftpServer.UploadForSynchronization();
+        }
+
+        private void SynchronizeDoWork(object sender, DoWorkEventArgs e)
+        {
+            ftpServer.UploadForSynchronization();
+        }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
