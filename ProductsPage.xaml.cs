@@ -401,7 +401,6 @@ namespace _01electronics_marketing
             this.NavigationService.Navigate(brandsPage);
         }
 
-
         private void BorderMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Border currentBorder = sender as Border;

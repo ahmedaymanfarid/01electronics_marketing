@@ -115,11 +115,12 @@ namespace _01electronics_marketing
                 {
                     File.Delete(product.GetProductPhotoLocalPath());
 
-
                 }
+
 
                 catch
                 {
+
 
 
                 }
@@ -205,8 +206,9 @@ namespace _01electronics_marketing
 
                 if (!product.IssueNewProduct())
                     return;
-                SystemWatcher.fromSoftware = true;
+                //SystemWatcher.fromSoftware = true;
                 File.Copy(localFolderPath, product.GetProductPhotoLocalPath());
+                ftpObject.Create(product.GetProductPhotoLocalPath());
                 this.Close();
 
             }

@@ -114,6 +114,38 @@ D:\01electronics_marketing\obj\Debug\SignUpPage.baml
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.g.resources
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CoreCompileInputs.cache
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CopyComplete
+<<<<<<< HEAD
+=======
+C:\Users\akram.mohamed\source\Marketing\01electronics_marketing\obj\Debug\01electronics_marketing_Content.g.cs
+>>>>>>> c0b18ad1bba20a47e330709a6b66f94c9ae6bc2f
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.AssemblyReference.cache
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.SuggestedBindingRedirects.cache
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\AddBrand.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\AddProductWindow.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\adminWindow.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\BrandsPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\CategoriesPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ChangePasswordPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ForgetPasswordPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\MainWindow.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelAdditionalInfoPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelBasicInfoPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelGensetSpec.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelsPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelsWindow.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelUploadFilesPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelUpsSpecsPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\MoveModelWindow.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ProductsPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\SignInPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\SignInWindow.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\SignUpPage.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\App.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\01electronics_marketing_Content.g.cs
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\01electronics_marketing_MarkupCompile.cache
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\01electronics_marketing_MarkupCompile.lref
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\01electronics_marketing.exe
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\01electronics_marketing.pdb
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.exe
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.pdb
 F:\Raouf\Projects\01electronics_marketing\bin\Debug\01electronics_marketing.exe.config
@@ -173,3 +205,5 @@ F:\Raouf\Projects\01electronics_marketing\obj\Debug\01electronics_marketing.cspr
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CopyComplete
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\01electronics_marketing.exe
 F:\Raouf\Projects\01electronics_marketing\obj\Debug\01electronics_marketing.pdb
+>>>>>>> ebb79b9aafe7ca6311f3fdfc24a41c08903c5682
+C:\Users\akram.mohamed\source\01electronics_marketing\obj\Debug\ModelSpecsPage.g.cs
