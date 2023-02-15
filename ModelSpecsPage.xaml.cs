@@ -92,12 +92,16 @@ namespace _01electronics_marketing
                     InitializeUIElements();
                 else if (COMPANY_WORK_MACROS.GENSET_CATEGORY_ID == product.GetCategoryID())
                 {
+                    mainGrid.Children.Clear();
+                    mainGrid.RowDefinitions.Clear();
                     ModelHeader.Content = "GENSET SPECS";
                     for (int i = 0; i < product.GetModelSpecs().Count; i++)
                         InitializeNewCardGenset();
                 } 
                 else if (COMPANY_WORK_MACROS.ENCLOSURES_AND_CABINETS_CATEGORY_ID == product.GetCategoryID())
                 {
+                    mainGrid.Children.Clear();
+                    mainGrid.RowDefinitions.Clear();
                     ModelHeader.Content = "ENCLOUSURES AND CABINETS SPECS";
                     for (int i = 0; i < product.GetModelSpecs().Count; i++)
                         InitializeNewCardEnclosuresAndCabinets();
@@ -3459,7 +3463,7 @@ namespace _01electronics_marketing
         //panells 
         private void PanelTypeTextChanged(object sender, TextChangedEventArgs e)
         {
-
+           
         }
         private void PowerRate_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -3475,6 +3479,7 @@ namespace _01electronics_marketing
         }
         private void PanelPoleTextChanged(object sender, TextChangedEventArgs e)
         {
+
         }
     }
 }

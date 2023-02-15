@@ -65,7 +65,7 @@ namespace _01electronics_marketing
             loggedInUser.InitializeEmployeeInfo(employeeEmail);
 
             if (loggedInUser.GetEmployeeDepartmentId() != COMPANY_ORGANISATION_MACROS.MARKETING_AND_SALES_DEPARTMENT_ID 
-                && (loggedInUser.GetEmployeePositionId() != COMPANY_ORGANISATION_MACROS.MANAGER_POSTION || loggedInUser.GetEmployeeDepartmentId() != COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID)
+                && (loggedInUser.GetEmployeePositionId() != COMPANY_ORGANISATION_MACROS.MANAGER_POSTION || loggedInUser.GetEmployeeDepartmentId() != COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID)
                 && loggedInUser.GetEmployeeTeamId() != COMPANY_ORGANISATION_MACROS.DOCUMENT_CONTROL_TEAM_ID
                 && loggedInUser.GetEmployeeTeamId() != COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID
                 && loggedInUser.GetEmployeeTeamId() != COMPANY_ORGANISATION_MACROS.RECTRUITMENT_TEAM_ID)
@@ -102,7 +102,7 @@ namespace _01electronics_marketing
 
 
 
-            if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID || loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID)
+            if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID || loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID)
             {
                 adminWindow adminWindow = new adminWindow(loggedInUser);
                 adminWindow.Show();
