@@ -288,7 +288,7 @@ namespace _01electronics_marketing
 
                         uploadThisFile = false;
 
-                        SystemWatcher.fromSoftware = true;
+                        //SystemWatcher.fromSoftware = true;
                         File.Copy(localFolderPath, product.GetProductPhotoLocalPath());
                     }
                 }
