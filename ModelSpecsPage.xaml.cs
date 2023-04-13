@@ -77,6 +77,23 @@ namespace _01electronics_marketing
                 {
 
                 }
+                else if (COMPANY_WORK_MACROS.CIRCUIT_BREAKERS_CATEGORY_ID == product.GetCategoryID())
+                {
+                    ModelHeader.Content = "CIRCUIT BREAKERS SPECS";
+                    mainGrid.Children.Clear();
+                    mainGrid.RowDefinitions.Clear();
+                    InitializeNewCardBreakrs();
+                }
+                else if (COMPANY_WORK_MACROS.LUBRICANTS_CATEGORY_ID == product.GetCategoryID())
+                {
+                    ModelHeader.Content = "LUBRICANTS SPECS";
+                    mainGrid.Children.Clear();
+                    mainGrid.RowDefinitions.Clear();
+                    //InitializeNewCardBreakrs();
+                }
+
+
+
                 else
                 {
                     ModelHeader.Content = "MODEL SPECS";
@@ -3411,7 +3428,252 @@ namespace _01electronics_marketing
             }
 
         }
+        private void InitializeNewCardBreakrs()
+        {
+            if (cardCount == 0)
+            {
+                mainGrid.Children.Clear();
+                mainGrid.RowDefinitions.Clear();
+            }
 
+            cardCount++;
+            mainGrid.RowDefinitions.Add(new RowDefinition());
+
+            Grid Card = new Grid() { VerticalAlignment = VerticalAlignment.Top };
+
+            Card.Background = new SolidColorBrush(Colors.White);
+            Card.Margin = new Thickness(20);
+
+            Grid.SetRow(Card, cardCount - 1);
+
+            Grid Header = new Grid() { Height = 50 };
+            Header.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF105A97");
+
+            Label header = new Label() { Content = "SPEC " + (mainGrid.Children.Count + 1), Style = (Style)FindResource("tableHeaderItem") };
+            header.HorizontalAlignment = HorizontalAlignment.Left;
+
+            Card.Tag = cardCount;
+
+            if (cardCount != 1)
+            {
+                Image delete = new Image() { Margin = new Thickness(10, 0, 10, 0) };
+                BitmapImage bi3 = new BitmapImage();
+                bi3.BeginInit();
+                bi3.UriSource = new Uri("Icons\\cross_icon.jpg", UriKind.Relative);
+                bi3.EndInit();
+                delete.Source = bi3;
+                delete.Width = 20;
+                delete.Height = 20;
+                delete.HorizontalAlignment = HorizontalAlignment.Right;
+                delete.Tag = cardCount;
+                delete.MouseLeftButtonDown += MouseLeftButtonDownGenset;
+
+                Header.Children.Add(delete);
+            }
+
+            Header.Children.Add(header);
+            Card.Children.Add(Header);
+
+
+            Card.RowDefinitions.Add(new RowDefinition());
+            Card.RowDefinitions.Add(new RowDefinition());
+            Card.RowDefinitions.Add(new RowDefinition());
+            Card.RowDefinitions.Add(new RowDefinition());
+
+            WrapPanel wrapPanel1 = new WrapPanel();
+            WrapPanel wrapPanel2 = new WrapPanel();
+            WrapPanel wrapPanel3 = new WrapPanel();
+
+            Grid.SetRow(wrapPanel1, 1);
+            Grid.SetRow(wrapPanel2, 2);
+            Grid.SetRow(wrapPanel3, 3);
+
+            Grid.SetRow(Header, 0);
+
+            Label panelTypeLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            panelTypeLable.Content = "Panel Type";
+
+            Label panelTypeLableInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            panelTypeLableInvisible.Visibility = Visibility.Collapsed;
+
+            TextBox panelTypeText = new TextBox() { Style = (Style)FindResource("textBoxStyle"), Width = 235, TextWrapping = TextWrapping.Wrap };
+            panelTypeText.TextChanged += PanelTypeTextChanged;
+
+
+            WrapPanel typePanel = new WrapPanel();
+            typePanel.Width = 650;
+            typePanel.Children.Add(panelTypeLable);
+            typePanel.Children.Add(panelTypeLableInvisible);
+            typePanel.Children.Add(panelTypeText);
+
+            wrapPanel1.Children.Add(typePanel);
+
+            Label panelPowerRateLabel = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            panelPowerRateLabel.Content = "Power Rate";
+
+            TextBox panelPowerRateTextBox = new TextBox() { Style = (Style)FindResource("textBoxStyle"), TextWrapping = TextWrapping.Wrap, Width = 235 };
+            panelPowerRateTextBox.TextChanged += PowerRate_TextChanged;
+
+            ComboBox panelPowerRateComboBox = new ComboBox() { Style = (Style)FindResource("comboBoxStyle"), Width = 90 };
+            rating.ForEach(a => panelPowerRateComboBox.Items.Add(a.measure_unit));
+
+            panelPowerRateComboBox.SelectedItem = "A";
+
+            Label panelPowerRateLabelInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            panelPowerRateLabelInvisible.Visibility = Visibility.Collapsed;
+
+            WrapPanel powerRatePanel = new WrapPanel();
+            powerRatePanel.Width = 650;
+
+            powerRatePanel.Children.Add(panelPowerRateLabel);
+            powerRatePanel.Children.Add(panelPowerRateTextBox);
+            powerRatePanel.Children.Add(panelPowerRateComboBox);
+            powerRatePanel.Children.Add(panelPowerRateLabelInvisible);
+
+            wrapPanel1.Children.Add(powerRatePanel);
+
+            Card.Children.Add(wrapPanel1);
+
+
+            Label breakerShortCircutLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            breakerShortCircutLable.Content = "Breaker Short Circuit";
+
+            Label breakerShortCircutLableInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            panelTypeLableInvisible.Visibility = Visibility.Collapsed;
+
+
+            TextBox breakerShortCircutText = new TextBox() { Style = (Style)FindResource("textBoxStyle"), Width = 235, TextWrapping = TextWrapping.Wrap };
+            breakerShortCircutText.TextChanged += breakerShortCircutTextChanged;
+
+            ComboBox breakerShortCircutComboBox = new ComboBox() { Style = (Style)FindResource("comboBoxStyle"), Width = 90 };
+            rating.ForEach(a => breakerShortCircutComboBox.Items.Add(a.measure_unit));
+            breakerShortCircutComboBox.SelectedItem = "KA";
+
+            WrapPanel breakerShortCircutPanel = new WrapPanel();
+            breakerShortCircutPanel.Width = 650;
+
+            breakerShortCircutPanel.Children.Add(breakerShortCircutLable);
+            breakerShortCircutPanel.Children.Add(breakerShortCircutText);
+            breakerShortCircutPanel.Children.Add(breakerShortCircutComboBox);
+            if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
+            {
+                breakerShortCircutPanel.Children.Add(breakerShortCircutLableInvisible);
+
+            }
+
+
+            wrapPanel2.Children.Add(breakerShortCircutPanel);
+
+            Label panalPhaseLabel = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            panalPhaseLabel.Content = "Panal Phase";
+
+            TextBox panalPhaseTextBox = new TextBox() { Style = (Style)FindResource("textBoxStyle"), TextWrapping = TextWrapping.Wrap, Width = 235 };
+            panalPhaseTextBox.TextChanged += panalPhaseTextChanged;
+
+            Label panalPhaseInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            panalPhaseInvisible.Visibility = Visibility.Collapsed;
+
+            WrapPanel panalPhasePanel = new WrapPanel();
+            panalPhasePanel.Width = 650;
+
+            panalPhasePanel.Children.Add(panalPhaseLabel);
+            panalPhasePanel.Children.Add(panalPhaseTextBox);
+            panalPhasePanel.Children.Add(panalPhaseInvisible);
+
+            wrapPanel2.Children.Add(panalPhasePanel);
+
+            Card.Children.Add(wrapPanel2);
+
+
+
+            Label panelPoleLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            panelPoleLable.Content = "Panel Pole";
+
+            Label panelPoleLableInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            panelPoleLableInvisible.Visibility = Visibility.Collapsed;
+
+            TextBox panelPoleText = new TextBox() { Style = (Style)FindResource("textBoxStyle"), Width = 235, TextWrapping = TextWrapping.Wrap };
+            panelPoleText.TextChanged += PanelPoleTextChanged;
+
+
+            WrapPanel PolePanel = new WrapPanel();
+            PolePanel.Width = 650;
+            PolePanel.Children.Add(panelPoleLable);
+            PolePanel.Children.Add(panelPoleText);
+            PolePanel.Children.Add(panelPoleLableInvisible);
+
+
+            wrapPanel3.Children.Add(PolePanel);
+
+
+            Label dateLabel = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            dateLabel.Content = "Valid Until";
+            DatePicker dateField = new DatePicker() { Style = (Style)FindResource("datePickerStyle"), Width = 253, SelectedDate = new DateTime(2030, 1, 1) };
+
+
+            Label dateLabelInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            dateLabelInvisible.Visibility = Visibility.Collapsed;
+
+            WrapPanel datePanel = new WrapPanel();
+            datePanel.Width = 650;
+
+            datePanel.Children.Add(dateLabel);
+            datePanel.Children.Add(dateField);
+            datePanel.Children.Add(dateLabelInvisible);
+
+            wrapPanel3.Children.Add(datePanel);
+
+            Card.Children.Add(wrapPanel3);
+
+
+            mainGrid.Children.Add(Card);
+
+            if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
+            {
+                panelTypeText.Visibility = Visibility.Collapsed;
+                panelTypeLableInvisible.Visibility = Visibility.Visible;
+                panelTypeLableInvisible.Foreground = Brushes.Black;
+                panelTypeLableInvisible.MouseDoubleClick += panelTypelabelInvisibleMouseDoubleClick;
+                panelTypeLableInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_type;
+
+                panelPowerRateTextBox.Visibility = Visibility.Collapsed;
+                panelPowerRateLabelInvisible.Visibility = Visibility.Visible;
+                panelPowerRateLabelInvisible.Foreground = Brushes.Black;
+                panelPowerRateLabelInvisible.MouseDoubleClick += powerRateLabellInvisibleMouseDoubleClick;
+                panelPowerRateComboBox.IsEnabled = false;
+                panelPowerRateComboBox.SelectedItem = product.GetModelSpecs()[cardCount - 1].panel_power_rate_measure_unit.ToString();
+                panelPowerRateLabelInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_power_rate;
+
+                breakerShortCircutText.Visibility = Visibility.Collapsed;
+                breakerShortCircutLableInvisible.Visibility = Visibility.Visible;
+                breakerShortCircutLableInvisible.Foreground = Brushes.Black;
+                breakerShortCircutLableInvisible.MouseDoubleClick += breakerShortCircutMouseDoubleClick;
+                breakerShortCircutComboBox.IsEnabled = false;
+                breakerShortCircutComboBox.SelectedItem = product.GetModelSpecs()[cardCount - 1].panel_circuit_breaker_rate_measure_unit.ToString();
+                breakerShortCircutLableInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_circuit_breaker_rate;
+
+
+                panalPhaseTextBox.Visibility = Visibility.Collapsed;
+                panalPhaseInvisible.Visibility = Visibility.Visible;
+                panalPhaseInvisible.Foreground = Brushes.Black;
+                panalPhaseInvisible.MouseDoubleClick += panalPhaseMouseDoubleClick;
+                panalPhaseInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_phase;
+
+
+                panelPoleText.Visibility = Visibility.Collapsed;
+                panelPoleLableInvisible.Visibility = Visibility.Visible;
+                panelPoleLableInvisible.Foreground = Brushes.Black;
+                panelPoleLableInvisible.MouseDoubleClick += panelPoleDoubleClick;
+                panelPoleLableInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_pole;
+
+                dateField.Visibility = Visibility.Collapsed;
+                dateLabelInvisible.Visibility = Visibility.Visible;
+                dateLabelInvisible.Content = product.GetModelSpecs()[cardCount - 1].valid_until;
+                dateLabelInvisible.Foreground = Brushes.Black;
+
+            }
+
+        }
 
         private void panelTypelabelInvisibleMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
