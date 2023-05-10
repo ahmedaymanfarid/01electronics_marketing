@@ -31,7 +31,7 @@ namespace _01electronics_marketing
         protected List<BASIC_STRUCTS.MODEl_SPEC_STRUCT> modelSpecs;
         List<PROCUREMENT_STRUCTS.MEASURE_UNITS_STRUCT> rating;
         protected int index = 0;
-        int cardCount = 0; 
+        int cardCount = 0;
 
         public ModelUpsSpecsPage(ref Employee mLoggedInUser, ref Model mPrduct, int mViewAddCondition)
         {
@@ -46,7 +46,7 @@ namespace _01electronics_marketing
 
             sqlDatabase = new SQLServer();
             modelSpecs = new List<BASIC_STRUCTS.MODEl_SPEC_STRUCT>();
-            rating = new List<PROCUREMENT_STRUCTS.MEASURE_UNITS_STRUCT>();        
+            rating = new List<PROCUREMENT_STRUCTS.MEASURE_UNITS_STRUCT>();
             commonQueriesObject = new CommonQueries();
             commonFunctionsObject = new CommonFunctions();
 
@@ -91,9 +91,6 @@ namespace _01electronics_marketing
                     mainGrid.RowDefinitions.Clear();
                     //InitializeNewCardBreakrs();
                 }
-
-
-
                 else
                 {
                     ModelHeader.Content = "MODEL SPECS";
@@ -114,7 +111,7 @@ namespace _01electronics_marketing
                     ModelHeader.Content = "GENSET SPECS";
                     for (int i = 0; i < product.GetModelSpecs().Count; i++)
                         InitializeNewCardGenset();
-                } 
+                }
                 else if (COMPANY_WORK_MACROS.ENCLOSURES_AND_CABINETS_CATEGORY_ID == product.GetCategoryID())
                 {
                     mainGrid.Children.Clear();
@@ -123,6 +120,20 @@ namespace _01electronics_marketing
                     for (int i = 0; i < product.GetModelSpecs().Count; i++)
                         InitializeNewCardEnclosuresAndCabinets();
 
+                }
+                else if (COMPANY_WORK_MACROS.CIRCUIT_BREAKERS_CATEGORY_ID == product.GetCategoryID())
+                {
+                    ModelHeader.Content = "CIRCUIT BREAKERS SPECS";
+                    mainGrid.Children.Clear();
+                    mainGrid.RowDefinitions.Clear();
+                    InitializeNewCardBreakrs();
+                }
+                else if (COMPANY_WORK_MACROS.LUBRICANTS_CATEGORY_ID == product.GetCategoryID())
+                {
+                    ModelHeader.Content = "LUBRICANTS SPECS";
+                    mainGrid.Children.Clear();
+                    mainGrid.RowDefinitions.Clear();
+                    //InitializeNewCardBreakrs();
                 }
                 else
                 {
@@ -328,7 +339,7 @@ namespace _01electronics_marketing
                     else
                         model_spec.genset_rated_power = (int)Convert.ToDecimal(ratedPower.Text.ToString());
 
-                         ComboBox ratedPowerCombo = ratedPanel.Children[2] as ComboBox;
+                    ComboBox ratedPowerCombo = ratedPanel.Children[2] as ComboBox;
 
                     model_spec.genset_rating_unit = rating[ratedPowerCombo.SelectedIndex].measure_unit_id;
 
@@ -459,7 +470,7 @@ namespace _01electronics_marketing
                     TextBox PanelPowerRateTextBox = PanelPowerRatePanel.Children[1] as TextBox;
 
                     if (PanelPowerRateTextBox.Text == "")
-                        model_spec.panel_power_rate ="";
+                        model_spec.panel_power_rate = "";
                     else
                         model_spec.panel_power_rate = PanelPowerRateTextBox.Text;
 
@@ -469,7 +480,7 @@ namespace _01electronics_marketing
 
                     WrapPanel wrap2 = card.Children[2] as WrapPanel;
 
-                    
+
                     WrapPanel PanelCircuitBreakerRatePanel = wrap2.Children[0] as WrapPanel;
 
                     TextBox PanelCircuitBreakerRateTextBox = PanelCircuitBreakerRatePanel.Children[1] as TextBox;
@@ -482,7 +493,7 @@ namespace _01electronics_marketing
                     ComboBox PanelCircuitBreakerRateComboBox = PanelCircuitBreakerRatePanel.Children[2] as ComboBox;
 
                     model_spec.panel_circuit_breaker_rate_unit = rating[PanelCircuitBreakerRateComboBox.SelectedIndex].measure_unit_id;
-                    
+
 
                     WrapPanel PanelPhasePanel = wrap2.Children[1] as WrapPanel;
 
@@ -492,7 +503,7 @@ namespace _01electronics_marketing
                     else
                         model_spec.panel_phase = PanelPhaseTextBox.Text.ToString();
 
-                    
+
                     WrapPanel wrap3 = card.Children[3] as WrapPanel;
 
                     WrapPanel PanelPolePanel = wrap3.Children[0] as WrapPanel;
@@ -502,7 +513,7 @@ namespace _01electronics_marketing
                         model_spec.panel_pole = 0;
                     else
                         model_spec.panel_pole = int.Parse(PanelPoleTextBox.Text.ToString());
-                    
+
                     WrapPanel datePanel = wrap3.Children[1] as WrapPanel;
 
                     DatePicker dateTextBox = datePanel.Children[1] as DatePicker;
@@ -1582,20 +1593,34 @@ namespace _01electronics_marketing
             mainGrid.Children.Remove(mainGrid.Children[tag - 1]);
             cardCount--;
         }
-        private void onBtnAddClick(object sender, MouseButtonEventArgs e) 
+        private void onBtnAddClick(object sender, MouseButtonEventArgs e)
         {
 
             if (product.GetCategoryID() == COMPANY_WORK_MACROS.UPS_CATEGORY_ID)
             {
                 InitializeNewCardUPS(true, product.GetModelSpecs().Count);
             }
-            else if(product.GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
+            else if (product.GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
             {
                 InitializeNewCardGenset();
             }
             else if (product.GetCategoryID() == COMPANY_WORK_MACROS.ENCLOSURES_AND_CABINETS_CATEGORY_ID)
             {
                 InitializeNewCardEnclosuresAndCabinets();
+            }
+            else if (COMPANY_WORK_MACROS.CIRCUIT_BREAKERS_CATEGORY_ID == product.GetCategoryID())
+            {
+                ModelHeader.Content = "CIRCUIT BREAKERS SPECS";
+                mainGrid.Children.Clear();
+                mainGrid.RowDefinitions.Clear();
+                InitializeNewCardBreakrs();
+            }
+            else if (COMPANY_WORK_MACROS.LUBRICANTS_CATEGORY_ID == product.GetCategoryID())
+            {
+                ModelHeader.Content = "LUBRICANTS SPECS";
+                mainGrid.Children.Clear();
+                mainGrid.RowDefinitions.Clear();
+                //InitializeNewCardBreakrs();
             }
 
 
@@ -1758,7 +1783,7 @@ namespace _01electronics_marketing
 
             Label ModellabelInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
             ModellabelInvisible.Visibility = Visibility.Collapsed;
-            
+
             WrapPanel modelPanel = new WrapPanel();
 
             modelPanel.Children.Add(ModelLabel);
@@ -1782,7 +1807,7 @@ namespace _01electronics_marketing
 
             Label Kva50labelInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
             Kva50labelInvisible.Visibility = Visibility.Collapsed;
-            
+
             WrapPanel LtbKva50Panel = new WrapPanel();
 
             LtbKva50Panel.Children.Add(ltbKva50Label);
@@ -1893,7 +1918,7 @@ namespace _01electronics_marketing
 
             Label tanklabelInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
             tanklabelInvisible.Visibility = Visibility.Collapsed;
-          
+
             WrapPanel TankPanel = new WrapPanel();
 
             TankPanel.Children.Add(TankLabel);
@@ -1929,7 +1954,7 @@ namespace _01electronics_marketing
 
             Label alternatorLabelInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
             alternatorLabelInvisible.Visibility = Visibility.Collapsed;
-           
+
             WrapPanel AlternatorPanel = new WrapPanel();
 
             AlternatorPanel.Children.Add(AlternatorLable);
@@ -1947,7 +1972,7 @@ namespace _01electronics_marketing
 
             Label dateLabelInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
             dateLabelInvisible.Visibility = Visibility.Collapsed;
-           
+
             WrapPanel datePanel = new WrapPanel();
 
             datePanel.Children.Add(dateLabel);
@@ -3483,15 +3508,17 @@ namespace _01electronics_marketing
             WrapPanel wrapPanel1 = new WrapPanel();
             WrapPanel wrapPanel2 = new WrapPanel();
             WrapPanel wrapPanel3 = new WrapPanel();
+            WrapPanel wrapPanel4 = new WrapPanel();
 
             Grid.SetRow(wrapPanel1, 1);
             Grid.SetRow(wrapPanel2, 2);
             Grid.SetRow(wrapPanel3, 3);
+            Grid.SetRow(wrapPanel4, 4);
 
             Grid.SetRow(Header, 0);
 
             Label panelTypeLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
-            panelTypeLable.Content = "Panel Type";
+            panelTypeLable.Content = "Breacker Type";
 
             Label panelTypeLableInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
             panelTypeLableInvisible.Visibility = Visibility.Collapsed;
@@ -3509,7 +3536,7 @@ namespace _01electronics_marketing
             wrapPanel1.Children.Add(typePanel);
 
             Label panelPowerRateLabel = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
-            panelPowerRateLabel.Content = "Power Rate";
+            panelPowerRateLabel.Content = "Current Rate";
 
             TextBox panelPowerRateTextBox = new TextBox() { Style = (Style)FindResource("textBoxStyle"), TextWrapping = TextWrapping.Wrap, Width = 235 };
             panelPowerRateTextBox.TextChanged += PowerRate_TextChanged;
@@ -3536,7 +3563,7 @@ namespace _01electronics_marketing
 
 
             Label breakerShortCircutLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
-            breakerShortCircutLable.Content = "Breaker Short Circuit";
+            breakerShortCircutLable.Content = "Short Circuit";
 
             Label breakerShortCircutLableInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
             panelTypeLableInvisible.Visibility = Visibility.Collapsed;
@@ -3565,7 +3592,7 @@ namespace _01electronics_marketing
             wrapPanel2.Children.Add(breakerShortCircutPanel);
 
             Label panalPhaseLabel = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
-            panalPhaseLabel.Content = "Panal Phase";
+            panalPhaseLabel.Content = "Pole";
 
             TextBox panalPhaseTextBox = new TextBox() { Style = (Style)FindResource("textBoxStyle"), TextWrapping = TextWrapping.Wrap, Width = 235 };
             panalPhaseTextBox.TextChanged += panalPhaseTextChanged;
@@ -3586,24 +3613,41 @@ namespace _01electronics_marketing
 
 
 
-            Label panelPoleLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
-            panelPoleLable.Content = "Panel Pole";
+            Label panelCurveLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            panelCurveLable.Content = "Curve";
 
-            Label panelPoleLableInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
-            panelPoleLableInvisible.Visibility = Visibility.Collapsed;
+            Label panelCurveLableInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            panelCurveLableInvisible.Visibility = Visibility.Collapsed;
 
-            TextBox panelPoleText = new TextBox() { Style = (Style)FindResource("textBoxStyle"), Width = 235, TextWrapping = TextWrapping.Wrap };
-            panelPoleText.TextChanged += PanelPoleTextChanged;
+            TextBox panelCurveText = new TextBox() { Style = (Style)FindResource("textBoxStyle"), Width = 235, TextWrapping = TextWrapping.Wrap };
+            panelCurveText.TextChanged += PanelPoleTextChanged;
 
 
             WrapPanel PolePanel = new WrapPanel();
             PolePanel.Width = 650;
-            PolePanel.Children.Add(panelPoleLable);
-            PolePanel.Children.Add(panelPoleText);
-            PolePanel.Children.Add(panelPoleLableInvisible);
+            PolePanel.Children.Add(panelCurveLable);
+            PolePanel.Children.Add(panelCurveText);
+            PolePanel.Children.Add(panelCurveLableInvisible);
 
 
-            wrapPanel3.Children.Add(PolePanel);
+            Label IECLable = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
+            IECLable.Content = "IEC";
+
+            Label IECInvisible = new Label() { Style = (Style)FindResource("labelStyle") };
+            IECInvisible.Visibility = Visibility.Collapsed;
+
+            TextBox IECText = new TextBox() { Style = (Style)FindResource("textBoxStyle"), Width = 235, TextWrapping = TextWrapping.Wrap };
+            IECText.TextChanged += PanelPoleTextChanged;
+
+
+            WrapPanel IECPanel = new WrapPanel();
+            IECPanel.Width = 650;
+            IECPanel.Children.Add(IECLable);
+            IECPanel.Children.Add(IECText);
+            IECPanel.Children.Add(IECInvisible);
+
+
+            wrapPanel3.Children.Add(IECPanel);
 
 
             Label dateLabel = new Label() { Style = (Style)FindResource("labelStyle"), Width = 175 };
@@ -3623,7 +3667,7 @@ namespace _01electronics_marketing
 
             wrapPanel3.Children.Add(datePanel);
 
-            Card.Children.Add(wrapPanel3);
+            Card.Children.Add(wrapPanel4);
 
 
             mainGrid.Children.Add(Card);
@@ -3660,11 +3704,11 @@ namespace _01electronics_marketing
                 panalPhaseInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_phase;
 
 
-                panelPoleText.Visibility = Visibility.Collapsed;
-                panelPoleLableInvisible.Visibility = Visibility.Visible;
-                panelPoleLableInvisible.Foreground = Brushes.Black;
-                panelPoleLableInvisible.MouseDoubleClick += panelPoleDoubleClick;
-                panelPoleLableInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_pole;
+                IECText.Visibility = Visibility.Collapsed;
+                IECInvisible.Visibility = Visibility.Visible;
+                IECInvisible.Foreground = Brushes.Black;
+                IECInvisible.MouseDoubleClick += panelPoleDoubleClick;
+                IECInvisible.Content = product.GetModelSpecs()[cardCount - 1].panel_pole;
 
                 dateField.Visibility = Visibility.Collapsed;
                 dateLabelInvisible.Visibility = Visibility.Visible;
@@ -3725,7 +3769,7 @@ namespace _01electronics_marketing
         //panells 
         private void PanelTypeTextChanged(object sender, TextChangedEventArgs e)
         {
-           
+
         }
         private void PowerRate_TextChanged(object sender, TextChangedEventArgs e)
         {
