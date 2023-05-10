@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\01electronics_marketing\App.xaml
-201963472348
+21-1519476252
 1856827185
-23-157841088
+241008534284
 17-521422944
-AddBrand.xaml;AddProductWindow.xaml;adminWindow.xaml;BrandsPage.xaml;CategoriesPage.xaml;ChangePasswordPage.xaml;ForgetPasswordPage.xaml;MainWindow.xaml;ModelAdditionalInfoPage.xaml;ModelBasicInfoPage.xaml;ModelGensetSpec.xaml;ModelsPage.xaml;ModelsWindow.xaml;ModelUploadFilesPage.xaml;ModelUpsSpecsPage.xaml;MoveModelWindow.xaml;ProductsPage.xaml;SignInPage.xaml;SignInWindow.xaml;SignUpPage.xaml;
+AddBrand.xaml;AddPriceListWindow.xaml;AddProductWindow.xaml;adminWindow.xaml;BrandsPage.xaml;CategoriesPage.xaml;ChangePasswordPage.xaml;ForgetPasswordPage.xaml;MainWindow.xaml;ModelAdditionalInfoPage.xaml;ModelBasicInfoPage.xaml;ModelsPage.xaml;ModelsWindow.xaml;ModelUploadFilesPage.xaml;ModelSpecsPage.xaml;MoveModelWindow.xaml;PriceListPage.xaml;ProductsPage.xaml;SignInPage.xaml;SignInWindow.xaml;SignUpPage.xaml;
 
-False
+True
 

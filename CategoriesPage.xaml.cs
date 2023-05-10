@@ -171,6 +171,12 @@ namespace _01electronics_marketing
             this.NavigationService.Navigate(productsPage);
         }
 
+        private void OnButtonClickedPriceList(object sender, MouseButtonEventArgs e)
+        {
+            PriceListPage priceListPage = new PriceListPage(ref loggedInUser);
+            this.NavigationService.Navigate(priceListPage);
+        }
+
         //private void OnButtonClickedMyProfile(object sender, MouseButtonEventArgs e)
         //{
         //    StatisticsPage statisticsPage = new StatisticsPage(ref loggedInUser);

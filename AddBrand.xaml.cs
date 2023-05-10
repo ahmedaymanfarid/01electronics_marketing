@@ -166,7 +166,7 @@ namespace _01electronics_marketing
 
             if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
                loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
-               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
+               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID))
             {
                 canEdit = true;
             }
@@ -252,10 +252,12 @@ namespace _01electronics_marketing
             Grid.SetRow(progressBar, 3);
             UploadIconGrid.Children.Add(progressBar);
 
-            SystemWatcher.fromSoftware = true;
+            //SystemWatcher.fromSoftware = true;
 
             File.Delete(oldLocalFolderPath);
             File.Copy(localFolderPath, oldLocalFolderPath);
+            ftpObject.Delete(oldLocalFolderPath);
+            ftpObject.Create(oldLocalFolderPath);
 
             saveChangesButton.IsEnabled = true;
 

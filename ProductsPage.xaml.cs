@@ -271,7 +271,7 @@ namespace _01electronics_marketing
 
             if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
                 loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
-                (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
+                (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID))
             {
                 addBtn.Visibility = Visibility.Visible;
             }
@@ -400,7 +400,6 @@ namespace _01electronics_marketing
             BrandsPage brandsPage = new BrandsPage(ref loggedInUser, ref selectedBrand/* ref selectedProduct*/);
             this.NavigationService.Navigate(brandsPage);
         }
-
 
         private void BorderMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

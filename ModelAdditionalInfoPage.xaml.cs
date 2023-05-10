@@ -77,11 +77,6 @@ namespace _01electronics_marketing
             if (viewAddCondition != COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
                 nextButton.IsEnabled = false;
 
-            if (product.GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
-            {
-
-                SpecsType.Content = "Genset Specs";
-            }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -534,6 +529,7 @@ namespace _01electronics_marketing
                         Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\models\\" + product.GetProductID() + "\\" + product.GetBrandID() + "\\" + product.GetModelID());
                         product.GetNewModelPhotoLocalPath();
 
+
                         if (modelBasicInfoPage.localFolderPath != null)
                         {
                             File.Copy(modelBasicInfoPage.localFolderPath, product.GetModelPhotoLocalPath());
@@ -604,10 +600,12 @@ namespace _01electronics_marketing
                         if (!product.IssueNewModel())
                             return;
 
+
                         //SystemWatcher.fromSoftware = true;
 
                         Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\models\\" + product.GetProductID() + "\\" + product.GetBrandID() + "\\" + product.GetModelID());
                         product.GetNewModelPhotoLocalPath();
+
 
                         if (modelBasicInfoPage.localFolderPath != null)
                         {
@@ -617,6 +615,7 @@ namespace _01electronics_marketing
                             ftbServer.Create(product.GetModelPhotoLocalPath());
 
                         }
+
 
 
 

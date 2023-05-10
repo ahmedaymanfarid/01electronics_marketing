@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +52,10 @@
   <PropertyGroup>
     <ApplicationIcon>MAIN_LOGO.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,6 +79,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPriceListWindow.xaml.cs">
+      <DependentUpon>AddPriceListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PriceListPage.xaml.cs">
+      <DependentUpon>PriceListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
@@ -72,6 +97,10 @@
     <Page Include="AddBrand.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AddPriceListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddProductWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -138,10 +167,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ModelGensetSpec.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="ModelsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,13 +179,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ModelUpsSpecsPage.xaml">
+    <Page Include="ModelSpecsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MoveModelWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PriceListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProductsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -186,9 +215,6 @@
     <Compile Include="ModelBasicInfoPage.xaml.cs">
       <DependentUpon>ModelBasicInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModelGensetSpec.xaml.cs">
-      <DependentUpon>ModelGensetSpec.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ModelsPage.xaml.cs">
       <DependentUpon>ModelsPage.xaml</DependentUpon>
     </Compile>
@@ -198,8 +224,8 @@
     <Compile Include="ModelUploadFilesPage.xaml.cs">
       <DependentUpon>ModelUploadFilesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModelUpsSpecsPage.xaml.cs">
-      <DependentUpon>ModelUpsSpecsPage.xaml</DependentUpon>
+    <Compile Include="ModelSpecsPage.xaml.cs">
+      <DependentUpon>ModelSpecsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MoveModelWindow.xaml.cs">
       <DependentUpon>MoveModelWindow.xaml</DependentUpon>
@@ -291,6 +317,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\SVG\plus-circle-fill.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

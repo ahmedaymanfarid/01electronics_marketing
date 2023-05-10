@@ -18,11 +18,12 @@
         <Grid Grid.Column="0" MinHeight="300" Background="#105A97">
 
             <Grid.RowDefinitions>
-                <RowDefinition />
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource sideNavigationItemStyle}" Name="ProductsLabel" Text="Products" MouseLeftButtonDown="OnButtonClickedProducts"/>
-
+            <TextBlock Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource sideNavigationItemStyle}" Name="ProductsLabel" Text="Products" MouseLeftButtonDown="OnButtonClickedProducts" Background="#EDEDED" Foreground="#105A97"/>
+            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource sideNavigationItemStyle}" Name="priceListLabel" Text="Price List" MouseLeftButtonDown="OnButtonClickedPriceList" />
         </Grid>
         <Grid  Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>

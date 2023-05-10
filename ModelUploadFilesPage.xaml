@@ -56,7 +56,7 @@
                     Style="{StaticResource unselectedSecondaryTabBorder}">
                     <Label
                         Name="SpecsType"
-                        Content="UPS Specs"
+                        Content="Model Specs"
                         Style="{StaticResource unselectedSecondaryTabLabelItem}" />
                 </Border>
                 <Border
