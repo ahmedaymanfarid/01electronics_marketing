@@ -147,6 +147,14 @@ D:\01electronics_marketing\obj\Debug\ModelSpecsPage.g.cs
 D:\01electronics_marketing\obj\Debug\PriceListPage.g.cs
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.exe
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.pdb
+D:\01electronics_marketing\bin\Debug\01electronics_marketing.exe.config
+D:\01electronics_marketing\bin\Debug\01electronics_marketing.exe
+D:\01electronics_marketing\bin\Debug\01electronics_marketing.pdb
+D:\01electronics_marketing\bin\Debug\01electronics_library.dll
+D:\01electronics_marketing\bin\Debug\01electronics_windows_library.dll
+D:\01electronics_marketing\bin\Debug\01electronics_library.pdb
+D:\01electronics_marketing\bin\Debug\01electronics_windows_library.pdb
+>>>>>>> ded130fff08ca6d3eea25a73911c7ed0241a2637
 D:\01electronics_marketing\obj\Debug\App.baml
 D:\01electronics_marketing\obj\Debug\AddBrand.baml
 D:\01electronics_marketing\obj\Debug\AddProductWindow.baml
@@ -169,15 +177,8 @@ D:\01electronics_marketing\obj\Debug\SignInPage.baml
 D:\01electronics_marketing\obj\Debug\SignInWindow.baml
 D:\01electronics_marketing\obj\Debug\SignUpPage.baml
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.g.resources
-D:\01electronics_marketing\bin\Debug\01electronics_marketing.exe.config
-D:\01electronics_marketing\bin\Debug\01electronics_marketing.exe
-D:\01electronics_marketing\bin\Debug\01electronics_marketing.pdb
-D:\01electronics_marketing\bin\Debug\01electronics_library.dll
-D:\01electronics_marketing\bin\Debug\01electronics_windows_library.dll
 D:\01electronics_marketing\bin\Debug\itextsharp.dll
 D:\01electronics_marketing\bin\Debug\BouncyCastle.Crypto.dll
-D:\01electronics_marketing\bin\Debug\01electronics_library.pdb
-D:\01electronics_marketing\bin\Debug\01electronics_windows_library.pdb
 D:\01electronics_marketing\bin\Debug\itextsharp.xml
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CoreCompileInputs.cache
 D:\01electronics_marketing\obj\Debug\01electronics_marketing.csproj.CopyComplete

@@ -10,6 +10,7 @@ none
 false
 DEBUG;TRACE
 D:\01electronics_marketing\App.xaml
+<<<<<<< HEAD
 21-1519476252
 1856827185
 241008534284
@@ -17,4 +18,13 @@ D:\01electronics_marketing\App.xaml
 AddBrand.xaml;AddPriceListWindow.xaml;AddProductWindow.xaml;adminWindow.xaml;BrandsPage.xaml;CategoriesPage.xaml;ChangePasswordPage.xaml;ForgetPasswordPage.xaml;MainWindow.xaml;ModelAdditionalInfoPage.xaml;ModelBasicInfoPage.xaml;ModelsPage.xaml;ModelsWindow.xaml;ModelUploadFilesPage.xaml;ModelSpecsPage.xaml;MoveModelWindow.xaml;PriceListPage.xaml;ProductsPage.xaml;SignInPage.xaml;SignInWindow.xaml;SignUpPage.xaml;
 
 True
+=======
+19-1656227346
+1856827185
+22921574630
+17-521422944
+AddBrand.xaml;AddProductWindow.xaml;adminWindow.xaml;BrandsPage.xaml;CategoriesPage.xaml;ChangePasswordPage.xaml;ForgetPasswordPage.xaml;MainWindow.xaml;ModelAdditionalInfoPage.xaml;ModelBasicInfoPage.xaml;ModelsPage.xaml;ModelsWindow.xaml;ModelUploadFilesPage.xaml;ModelSpecsPage.xaml;MoveModelWindow.xaml;ProductsPage.xaml;SignInPage.xaml;SignInWindow.xaml;SignUpPage.xaml;
+
+False
+>>>>>>> ded130fff08ca6d3eea25a73911c7ed0241a2637
 

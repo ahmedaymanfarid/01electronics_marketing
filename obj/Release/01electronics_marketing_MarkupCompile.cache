@@ -4,17 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 D:\01electronics_marketing\obj\Release\
+=======
+F:\Raouf\Projects\01electronics_marketing\obj\Release\
+>>>>>>> ded130fff08ca6d3eea25a73911c7ed0241a2637
 _01electronics_marketing
 none
 false
 TRACE
+<<<<<<< HEAD
 D:\01electronics_marketing\App.xaml
 201963472348
 1856827185
 23-814984778
 172104419748
 AddBrand.xaml;AddProductWindow.xaml;adminWindow.xaml;BrandsPage.xaml;CategoriesPage.xaml;ChangePasswordPage.xaml;ForgetPasswordPage.xaml;MainWindow.xaml;ModelAdditionalInfoPage.xaml;ModelBasicInfoPage.xaml;ModelGensetSpec.xaml;ModelsPage.xaml;ModelsWindow.xaml;ModelUploadFilesPage.xaml;ModelUpsSpecsPage.xaml;MoveModelWindow.xaml;ProductsPage.xaml;SignInPage.xaml;SignInWindow.xaml;SignUpPage.xaml;
+=======
+F:\Raouf\Projects\01electronics_marketing\App.xaml
+19-1656227346
+1856827185
+22264430940
+17-539291554
+AddBrand.xaml;AddProductWindow.xaml;adminWindow.xaml;BrandsPage.xaml;CategoriesPage.xaml;ChangePasswordPage.xaml;ForgetPasswordPage.xaml;MainWindow.xaml;ModelAdditionalInfoPage.xaml;ModelBasicInfoPage.xaml;ModelsPage.xaml;ModelsWindow.xaml;ModelUploadFilesPage.xaml;ModelSpecsPage.xaml;MoveModelWindow.xaml;ProductsPage.xaml;SignInPage.xaml;SignInWindow.xaml;SignUpPage.xaml;
+>>>>>>> ded130fff08ca6d3eea25a73911c7ed0241a2637
 
 True
 
