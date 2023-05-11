@@ -21,7 +21,7 @@ namespace _01electronics_marketing
     {
         public AddPriceListWindow()
         {
-            InitializeComponent();
+             InitializeComponent();
         }
         private void OnSelChangedCategoryComboBox(object sender, SelectionChangedEventArgs e)
         {

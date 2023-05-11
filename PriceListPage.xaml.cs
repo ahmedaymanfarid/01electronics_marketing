@@ -39,6 +39,7 @@ namespace _01electronics_marketing
         {
             AddPriceListWindow addPriceListWindow = new AddPriceListWindow();
             addPriceListWindow.Show();
+            //commint
         }
     }
 }
