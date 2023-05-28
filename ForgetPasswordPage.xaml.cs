@@ -12,17 +12,22 @@ namespace _01electronics_marketing
     /// </summary>
     public partial class ForgetPasswordPage : Page
     {
-        IntegrityChecks integrityChecker = new IntegrityChecks();
+        IntegrityChecks integrityChecker;
         protected String errorMessage;
 
         String employeeEmail;
         int SecretCode;
         int SecretCodeConfirmation;
+        CommonQueries commonQueries;
+        private CommonFunctions commonFunctions;
 
-        public ForgetPasswordPage(ref string Email)
+        public ForgetPasswordPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref string Email)
         {
             InitializeComponent();
             employeeEmailTextBox.Text = Email;
+            integrityChecker = mIntegrityChecks;
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
         }
 
         private void OnButtonClickedReset(object sender, RoutedEventArgs e)
@@ -89,7 +94,7 @@ namespace _01electronics_marketing
             SecretCode = int.Parse(SecretCodeTextBox.Text);
             if (SecretCode == SecretCodeConfirmation)
             {
-                ChangePasswordPage forgetPasswordMail = new ChangePasswordPage(ref employeeEmail);
+                ChangePasswordPage forgetPasswordMail = new ChangePasswordPage(ref commonQueries, ref commonFunctions, ref integrityChecker, ref employeeEmail);
                 this.NavigationService.Navigate(forgetPasswordMail);
 
             }

@@ -20,21 +20,25 @@ namespace _01electronics_marketing
     {
         private Employee loggedInUser;
         private CommonQueries commonQueries;
-        private List<COMPANY_WORK_MACROS.PRODUCT_CATEGORY_STRUCT> categories;
+        private List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT> categories;
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
         protected List<String> categoriesSummaryPoints;
         protected String sqlQuery;
         protected SQLServer sqlDatabase;
         protected FTPServer ftpServer;
 
-        public CategoriesPage(ref Employee mLoggedInUser)
+        public CategoriesPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUserr)
         {
             InitializeComponent();
 
-            loggedInUser = mLoggedInUser;
-            commonQueries = new CommonQueries();
+            loggedInUser = mLoggedInUserr;
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
             sqlDatabase = new SQLServer();
             ftpServer = new FTPServer();
-            categories = new List<COMPANY_WORK_MACROS.PRODUCT_CATEGORY_STRUCT>();
+            categories = new List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT>();
             categoriesSummaryPoints = new List<string>();
             //categoriesSummaryPoints = new List<string>();
 
@@ -75,12 +79,12 @@ namespace _01electronics_marketing
 
                 Image productImage = new Image();
 
-                string src = String.Format(@"/01electronics_marketing;component/Photos/categories/" + categories[i].categoryId + ".jpg");
+                string src = String.Format(@"/01electronics_marketing;component/Photos/categories/" + categories[i].category_id + ".jpg");
                 productImage.Source = new BitmapImage(new Uri(src, UriKind.Relative));
                 productImage.HorizontalAlignment = HorizontalAlignment.Stretch;
                 productImage.VerticalAlignment = VerticalAlignment.Stretch;
                 productImage.MouseDown += ImageMouseDown;
-                productImage.Tag = categories[i].categoryId.ToString();
+                productImage.Tag = categories[i].category_id.ToString();
                 gridI.Children.Add(productImage);
                 Grid.SetRow(productImage, 1);
 
@@ -110,7 +114,7 @@ namespace _01electronics_marketing
                 headerLabel.FontSize = 17;
                 headerLabel.FontWeight = FontWeights.Bold;
                 headerLabel.Padding = new Thickness(10);
-                headerLabel.Content = categories[i].category;
+                headerLabel.Content = categories[i].category_name;
 
                 Grid.SetRow(headerLabel, 0);
                 headerGrid.Children.Add(headerLabel);
@@ -148,7 +152,7 @@ namespace _01electronics_marketing
         //}
         private void OnButtonClickedProducts(object sender, MouseButtonEventArgs e)
         {
-            CategoriesPage productsPage = new CategoriesPage(ref loggedInUser);
+            CategoriesPage productsPage = new CategoriesPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(productsPage);
         }
         private void OnButtonClickedStatistics(object sender, RoutedEventArgs e)
@@ -167,13 +171,13 @@ namespace _01electronics_marketing
             Product selectedProduct = new Product();
             selectedProduct.SetCategoryID(int.Parse(tmp));
 
-            ProductsPage productsPage = new ProductsPage(ref loggedInUser, ref selectedProduct);
+            ProductsPage productsPage = new ProductsPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref selectedProduct);
             this.NavigationService.Navigate(productsPage);
         }
 
         private void OnButtonClickedPriceList(object sender, MouseButtonEventArgs e)
         {
-            PriceListPage priceListPage = new PriceListPage(ref loggedInUser);
+            PriceListPage priceListPage = new PriceListPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(priceListPage);
         }
 

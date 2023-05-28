@@ -18,17 +18,27 @@ namespace _01electronics_marketing
         bool canceled = false;
         int progress = 0;
         bool closedWindow = false;
-        private BackgroundWorker backgroundWorker = new BackgroundWorker();
+        private CommonQueries commonQueries;
+        private SecuredCommonQueries securedCommonQueries;
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
+        private Employee loggedInUser;
+        private BackgroundWorker backgroundWorker;
 
 
         System.Timers.Timer timer = new System.Timers.Timer(300000);
         FTPServer ftpServer = new FTPServer();
         bool fileFound = true;
-        public MainWindow(ref Employee mLoggedInUser)
+
+
+        public MainWindow(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUserr)
         {
-
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
+            loggedInUser = mLoggedInUserr;
             this.Closing += NavigationWindow_Closing;
-
+            backgroundWorker = new BackgroundWorker();
             backgroundWorker.WorkerReportsProgress = true;
 
 
@@ -143,7 +153,7 @@ namespace _01electronics_marketing
 
 
 
-            CategoriesPage statisticsPage = new CategoriesPage(ref mLoggedInUser);
+            CategoriesPage statisticsPage = new CategoriesPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(statisticsPage);
 
         }

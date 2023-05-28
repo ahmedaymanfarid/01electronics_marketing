@@ -23,7 +23,7 @@ namespace _01electronics_marketing
         private CommonFunctions commonFunctionsObject;
         private SQLServer sqlDatabase;
         private int viewAddCondition;
-
+        private IntegrityChecks integrityChecks;
         public ModelBasicInfoPage modelBasicInfoPage;
         public ModelUpsSpecsPage modelUpsSpecsPage;
         public ModelUploadFilesPage modelUploadFilesPage;
@@ -38,18 +38,18 @@ namespace _01electronics_marketing
         private List<String> modelStandardFeatures;
         private List<String> modelBenefits;
         private List<String> modelApplications;
-        public ModelAdditionalInfoPage(ref Employee mLoggedInUser, ref Model mPrduct, int mViewAddCondition, ModelUpsSpecsPage modelUpssSpecsPage = null, ModelBasicInfoPage ModelBasicInfo = null)
+        public ModelAdditionalInfoPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUser, ref Model mPrduct, int mViewAddCondition, ModelUpsSpecsPage modelUpssSpecsPage = null, ModelBasicInfoPage ModelBasicInfo = null)
         {
             loggedInUser = mLoggedInUser;
             viewAddCondition = mViewAddCondition;
             modelBasicInfoPage = ModelBasicInfo;
             modelUpsSpecsPage = modelUpssSpecsPage;
-
+            integrityChecks = mIntegrityChecks;
             sqlDatabase = new SQLServer();
             ftbServer = new FTPServer();
 
-            commonQueriesObject = new CommonQueries();
-            commonFunctionsObject = new CommonFunctions();
+            commonQueriesObject =mCommonQueries;
+            commonFunctionsObject =mCommonFunctions;
             modelStandardFeatures = new List<String>();
             modelBenefits = new List<String>();
             modelApplications = new List<String>();
@@ -546,7 +546,7 @@ namespace _01electronics_marketing
                         {
                             viewAddCondition = COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION;
 
-                            ModelsWindow viewproduct = new ModelsWindow(ref loggedInUser, ref product, viewAddCondition, true);
+                            ModelsWindow viewproduct = new ModelsWindow(ref commonQueriesObject, ref commonFunctionsObject, ref integrityChecks, ref loggedInUser, ref product, viewAddCondition, true);
 
                             viewproduct.Show();
                         }
@@ -626,7 +626,7 @@ namespace _01electronics_marketing
                         {
                             viewAddCondition = COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION;
 
-                            ModelsWindow viewproduct = new ModelsWindow(ref loggedInUser, ref product, viewAddCondition, true);
+                            ModelsWindow viewproduct = new ModelsWindow(ref commonQueriesObject, ref commonFunctionsObject, ref integrityChecks, ref loggedInUser, ref product, viewAddCondition, true);
 
                             viewproduct.Show();
                         }

@@ -25,24 +25,29 @@ namespace _01electronics_marketing
         List<COMPANY_ORGANISATION_MACROS.EMPLOYEE_STRUCT> preSalesEmployees;
         List<COMPANY_ORGANISATION_MACROS.EMPLOYEE_STRUCT> salesAndPreSalesEmployees;
         List<COMPANY_ORGANISATION_MACROS.EMPLOYEE_STRUCT> managers;
-        Employee loggedInUser;
+        //Employee loggedInUser;
 
         bool selected = false;
 
         Employee loggedInUserFromLoginPage;
+        private SecuredCommonQueries securedCommonQueries;
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
 
 
-        public adminWindow(Employee loggedInUserr)    
+        public adminWindow(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUserr)    
         {     
             InitializeComponent();
-            loggedInUser = new Employee();
+            //loggedInUser =mLoggedInUser;
             salesEmployees = new List<COMPANY_ORGANISATION_MACROS.EMPLOYEE_STRUCT>();
             preSalesEmployees = new List<COMPANY_ORGANISATION_MACROS.EMPLOYEE_STRUCT>();
             salesAndPreSalesEmployees = new List<COMPANY_ORGANISATION_MACROS.EMPLOYEE_STRUCT>();
             managers = new List<COMPANY_ORGANISATION_MACROS.EMPLOYEE_STRUCT>();
-            loggedInUserFromLoginPage = loggedInUserr;
+            loggedInUserFromLoginPage = mLoggedInUserr;
 
-            commonQueries = new CommonQueries();
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
             commonQueries.GetTeamEmployees(COMPANY_ORGANISATION_MACROS.SALES_TEAM_ID, ref salesEmployees);
             commonQueries.GetTeamEmployees(COMPANY_ORGANISATION_MACROS.TECHNICAL_OFFICE_TEAM_ID, ref preSalesEmployees);
             commonQueries.GetAllManagerEmployees(ref managers);
@@ -81,17 +86,17 @@ namespace _01electronics_marketing
         {
         
             if (salesCombo.SelectedIndex == salesCombo.Items.Count - 1)
-                loggedInUser.InitializeEmployeeInfo(loggedInUserFromLoginPage.GetEmployeeId());
+                loggedInUserFromLoginPage.InitializeEmployeeInfo(loggedInUserFromLoginPage.GetEmployeeId());
 
             else if (salesCombo.SelectedIndex == salesCombo.Items.Count - 2)
-                loggedInUser.InitializeEmployeeInfo(salesAndPreSalesEmployees[salesCombo.SelectedIndex].employee_id);
+                loggedInUserFromLoginPage.InitializeEmployeeInfo(salesAndPreSalesEmployees[salesCombo.SelectedIndex].employee_id);
             else
-                loggedInUser.InitializeEmployeeInfo(salesAndPreSalesEmployees[salesCombo.SelectedIndex].employee_id);
+                loggedInUserFromLoginPage.InitializeEmployeeInfo(salesAndPreSalesEmployees[salesCombo.SelectedIndex].employee_id);
         }
 
         private void OnBtnClickSaveChanges(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow(ref loggedInUser);
+            MainWindow mainWindow = new MainWindow(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUserFromLoginPage);
             mainWindow.Show();
             this.Close();
         }

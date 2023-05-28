@@ -32,7 +32,7 @@ namespace _01electronics_marketing
         List<Image> productImages = new List<Image>();
         private Employee loggedInUser;
         private CommonQueries commonQueries;
-        private List<COMPANY_WORK_MACROS.PRODUCT_STRUCT> products;
+        private List<PRODUCTS_STRUCTS.PRODUCT_TYPE_STRUCT> products;
         protected List<String> productSummaryPoints;
         protected String sqlQuery;
         protected SQLServer sqlDatabase;
@@ -41,10 +41,11 @@ namespace _01electronics_marketing
         protected String returnMessage;
         private Expander currentExpander;
         private Expander previousExpander;
-
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
         protected int mViewAddCondition;
 
-        public ProductsPage(ref Employee mLoggedInUser, ref Product mSelectedProduct)
+        public ProductsPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUser, ref Product mSelectedProduct)
         {
             InitializeComponent();
 
@@ -54,10 +55,12 @@ namespace _01electronics_marketing
 
             loggedInUser = mLoggedInUser;
             mViewAddCondition = COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION;
-            commonQueries = new CommonQueries();
+            commonQueries =mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
             sqlDatabase = new SQLServer();
             ftpServer = new FTPServer();
-            products = new List<COMPANY_WORK_MACROS.PRODUCT_STRUCT>();
+            products = new List<PRODUCTS_STRUCTS.PRODUCT_TYPE_STRUCT>();
             productSummaryPoints = new List<string>();
             selectedProduct = mSelectedProduct;
 
@@ -105,7 +108,7 @@ namespace _01electronics_marketing
                 RowDefinition imageRow = new RowDefinition();
                 gridI.RowDefinitions.Add(imageRow);
 
-                selectedProduct.SetProductID(products[i].typeId);
+                selectedProduct.SetProductID(products[i].type_id);
 
                 Image productImage = new Image();
 
@@ -131,7 +134,7 @@ namespace _01electronics_marketing
 
                     border1.Height = 300;
                     border1.BorderBrush = (Brush)converter.ConvertFrom("#105A97");
-                    border1.Tag = products[i].typeId.ToString();
+                    border1.Tag = products[i].type_id.ToString();
                     border1.MouseLeftButtonDown += BorderMouseLeftButtonDown;
                     gridI.Children.Add(border1);
                     Grid.SetRow(border1, 0);
@@ -157,7 +160,7 @@ namespace _01electronics_marketing
                         BrushConverter converter = new BrushConverter();
                         border1.BorderBrush = (Brush)converter.ConvertFrom("#105A97");
                         border1.Background = (Brush)converter.ConvertFrom("#EDEDED");
-                        border1.Tag = products[i].typeId.ToString();
+                        border1.Tag = products[i].type_id.ToString();
                         border1.MouseLeftButtonDown += BorderMouseLeftButtonDown;
                         gridI.Children.Add(border1);
                         Grid.SetRow(border1, 0);
@@ -165,7 +168,7 @@ namespace _01electronics_marketing
                     }
                 }
 
-                productImage.Tag = products[i].typeId.ToString();
+                productImage.Tag = products[i].type_id.ToString();
                 productImage.Source = src;
                 productImage.HorizontalAlignment = HorizontalAlignment.Stretch;
                 productImage.VerticalAlignment = VerticalAlignment.Stretch;
@@ -181,7 +184,7 @@ namespace _01electronics_marketing
 
 
                 Expander expander = new Expander();
-                expander.Tag = products[i].typeId.ToString();
+                expander.Tag = products[i].type_id.ToString();
                 expander.ExpandDirection = ExpandDirection.Down;
                 expander.VerticalAlignment = VerticalAlignment.Top;
                 expander.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
@@ -235,7 +238,7 @@ namespace _01electronics_marketing
                 headerLabel.FontSize = 17;
                 headerLabel.FontWeight = FontWeights.Bold;
                 headerLabel.Padding = new Thickness(10);
-                headerLabel.Text = products[i].typeName;
+                headerLabel.Text = products[i].product_name;
 
                 Grid.SetRow(headerLabel, 0);
                 headerGrid.Children.Add(headerLabel);
@@ -325,7 +328,7 @@ namespace _01electronics_marketing
         //}
         private void OnButtonClickedProducts(object sender, MouseButtonEventArgs e)
         {
-            CategoriesPage productsPage = new CategoriesPage(ref loggedInUser);
+            CategoriesPage productsPage = new CategoriesPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(productsPage);
         }
         //private void OnButtonClickedWorkOrders(object sender, RoutedEventArgs e)
@@ -397,7 +400,7 @@ namespace _01electronics_marketing
             selectedBrand.SetProductName(selectedProduct.GetProductName());
             selectedBrand.SetCategoryName(selectedProduct.GetCategoryName());
 
-            BrandsPage brandsPage = new BrandsPage(ref loggedInUser, ref selectedBrand/* ref selectedProduct*/);
+            BrandsPage brandsPage = new BrandsPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref selectedBrand/* ref selectedProduct*/);
             this.NavigationService.Navigate(brandsPage);
         }
 
@@ -416,7 +419,7 @@ namespace _01electronics_marketing
             selectedBrand.SetProductName(selectedProduct.GetProductName());
             selectedBrand.SetCategoryName(selectedProduct.GetCategoryName());
 
-            BrandsPage brandsPage = new BrandsPage(ref loggedInUser, ref selectedBrand/* ref selectedProduct*/);
+            BrandsPage brandsPage = new BrandsPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref selectedBrand/* ref selectedProduct*/);
             this.NavigationService.Navigate(brandsPage);
         }
 

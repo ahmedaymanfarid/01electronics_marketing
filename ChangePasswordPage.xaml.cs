@@ -13,17 +13,20 @@ namespace _01electronics_marketing
     public partial class ChangePasswordPage : Page
     {
         private SQLServer sqlServer = new SQLServer();
-        private IntegrityChecks integrityChecker = new IntegrityChecks();
-        private CommonQueries commonQueries = new CommonQueries();
-
+        private CommonQueries commonQueries;
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
         int employeeID;
         String employeeEmail;
         String employeePassword;
         String confirmPassword;
         String employeeHashedPassword;
-        public ChangePasswordPage(ref string Email)
+        public ChangePasswordPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref string Email)
         {
             InitializeComponent();
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
             employeeEmail = Email;
 
         }
@@ -41,7 +44,7 @@ namespace _01electronics_marketing
 
 
 
-            SignInPage signInpage = new SignInPage();
+            SignInPage signInpage = new SignInPage(ref commonQueries, ref commonFunctions, ref integrityChecks);
             this.NavigationService.Navigate(signInpage);
 
         }

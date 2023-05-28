@@ -38,8 +38,8 @@ namespace _01electronics_marketing
     {
         private CommonQueries commonQueriesObject;
 
-        private List<COMPANY_WORK_MACROS.BRAND_STRUCT> brands = new List<COMPANY_WORK_MACROS.BRAND_STRUCT>();
-        private List<COMPANY_WORK_MACROS.BRAND_STRUCT> mbrandsList = new List<COMPANY_WORK_MACROS.BRAND_STRUCT>();
+        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brands;
+        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> mbrandsList;
 
         private Employee loggedInUser;
 
@@ -83,20 +83,22 @@ namespace _01electronics_marketing
         List<string> ftpFiles;
 
         Grid UploadIconGrid = new Grid();
+        private CommonFunctions commonFunctions;
 
         ProgressBar progressBar = new ProgressBar();
-        public AddBrand(ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<COMPANY_WORK_MACROS.BRAND_STRUCT> brandsList)
+        public AddBrand(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brandsList)
         {
 
             InitializeComponent();
-            commonQueriesObject = new CommonQueries();
+            commonQueriesObject = mCommonQueries;
+            commonFunctions = mCommonFunctions;
             counter = 0;
             loggedInUser = mLoggedInUser;
             canEdit = false;
             InitializeComponent();
             sqlDatabase = new SQLServer();
             ftpObject = new FTPServer();
-            integrityChecks = new IntegrityChecks();
+            integrityChecks =mIntegrityChecks;
             product = pBrand;
             viewAddCondition = mViewAddCondition;
             mbrandsList = brandsList;
@@ -131,7 +133,7 @@ namespace _01electronics_marketing
             {
                 editPictureButton.IsEnabled = true;
 
-                product.SetBrandName(brands[brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID())].brandName);
+                product.SetBrandName(brands[brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID())].brand_name);
 
                 ContactProfileHeader.Content = "VIEW BRAND";
                 serverFileName = (String)product.GetBrandID().ToString() + ".jpg";
@@ -156,7 +158,7 @@ namespace _01electronics_marketing
             int index;
             for (int i = 0; i < mbrandsList.Count; i++)
             {
-                index = brands.FindIndex(x => x.brandId == mbrandsList[i].brandId);
+                index = brands.FindIndex(x => x.brand_id == mbrandsList[i].brand_id);
                 brands.Remove(brands[index]);
 
             }
@@ -174,10 +176,10 @@ namespace _01electronics_marketing
 
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
             {
-                int index = brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID());
+                int index = brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID());
 
 
-                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID());
+                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID());
                 BrandNameLabel.Content = product.GetBrandName();
                 BrandNameComboBox.Visibility = Visibility.Collapsed;
                 BrandNameLabel.Visibility = Visibility.Visible;
@@ -202,7 +204,7 @@ namespace _01electronics_marketing
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
             {
                 product.SetBrandName(BrandNameComboBox.SelectedItem.ToString());
-                product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brandId);
+                product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brand_id);
                 product.AddBrandToProduct();
             }
 
@@ -283,7 +285,7 @@ namespace _01electronics_marketing
         private bool InitializeBrandsComboBox()
         {
             for (int i = 0; i < brands.Count; i++)
-                BrandNameComboBox.Items.Add(brands[i].brandName);
+                BrandNameComboBox.Items.Add(brands[i].brand_name);
 
             return true;
         }
@@ -918,7 +920,7 @@ namespace _01electronics_marketing
 
         private void BrandNameComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brandId);
+            product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brand_id);
             wrapPanel.Children.Clear();
             uploadFilesStackPanel.Children.Clear();
 

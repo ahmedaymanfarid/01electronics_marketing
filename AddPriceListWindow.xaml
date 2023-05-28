@@ -13,67 +13,57 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <Label Content="ADD PRICE" Style="{StaticResource secondaryHeaderTextStyle}" Background="#105A97" Grid.Row="0"/>
+        <Label Content="ADD ITEM" Style="{StaticResource secondaryHeaderTextStyle}" Background="#105A97" Grid.Row="0"/>
         <ScrollViewer  Grid.Row="1">
-            <WrapPanel >
-                <Border Style="{StaticResource borderCard}">
+            <WrapPanel  x:Name="mainWrapPanel">
+                <Border Margin="10" BorderBrush="#105A97" BorderThickness="1">
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="20" Color="LightGray"/>
                     </Border.Effect>
-                    <WrapPanel Background="White" >
-                        <Label Style="{StaticResource labelStyleCard}" Content="Category *"/>
-                        <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="categoryComboBox" SelectionChanged="OnSelChangedCategoryComboBox"  MouseLeave="OnMouseLeaveCategoryComboBox"/>
-                    </WrapPanel>
-                </Border>
-                <Border Style="{StaticResource borderCard}">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="LightGray"/>
-                    </Border.Effect>
-                    <WrapPanel Background="White" >
-                        <Label Style="{StaticResource labelStyleCard}" Content="Type *"/>
-                        <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="typeComboBox" SelectionChanged="OnSelChangedTypeComboBox"   MouseLeave="OnMouseLeaveTypeComboBox"/>
-                    </WrapPanel>
-                </Border>
-                <Border Style="{StaticResource borderCard}">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="LightGray"/>
-                    </Border.Effect>
-                    <WrapPanel Background="White" >
-                        <Label Style="{StaticResource labelStyleCard}" Content="Brand *"/>
-                        <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="brandComboBox" SelectionChanged="OnSelChangedBrandComboBox"  MouseLeave="OnMouseLeaveBrandComboBox"/>
-                    </WrapPanel>
-                </Border>
-                <Border Style="{StaticResource borderCard}">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="LightGray"/>
-                    </Border.Effect>
-                    <WrapPanel Background="White" >
-                        <Label Style="{StaticResource labelStyleCard}" Content="Model *"/>
-                        <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="modelComboBox" SelectionChanged="OnSelChangedModelComboBox" MouseLeave="OnMouseLeaveModelComboBox"/>
-                    </WrapPanel>
-                </Border>
-                <Border Style="{StaticResource borderCard}">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="LightGray"/>
-                    </Border.Effect>
-                    <WrapPanel Background="White" >
-                        <Label Style="{StaticResource labelStyleCard}" Content="Specs *"/>
-                        <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="specsComboBox" />
-                    </WrapPanel>
-                </Border>
-                <Border Style="{StaticResource borderCard}">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="LightGray"/>
-                    </Border.Effect>
-                    <WrapPanel Background="White" >
-                        <Label Style="{StaticResource labelStyleCard}" Content="Price *"/>
-                        <TextBox Style="{StaticResource TextBlockStyleCard}" Name="modelTextBlock" Width="100"/>
-                        <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="priceCurrencyComboBox" Width="100" Margin="40,8,0,0"/>
-                    </WrapPanel>
+                    <StackPanel>
+                        <WrapPanel Background="#105A97" Margin="10" >
+                            <Label Style="{StaticResource tableHeaderItem}" Content="Item 1" Foreground="White" HorizontalAlignment="Center" Margin="160,0,0,0" FontSize="20"/>
+                        </WrapPanel>
+                        <WrapPanel Background="White" Margin="10" >
+                            <Label Style="{StaticResource labelStyleCard}" Content="Category *"/>
+                            <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="categoryComboBox" SelectionChanged="OnSelChangedCategoryComboBox"/>
+                        </WrapPanel>
+                        <WrapPanel Background="White" Margin="10">
+                            <Label Style="{StaticResource labelStyleCard}" Content="Type *"/>
+                            <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="typeComboBox" SelectionChanged="OnSelChangedTypeComboBox"/>
+                        </WrapPanel>
+                        <WrapPanel Background="White" Margin="10" >
+                            <Label Style="{StaticResource labelStyleCard}" Content="Brand *"/>
+                            <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="brandComboBox" SelectionChanged="OnSelChangedBrandComboBox"/>
+                        </WrapPanel>
+                        <WrapPanel Background="White" Margin="10">
+                            <Label Style="{StaticResource labelStyleCard}" Content="Model *"/>
+                            <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="modelComboBox" SelectionChanged="OnSelChangedModelComboBox"/>
+                        </WrapPanel>
+                        <WrapPanel Background="White" Margin="10" >
+                            <Label Style="{StaticResource labelStyleCard}" Content="Specs *"/>
+                            <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="specsComboBox" SelectionChanged="OnSelectionChangedSpecsComboBox" />
+                        </WrapPanel>
+                        <WrapPanel Background="White" Margin="10" >
+                            <Label Style="{StaticResource labelStyleCard}" Content="Price *"/>
+                            <TextBox Style="{StaticResource TextBlockStyleCard}" Name="priceTextBlock" Width="100" TextChanged="OnTextChangedPriceTextBox"/>
+                            <ComboBox Style="{StaticResource comboBoxStyleCard}" Name="priceCurrencyComboBox" Width="100" Margin="40,8,0,0"/>
+                        </WrapPanel>
+                        <WrapPanel Background="White" Margin="10" >
+                            <Label Style="{StaticResource labelStyleCard}" Content="Discount *" />
+                            <TextBox Style="{StaticResource TextBlockStyleCard}" Name="discountTextBlock" Width="100" TextChanged="OnTextChangedDiscountTextBox"/>
+                        </WrapPanel>
+                    </StackPanel>
+
                 </Border>
             </WrapPanel>
+            
         </ScrollViewer>
-        <Button Grid.Row="2" Style="{StaticResource buttonStyle}" Content="Save" Click="OnButtonClickSave"/>
+        <WrapPanel Grid.Row="2">
+            <Button Style="{StaticResource buttonStyle}" Content="Add New Item" Margin="400,0,150,0" Click="OnButtonClickAddNewItem" />
+            <Button  Style="{StaticResource buttonStyle}" Content="Save" Click="OnButtonClickSave"/>
 
+        </WrapPanel>
+       
     </Grid>
 </Window>
