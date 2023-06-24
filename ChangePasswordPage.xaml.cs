@@ -13,7 +13,7 @@ namespace _01electronics_marketing
     public partial class ChangePasswordPage : Page
     {
         private SQLServer sqlServer = new SQLServer();
-        private IntegrityChecks integrityChecker = new IntegrityChecks();
+        private IntegrityChecks integrityChecks = new IntegrityChecks();
         private CommonQueries commonQueries = new CommonQueries();
 
         int employeeID;

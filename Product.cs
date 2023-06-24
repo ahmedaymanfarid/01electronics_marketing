@@ -37,8 +37,8 @@ namespace _01electronics_marketing
 
         private String productName;
         private String categoryName;
-        //private String brandName;
-        //private String modelName;
+        //private String brand_name;
+        //private String model_name;
         private String summaryPoints;
 
 
@@ -890,13 +890,13 @@ namespace _01electronics_marketing
 
         //public void SetBrandName(String mBrandName)
         //{
-        //    brandName = mBrandName;
+        //    brand_name = mBrandName;
         //}
 
         //
         //public void SetModelName(String mModelName)
         //{
-        //    modelName = mModelName;
+        //    model_name = mModelName;
         //}
         public void SetsummaryPoints(string msummaryPoints)
         {
@@ -972,14 +972,14 @@ namespace _01electronics_marketing
         }
         //public String GetBrandName()
         //{
-        //    return brandName;
+        //    return brand_name;
         //}
 
         //
 
         //public String GetModelName()
         //{
-        //    return modelName;
+        //    return model_name;
         //}
         public String GetSummaryPoints()
         {

@@ -15,7 +15,7 @@ namespace _01electronics_marketing
     public partial class SignUpPage : Page
     {
         private SQLServer sqlServer = new SQLServer();
-        private IntegrityChecks integrityChecker = new IntegrityChecks();
+        private IntegrityChecks integrityChecks = new IntegrityChecks();
         private CommonQueries commonQueries = new CommonQueries();
 
         private Employee signupEmployee = new Employee();
@@ -35,7 +35,7 @@ namespace _01electronics_marketing
             String inputString = businessEmailTextBox.Text;
             String modifiedString = null;
 
-            if (!integrityChecker.CheckEmployeeSignUpEmailEditBox(inputString, ref modifiedString, false, ref errorMessage))
+            if (!integrityChecks.CheckEmployeeSignUpEmailEditBox(inputString, ref modifiedString, false, ref errorMessage))
             {
                 System.Windows.Forms.MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -53,7 +53,7 @@ namespace _01electronics_marketing
             String inputString = personalEmailTextBox.Text;
             String modifiedString = null;
 
-            if (!integrityChecker.CheckEmployeePersonalEmailEditBox(inputString, ref modifiedString, false, ref errorMessage))
+            if (!integrityChecks.CheckEmployeePersonalEmailEditBox(inputString, ref modifiedString, false, ref errorMessage))
             {
                 System.Windows.Forms.MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

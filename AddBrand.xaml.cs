@@ -38,8 +38,8 @@ namespace _01electronics_marketing
     {
         private CommonQueries commonQueriesObject;
 
-        private List<COMPANY_WORK_MACROS.BRAND_STRUCT> brands = new List<COMPANY_WORK_MACROS.BRAND_STRUCT>();
-        private List<COMPANY_WORK_MACROS.BRAND_STRUCT> mbrandsList = new List<COMPANY_WORK_MACROS.BRAND_STRUCT>();
+        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brands = new List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT>();
+        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> mbrandsList = new List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT>();
 
         private Employee loggedInUser;
 
@@ -85,7 +85,7 @@ namespace _01electronics_marketing
         Grid UploadIconGrid = new Grid();
 
         ProgressBar progressBar = new ProgressBar();
-        public AddBrand(ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<COMPANY_WORK_MACROS.BRAND_STRUCT> brandsList )
+        public AddBrand(ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brandsList )
         {
 
             InitializeComponent();
@@ -131,7 +131,7 @@ namespace _01electronics_marketing
             {
                 editPictureButton.IsEnabled = true;
 
-                product.SetBrandName(brands[brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID())].brandName);
+                product.SetBrandName(brands[brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID())].brand_name);
 
                 ContactProfileHeader.Content = "VIEW BRAND";
                 serverFileName = (String)product.GetBrandID().ToString() + ".jpg";
@@ -156,7 +156,7 @@ namespace _01electronics_marketing
             int index;
             for (int i =0 ; i < mbrandsList.Count; i++)
             {
-                index= brands.FindIndex(x => x.brandId == mbrandsList[i].brandId );
+                index= brands.FindIndex(x => x.brand_id == mbrandsList[i].brand_id );
                 brands.Remove(brands[index]);
 
             }
@@ -166,7 +166,7 @@ namespace _01electronics_marketing
 
             if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
                loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
-               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
+               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID))
             {
                 canEdit = true;
             }
@@ -174,10 +174,10 @@ namespace _01electronics_marketing
 
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
             {
-                int index = brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID());
+                int index = brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID());
 
 
-                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brandId == product.GetBrandID());  
+                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID());  
                 BrandNameLabel.Content = product.GetBrandName();
                 BrandNameComboBox.Visibility = Visibility.Collapsed;
                 BrandNameLabel.Visibility = Visibility.Visible;
@@ -202,7 +202,7 @@ namespace _01electronics_marketing
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
             {
                 product.SetBrandName(BrandNameComboBox.SelectedItem.ToString());
-                product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brandId);
+                product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brand_id);
                 product.AddBrandToProduct();      
             }
 
@@ -281,7 +281,7 @@ namespace _01electronics_marketing
         private bool InitializeBrandsComboBox()
         {
             for (int i = 0; i < brands.Count; i++)
-                BrandNameComboBox.Items.Add(brands[i].brandName);
+                BrandNameComboBox.Items.Add(brands[i].brand_name);
 
             return true; 
         }
@@ -916,7 +916,7 @@ namespace _01electronics_marketing
 
         private void BrandNameComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brandId);
+            product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brand_id);
             wrapPanel.Children.Clear();
             uploadFilesStackPanel.Children.Clear();
 
@@ -929,7 +929,7 @@ namespace _01electronics_marketing
             try
             {
                 Image brandLogo = new Image();
-                //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
                 BitmapImage src = new BitmapImage();
                 src.BeginInit();
                 src.UriSource = new Uri(product.GetBrandPhotoLocalPath(), UriKind.Relative);
@@ -944,10 +944,10 @@ namespace _01electronics_marketing
 
 
 
-                //if(brandsList[i].brandId == 0)
+                //if(brandsList[i].brand_id == 0)
                 //{
                 //    Label othersLabel = new Label();
-                //    othersLabel.Content = brandsList[i].brandName;
+                //    othersLabel.Content = brandsList[i].brand_name;
                 //    othersLabel.Style = (Style)FindResource("tableHeaderItem");
                 //    gridI.Children.Add(othersLabel);
                 //}    
@@ -969,7 +969,7 @@ namespace _01electronics_marketing
                 {
 
                     Image brandLogo = new Image();
-                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
                     BitmapImage src = new BitmapImage();
                     src.BeginInit();
                     src.UriSource = new Uri(product.GetBrandPhotoLocalPath(), UriKind.Relative);
@@ -982,10 +982,10 @@ namespace _01electronics_marketing
                     //brandLogo.Margin = new Thickness(80, 100, 12, 12);
 
 
-                    //if(brandsList[i].brandId == 0)
+                    //if(brandsList[i].brand_id == 0)
                     //{
                     //    Label othersLabel = new Label();
-                    //    othersLabel.Content = brandsList[i].brandName;
+                    //    othersLabel.Content = brandsList[i].brand_name;
                     //    othersLabel.Style = (Style)FindResource("tableHeaderItem");
                     //    gridI.Children.Add(othersLabel);
                     //}    

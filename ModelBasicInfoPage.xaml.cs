@@ -146,7 +146,7 @@ namespace _01electronics_marketing
                 try
                 {
                     Image brandLogo = new Image();
-                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
                     BitmapImage src = new BitmapImage();
                     src.BeginInit();
                     src.UriSource = new Uri(product.GetModelFolderLocalPath(), UriKind.Relative);
@@ -170,7 +170,7 @@ namespace _01electronics_marketing
                     {
 
                         Image brandLogo = new Image();
-                        //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                        //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
                         BitmapImage src = new BitmapImage();
                         src.BeginInit();
                         src.UriSource = new Uri(product.GetModelFolderLocalPath(), UriKind.Relative);

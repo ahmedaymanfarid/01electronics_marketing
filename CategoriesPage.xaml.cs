@@ -20,7 +20,7 @@ namespace _01electronics_marketing
     {
         private Employee loggedInUser;
         private CommonQueries commonQueries;
-        private List<COMPANY_WORK_MACROS.PRODUCT_CATEGORY_STRUCT> categories;
+        private List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT> categories;
         protected List<String> categoriesSummaryPoints;
         protected String sqlQuery;
         protected SQLServer sqlDatabase;
@@ -34,7 +34,7 @@ namespace _01electronics_marketing
             commonQueries = new CommonQueries();
             sqlDatabase = new SQLServer();
             ftpServer = new FTPServer();
-            categories = new List<COMPANY_WORK_MACROS.PRODUCT_CATEGORY_STRUCT>();
+            categories = new List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT>();
             categoriesSummaryPoints = new List<string>();
             //categoriesSummaryPoints = new List<string>();
 
@@ -75,12 +75,12 @@ namespace _01electronics_marketing
 
                 Image productImage = new Image();
 
-                string src = String.Format(@"/01electronics_marketing;component/Photos/categories/" + categories[i].categoryId + ".jpg");
+                string src = String.Format(@"/01electronics_marketing;component/Photos/categories/" + categories[i].category_id + ".jpg");
                 productImage.Source = new BitmapImage(new Uri(src, UriKind.Relative));
                 productImage.HorizontalAlignment = HorizontalAlignment.Stretch;
                 productImage.VerticalAlignment = VerticalAlignment.Stretch;
                 productImage.MouseDown += ImageMouseDown;
-                productImage.Tag = categories[i].categoryId.ToString();
+                productImage.Tag = categories[i].category_id.ToString();
                 gridI.Children.Add(productImage);
                 Grid.SetRow(productImage, 1);
 
@@ -110,7 +110,7 @@ namespace _01electronics_marketing
                 headerLabel.FontSize = 17;
                 headerLabel.FontWeight = FontWeights.Bold;
                 headerLabel.Padding = new Thickness(10);
-                headerLabel.Content = categories[i].category;
+                headerLabel.Content = categories[i].category_name;
 
                 Grid.SetRow(headerLabel, 0);
                 headerGrid.Children.Add(headerLabel);

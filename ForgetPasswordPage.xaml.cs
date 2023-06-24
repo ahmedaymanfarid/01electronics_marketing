@@ -12,7 +12,7 @@ namespace _01electronics_marketing
     /// </summary>
     public partial class ForgetPasswordPage : Page
     {
-        IntegrityChecks integrityChecker = new IntegrityChecks();
+        IntegrityChecks integrityChecks = new IntegrityChecks();
         protected String errorMessage;
 
         String employeeEmail;
@@ -29,7 +29,7 @@ namespace _01electronics_marketing
         {
             employeeEmail = employeeEmailTextBox.Text;
 
-            if (!integrityChecker.CheckEmployeeLoginEmailEditBox(employeeEmail, ref employeeEmail, false, ref errorMessage))
+            if (!integrityChecks.CheckEmployeeLoginEmailEditBox(employeeEmail, ref employeeEmail, false, ref errorMessage))
             {
                 System.Windows.Forms.MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

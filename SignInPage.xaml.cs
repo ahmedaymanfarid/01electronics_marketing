@@ -14,7 +14,7 @@ namespace _01electronics_marketing
     /// </summary>
     public partial class SignInPage : Page
     {
-        IntegrityChecks integrityChecker = new IntegrityChecks();
+        IntegrityChecks integrityChecks = new IntegrityChecks();
 
         String employeeEmail;
         String employeePassword;
@@ -58,7 +58,7 @@ namespace _01electronics_marketing
                 return;
             }
 
-            if (!integrityChecker.CheckEmployeeLoginEmailEditBox(employeeEmail, ref employeeEmail, false, ref errorMessage))
+            if (!integrityChecks.CheckEmployeeLoginEmailEditBox(employeeEmail, ref employeeEmail, false, ref errorMessage))
             {
                 System.Windows.Forms.MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -66,7 +66,7 @@ namespace _01electronics_marketing
             loggedInUser.InitializeEmployeeInfo(employeeEmail);
 
             if (loggedInUser.GetEmployeeDepartmentId() != COMPANY_ORGANISATION_MACROS.MARKETING_AND_SALES_DEPARTMENT_ID 
-                && (loggedInUser.GetEmployeePositionId() != COMPANY_ORGANISATION_MACROS.MANAGER_POSTION || loggedInUser.GetEmployeeDepartmentId() != COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID)
+                && (loggedInUser.GetEmployeePositionId() != COMPANY_ORGANISATION_MACROS.MANAGER_POSTION || loggedInUser.GetEmployeeDepartmentId() != COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID)
                 && loggedInUser.GetEmployeeTeamId() != COMPANY_ORGANISATION_MACROS.DOCUMENT_CONTROL_TEAM_ID
                 && loggedInUser.GetEmployeeTeamId() != COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID
                 && loggedInUser.GetEmployeeTeamId() != COMPANY_ORGANISATION_MACROS.RECTRUITMENT_TEAM_ID)
@@ -103,7 +103,7 @@ namespace _01electronics_marketing
 
 
 
-            if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID || loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID)
+            if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID || loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID)
             {
                 adminWindow adminWindow = new adminWindow(loggedInUser);
                 adminWindow.Show();
@@ -112,7 +112,7 @@ namespace _01electronics_marketing
                 return;
             }
 
-            if (!integrityChecker.CheckEmployeePasswordEditBox(employeePassword, loggedInUser.GetEmployeeId(), ref errorMessage))
+            if (!integrityChecks.CheckEmployeePasswordEditBox(employeePassword, loggedInUser.GetEmployeeId(), ref errorMessage))
             {
                 System.Windows.Forms.MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

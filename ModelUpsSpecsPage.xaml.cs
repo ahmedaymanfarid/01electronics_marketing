@@ -35,7 +35,7 @@ namespace _01electronics_marketing
         public ModelAdditionalInfoPage modelAdditionalInfoPage;
         public ModelBasicInfoPage modelBasicInfoPage;
         public ModelUploadFilesPage modelUploadFilesPage;
-        protected List<BASIC_STRUCTS.MODEl_SPEC_STRUCT> modelSpecs;
+        protected List<PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT> modelSpecs;
         List<PROCUREMENT_STRUCTS.MEASURE_UNITS_STRUCT> rating;
         protected int index = 0;
         int cardCountGenset = 0;
@@ -53,7 +53,7 @@ namespace _01electronics_marketing
             viewAddCondition = mViewAddCondition;
 
             sqlDatabase = new SQLServer();
-            modelSpecs = new List<BASIC_STRUCTS.MODEl_SPEC_STRUCT>();
+            modelSpecs = new List<PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT>();
             rating = new List<PROCUREMENT_STRUCTS.MEASURE_UNITS_STRUCT>();
             commonQueriesObject = new CommonQueries();
             commonFunctionsObject = new CommonFunctions();
@@ -1687,13 +1687,13 @@ namespace _01electronics_marketing
 
                 if (product.GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
                 {
-                    List<BASIC_STRUCTS.MODEl_SPEC_STRUCT> Model_specs = new List<BASIC_STRUCTS.MODEl_SPEC_STRUCT>();
+                    List<PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT> Model_specs = new List<PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT>();
 
 
                     for (int i = 0; i < mainGrid.Children.Count; i++)
                     {
 
-                        BASIC_STRUCTS.MODEl_SPEC_STRUCT model_spec = new BASIC_STRUCTS.MODEl_SPEC_STRUCT();
+                        PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT model_spec = new PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT();
 
                         Grid card = mainGrid.Children[i] as Grid;
 
@@ -1704,7 +1704,7 @@ namespace _01electronics_marketing
 
                         TextBox ratedPower = ratedPanel.Children[1] as TextBox;
                         if (ratedPower.Text == "")
-                            model_spec.genset_rated_power = null;
+                            model_spec.genset_rated_power = 0;
                         else
                             model_spec.genset_rated_power = (int)Convert.ToDecimal(ratedPower.Text.ToString());
 
@@ -1835,7 +1835,7 @@ namespace _01electronics_marketing
 
                         if (i == 0)
                         {
-                            BASIC_STRUCTS.MODEl_SPEC_STRUCT model_spec = new BASIC_STRUCTS.MODEl_SPEC_STRUCT();
+                            PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT model_spec = new PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT();
 
                             model_spec.spec_id = 1;
                             if (iOPhaseTextBox.Text != "" || (product.GetModelSpecs().Count > 0 && product.GetModelSpecs()[0].ups_io_phase != null))
@@ -1905,7 +1905,7 @@ namespace _01electronics_marketing
                         }
                         else
                         {
-                            BASIC_STRUCTS.MODEl_SPEC_STRUCT model_spec = new BASIC_STRUCTS.MODEl_SPEC_STRUCT();
+                            PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT model_spec = new PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT();
 
                             model_spec.spec_id = i + 1;
 
@@ -2219,7 +2219,7 @@ namespace _01electronics_marketing
          
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
             {
-                List<BASIC_STRUCTS.MODEl_SPEC_STRUCT> ModelSpecs = new List<BASIC_STRUCTS.MODEl_SPEC_STRUCT>();
+                List<PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT> ModelSpecs = new List<PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT>();
 
                 if (product.GetCategoryID() == COMPANY_WORK_MACROS.GENSET_CATEGORY_ID)
                 {
@@ -2229,7 +2229,7 @@ namespace _01electronics_marketing
                     for (int i = 0; i < mainGrid.Children.Count; i++)
                     {
 
-                        BASIC_STRUCTS.MODEl_SPEC_STRUCT model_spec=new BASIC_STRUCTS.MODEl_SPEC_STRUCT();
+                        PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT model_spec=new PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT();
 
                         Grid card = mainGrid.Children[i] as Grid;
 
@@ -2240,7 +2240,7 @@ namespace _01electronics_marketing
 
                         TextBox ratedPower = ratedPanel.Children[1] as TextBox;
                         if (ratedPower.Text == "")
-                            model_spec.genset_rated_power = null;
+                            model_spec.genset_rated_power = 0;
                         else
                             model_spec.genset_rated_power = (int)Convert.ToDecimal(ratedPower.Text.ToString());
 
@@ -2376,7 +2376,7 @@ namespace _01electronics_marketing
 
                         if (i == 0)
                         {
-                            BASIC_STRUCTS.MODEl_SPEC_STRUCT model_spec = new BASIC_STRUCTS.MODEl_SPEC_STRUCT();
+                            PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT model_spec = new PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT();
 
                             model_spec.spec_id = 1;
                             if (iOPhaseTextBox.Text != "" || (product.GetModelSpecs().Count > 0 && product.GetModelSpecs()[0].ups_io_phase != null))
@@ -2446,7 +2446,7 @@ namespace _01electronics_marketing
                         }
                         else
                         {
-                            BASIC_STRUCTS.MODEl_SPEC_STRUCT model_spec = new BASIC_STRUCTS.MODEl_SPEC_STRUCT();
+                            PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT model_spec = new PRODUCTS_STRUCTS.MODEL_SPECS_STRUCT();
 
                             model_spec.spec_id = i + 1;
 

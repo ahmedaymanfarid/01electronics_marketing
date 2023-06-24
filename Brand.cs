@@ -11,7 +11,7 @@ namespace _01electronics_marketing
     {
 
         private int brandID;
-        private String brandName;
+        private String brand_name;
 
         protected String BrandPhotoLocalPath;
         protected String BrandPhotoServerPath;
@@ -29,7 +29,7 @@ namespace _01electronics_marketing
 
         public void SetBrandName(String mBrandName)
         {
-            brandName = mBrandName;
+            brand_name = mBrandName;
         }
 
 
@@ -51,7 +51,7 @@ namespace _01electronics_marketing
 
         public String GetBrandName()
         {
-            return brandName;
+            return brand_name;
         }
 
         public bool GetNewBrandID()

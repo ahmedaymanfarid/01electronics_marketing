@@ -133,7 +133,7 @@ namespace _01electronics_marketing
                 try
                 {
                     Image brandLogo = new Image();
-                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
                     BitmapImage src = new BitmapImage();
                     src.BeginInit();
                       src.UriSource = new Uri(product.GetProductPhotoLocalPath(), UriKind.Relative);
@@ -157,7 +157,7 @@ namespace _01electronics_marketing
                     {
 
                         Image brandLogo = new Image();
-                        //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                        //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
                         BitmapImage src = new BitmapImage();
                         src.BeginInit();
                         src.UriSource = new Uri(product.GetProductPhotoLocalPath(), UriKind.Relative);
@@ -1088,7 +1088,7 @@ namespace _01electronics_marketing
                 remainingCharactersWrapPanel.Visibility = Visibility.Collapsed;
                 if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
                loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_TEAM_ID ||
-               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.BUSINESS_DEVELOPMENT_DEPARTMENT_ID))
+               (loggedInUser.GetEmployeePositionId() == COMPANY_ORGANISATION_MACROS.MANAGER_POSTION && loggedInUser.GetEmployeeDepartmentId() == COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID))
                 {
                     canEdit = true;
                     editPictureButton.Visibility = Visibility.Visible;
