@@ -12,15 +12,23 @@ namespace _01electronics_marketing
         public ModelUpsSpecsPage modelUpsSpecsPage;
         public ModelAdditionalInfoPage modelAdditionalInfoPage;
         public ModelUploadFilesPage modelUploadFilesPage;
-        public ModelsWindow(ref Employee mLoggedInUser, ref Model mPrduct, int mViewAddCondition, bool openFilesPage)
+
+        private static CommonQueries commonQueries;
+        private static SecuredCommonQueries securedCommonQueries;
+        private static CommonFunctions commonFunctions;
+        private static IntegrityChecks integrityChecks;
+        public ModelsWindow(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUser, ref Model mPrduct, int mViewAddCondition, bool openFilesPage)
         {
             InitializeComponent();
 
             modelBasicInfoPage = new ModelBasicInfoPage(ref mLoggedInUser, ref mPrduct, mViewAddCondition);
-            modelUpsSpecsPage = new ModelUpsSpecsPage(ref mLoggedInUser, ref mPrduct, mViewAddCondition);
-            modelAdditionalInfoPage = new ModelAdditionalInfoPage(ref mLoggedInUser, ref mPrduct, mViewAddCondition);
+            modelUpsSpecsPage = new ModelUpsSpecsPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref mLoggedInUser, ref mPrduct, mViewAddCondition);
+            modelAdditionalInfoPage = new ModelAdditionalInfoPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref mLoggedInUser, ref mPrduct, mViewAddCondition);
             modelUploadFilesPage = new ModelUploadFilesPage(ref mLoggedInUser, ref mPrduct, mViewAddCondition);
 
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
             if (openFilesPage)
             {
                 modelUploadFilesPage.modelBasicInfoPage = modelBasicInfoPage;

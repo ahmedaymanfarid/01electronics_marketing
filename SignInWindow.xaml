@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_01electronics_marketing"
         mc:Ignorable="d"
-        Title="01 Elecronics - Sales Department - Login" Height="630" Width="1000" Source="SignInPage.xaml">
+        Title="01 Electronics - Marketing - LogIn"  Height="630" Width="1000"  Source="SignInPage.xaml"
+>
+    
     
 </NavigationWindow>

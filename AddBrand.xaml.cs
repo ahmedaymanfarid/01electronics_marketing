@@ -38,8 +38,9 @@ namespace _01electronics_marketing
     {
         private CommonQueries commonQueriesObject;
 
-        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brands = new List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT>();
-        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> mbrandsList = new List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT>();
+
+        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brands;
+        private List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> mbrandsList;
 
         private Employee loggedInUser;
 
@@ -83,20 +84,23 @@ namespace _01electronics_marketing
         List<string> ftpFiles;
 
         Grid UploadIconGrid = new Grid();
+        private CommonFunctions commonFunctions;
 
         ProgressBar progressBar = new ProgressBar();
-        public AddBrand(ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brandsList )
+
+        public AddBrand(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Brand pBrand, ref Employee mLoggedInUser, ref int mViewAddCondition, ref List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brandsList)
         {
 
             InitializeComponent();
-            commonQueriesObject = new CommonQueries();
+            commonQueriesObject = mCommonQueries;
+            commonFunctions = mCommonFunctions;
             counter = 0;
             loggedInUser = mLoggedInUser;
             canEdit = false;
             InitializeComponent();
             sqlDatabase = new SQLServer();
             ftpObject = new FTPServer();
-            integrityChecks = new IntegrityChecks();
+            integrityChecks =mIntegrityChecks;
             product = pBrand;
             viewAddCondition = mViewAddCondition;
             mbrandsList = brandsList;
@@ -141,22 +145,23 @@ namespace _01electronics_marketing
                 uploadFilesStackPanel.Children.Add(wrapPanel);
 
             }
-            
+
             InitializeBrandsComboBox();
             checkEmployee();
-            
-            }
-        
+
+        }
+
         /// /////////////////////////////////////////////////////////////////
         /// ////////cHECKERS
         /// /////////////////////////////////////////////////////////////////
-       
+
         private void deleteSomeBrands()
         {
             int index;
-            for (int i =0 ; i < mbrandsList.Count; i++)
+            for (int i = 0; i < mbrandsList.Count; i++)
             {
-                index= brands.FindIndex(x => x.brand_id == mbrandsList[i].brand_id );
+
+                index = brands.FindIndex(x => x.brand_id == mbrandsList[i].brand_id);
                 brands.Remove(brands[index]);
 
             }
@@ -176,13 +181,13 @@ namespace _01electronics_marketing
             {
                 int index = brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID());
 
+                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID());
 
-                BrandNameComboBox.SelectedIndex = brands.FindIndex(brandItem => brandItem.brand_id == product.GetBrandID());  
                 BrandNameLabel.Content = product.GetBrandName();
                 BrandNameComboBox.Visibility = Visibility.Collapsed;
                 BrandNameLabel.Visibility = Visibility.Visible;
 
-                
+
                 picHint.Visibility = Visibility.Hidden;
                 editPictureButton.Visibility = Visibility.Visible;
 
@@ -203,7 +208,8 @@ namespace _01electronics_marketing
             {
                 product.SetBrandName(BrandNameComboBox.SelectedItem.ToString());
                 product.SetBrandID(brands[BrandNameComboBox.SelectedIndex].brand_id);
-                product.AddBrandToProduct();      
+
+                product.AddBrandToProduct();
             }
 
             this.Close();
@@ -252,10 +258,12 @@ namespace _01electronics_marketing
             Grid.SetRow(progressBar, 3);
             UploadIconGrid.Children.Add(progressBar);
 
-            SystemWatcher.fromSoftware = true;
+            //SystemWatcher.fromSoftware = true;
 
             File.Delete(oldLocalFolderPath);
             File.Copy(localFolderPath, oldLocalFolderPath);
+            ftpObject.Delete(oldLocalFolderPath);
+            ftpObject.Create(oldLocalFolderPath);
 
             saveChangesButton.IsEnabled = true;
 
@@ -283,7 +291,7 @@ namespace _01electronics_marketing
             for (int i = 0; i < brands.Count; i++)
                 BrandNameComboBox.Items.Add(brands[i].brand_name);
 
-            return true; 
+            return true;
         }
 
         private void InsertIconGrid(string mStatus, string localFolderPath)
@@ -964,40 +972,41 @@ namespace _01electronics_marketing
             {
 
 
-                product.SetBrandPhotoServerPath(product.GetBrandFolderServerPath() + "/" + product.GetBrandID()+ ".jpg");
-                if (product.DownloadPhotoFromServer(product.GetBrandPhotoServerPath(),product.GetBrandPhotoLocalPath()))
-                {
-
-                    Image brandLogo = new Image();
-                    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
-                    BitmapImage src = new BitmapImage();
-                    src.BeginInit();
-                    src.UriSource = new Uri(product.GetBrandPhotoLocalPath(), UriKind.Relative);
-                    src.CacheOption = BitmapCacheOption.OnLoad;
-                    src.EndInit();
-                    brandLogo.Source = src;
-                    brandLogo.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
-                    //brandLogo.Width = 300;
-                    //brandLogo.Margin = new Thickness(80, 100, 12, 12);
+                product.SetBrandPhotoServerPath(product.GetBrandFolderServerPath() + "/" + product.GetBrandID() + ".jpg");
+                //if (product.DownloadPhotoFromServer(product.GetBrandPhotoServerPath(),product.GetBrandPhotoLocalPath()))
+                //{
 
 
-                    //if(brandsList[i].brand_id == 0)
-                    //{
-                    //    Label othersLabel = new Label();
-                    //    othersLabel.Content = brandsList[i].brand_name;
-                    //    othersLabel.Style = (Style)FindResource("tableHeaderItem");
-                    //    gridI.Children.Add(othersLabel);
-                    //}    
+                //    Image brandLogo = new Image();
+                //    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                //    BitmapImage src = new BitmapImage();
+                //    src.BeginInit();
+                //    src.UriSource = new Uri(product.GetBrandPhotoLocalPath(), UriKind.Relative);
+                //    src.CacheOption = BitmapCacheOption.OnLoad;
+                //    src.EndInit();
+                //    brandLogo.Source = src;
+                //    brandLogo.HorizontalAlignment = HorizontalAlignment.Stretch;
+                //    brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
+                //    //brandLogo.Width = 300;
+                //    //brandLogo.Margin = new Thickness(80, 100, 12, 12);
+
+
+                //    //if(brandsList[i].brandId == 0)
+                //    //{
+                //    //    Label othersLabel = new Label();
+                //    //    othersLabel.Content = brandsList[i].brandName;
+                //    //    othersLabel.Style = (Style)FindResource("tableHeaderItem");
+                //    //    gridI.Children.Add(othersLabel);
+                //    //}    
 
 
 
-                    wrapPanel.Children.Add(brandLogo);
+                //    wrapPanel.Children.Add(brandLogo);
 
-                    uploadFilesStackPanel.Children.Add(wrapPanel);
+                //    uploadFilesStackPanel.Children.Add(wrapPanel);
 
 
-                }
+                //}
             }
         }
     }

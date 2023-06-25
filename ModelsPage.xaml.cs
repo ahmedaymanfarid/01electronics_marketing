@@ -37,7 +37,9 @@ namespace _01electronics_marketing
         private Expander previousExpander;
         private Grid currentGrid;
         protected int viewAddCondition;
-        public ModelsPage(ref Employee mLoggedInUser, ref Model mSelectedProduct)
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
+        public ModelsPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUser, ref Model mSelectedProduct)
         {
             InitializeComponent();
 
@@ -46,7 +48,10 @@ namespace _01electronics_marketing
             ftpServer = new FTPServer();
             modelsNames = new List<String>();
 
-            commonQueries = new CommonQueries();
+
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
             brandModels = new List<PRODUCTS_STRUCTS.PRODUCT_MODEL_STRUCT>();
 
             //downloadBackground = new BackgroundWorker();
@@ -105,7 +110,7 @@ namespace _01electronics_marketing
                 ModelsGrid.Children.Add(productTitleLabel);
                 Grid.SetRow(productTitleLabel, 0);
 
-              
+
                 for (int i = 0; i < brandModels.Count(); i++)
                 {
                     selectedProduct.SetModelID(brandModels[i].model_id);
@@ -135,12 +140,12 @@ namespace _01electronics_marketing
 
                         selectedProduct.GetNewModelPhotoLocalPath();
 
-                       Image brandImage = new Image();
+                        Image brandImage = new Image();
                         BitmapImage src = new BitmapImage();
                         src.BeginInit();
                         src.UriSource = new Uri(selectedProduct.GetModelPhotoLocalPath(), UriKind.Relative);
                         src.CacheOption = BitmapCacheOption.OnLoad;
-                      
+
 
                         if (File.Exists(selectedProduct.GetModelPhotoLocalPath()))
                         {
@@ -214,7 +219,7 @@ namespace _01electronics_marketing
 
                         expander.Expanded += new RoutedEventHandler(OnExpandExpander);
                         expander.Collapsed += new RoutedEventHandler(OnCollapseExpander);
-                        expander.Margin = new Thickness(10,0,0,0);
+                        expander.Margin = new Thickness(10, 0, 0, 0);
 
                         StackPanel expanderStackPanel = new StackPanel();
                         expanderStackPanel.Orientation = Orientation.Vertical;
@@ -360,7 +365,9 @@ namespace _01electronics_marketing
         //    ModelsGrid.Children.Clear();
         //    for (int i = 0; i < brandModels.Count(); i++)
         //    {
-        //        selectedProduct.SetModelID(brandModels[i].model_id);
+
+        //        selectedProduct.Setmodel_id(brandModels[i].model_id);
+
         //        selectedProduct.GetNewModelPhotoLocalPath();
         //        selectedProduct.GetNewPhotoServerPath();
 
@@ -382,7 +389,9 @@ namespace _01electronics_marketing
         //{
         //    for (int i = 0; i < brandModels.Count(); i++)
         //    {
-        //        selectedProduct.SetModelID(brandModels[i].model_id);
+
+        //        selectedProduct.Setmodel_id(brandModels[i].model_id);
+
         //        selectedProduct.GetNewModelPhotoLocalPath();
         //        selectedProduct.GetNewPhotoServerPath();
 
@@ -421,7 +430,7 @@ namespace _01electronics_marketing
         private void OnButtonClickedProducts(object sender, MouseButtonEventArgs e)
         {
             //DeletePhotos();
-            CategoriesPage productsPage = new CategoriesPage(ref loggedInUser);
+            CategoriesPage productsPage = new CategoriesPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(productsPage);
         }
         private void OnButtonClickedWorkOrders(object sender, MouseButtonEventArgs e)
@@ -591,9 +600,9 @@ namespace _01electronics_marketing
             selectedProduct.InitializeModelInfo(selectedProduct.GetProductID(), selectedProduct.GetBrandID(), selectedProduct.GetModelID());
             selectedProduct.SetModelName(brandModels[i].model_name);
             selectedProduct.InitializeModelSummaryPoints();
-            
 
-            MoveModelWindow MoveModelWindow = new MoveModelWindow(selectedProduct);
+
+            MoveModelWindow MoveModelWindow = new MoveModelWindow(ref commonQueries, ref commonFunctions, ref integrityChecks,ref loggedInUser, selectedProduct);
             MoveModelWindow.Closed += OnCloseAddModelsWindow;
             MoveModelWindow.Show();
 
@@ -605,9 +614,9 @@ namespace _01electronics_marketing
 
             Button tempListBox = (Button)sender;
 
-            StackPanel currentStackPanel= (StackPanel)tempListBox.Parent;
+            StackPanel currentStackPanel = (StackPanel)tempListBox.Parent;
             Expander currentExpander = (Expander)currentStackPanel.Parent;
-            
+
             currentGrid = (Grid)currentExpander.Parent;
 
             viewAddCondition = COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION;
@@ -618,8 +627,9 @@ namespace _01electronics_marketing
             selectedProduct.InitializeModelInfo(selectedProduct.GetProductID(), selectedProduct.GetBrandID(), selectedProduct.GetModelID());
             selectedProduct.SetModelName(brandModels[i].model_name);
             selectedProduct.InitializeModelSummaryPoints();
-            
-            ModelsWindow modelsWindow = new ModelsWindow(ref loggedInUser, ref selectedProduct, viewAddCondition, false);
+
+            ModelsWindow modelsWindow = new ModelsWindow(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref selectedProduct, viewAddCondition, false);
+            modelsWindow.Closed += OnCloseAddModelsWindow;
             modelsWindow.Show();
         }
 
@@ -666,12 +676,12 @@ namespace _01electronics_marketing
         private void onBtnAddClick(object sender, MouseButtonEventArgs e)
         {
             viewAddCondition = COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION;
-            ModelsWindow modelsWindow = new ModelsWindow(ref loggedInUser, ref selectedProduct, viewAddCondition, false);
+            ModelsWindow modelsWindow = new ModelsWindow(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref selectedProduct, viewAddCondition, false);
 
-            modelsWindow.Closed += OnCloseAddModelsWindow; 
+            modelsWindow.Closed += OnCloseAddModelsWindow;
             modelsWindow.Show();
 
-           
+
         }
 
         private void OnCloseAddModelsWindow(object sender, EventArgs e)

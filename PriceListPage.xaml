@@ -1,0 +1,47 @@
+﻿<Page x:Class="_01electronics_marketing.PriceListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_01electronics_marketing"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PriceListPage">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*" MinWidth="240"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" MinHeight="300" Background="#105A97">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource sideNavigationItemStyle}" Name="ProductsLabel" Text="Products" MouseLeftButtonDown="OnButtonClickedProducts"/>
+            <TextBlock Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource sideNavigationItemStyle}" Name="priceListLabel" Text="Price List" Background="#EDEDED" Foreground="#105A97" />
+        </Grid>
+        <Grid  Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="100"/>
+                
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="48,24,48,24" Content="Price List" Style="{StaticResource primaryHeaderTextStyle}"/>
+
+            <ScrollViewer Grid.Row="1" Grid.Column="1">
+                
+                <Grid Name="priceListGrid" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
+                   
+                  
+                </Grid>
+            </ScrollViewer>
+            <Button Style="{StaticResource buttonStyle}" Grid.Row="2" Content="ADD" Click="OnButtonClickAddNewPriceList"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -22,14 +22,19 @@ namespace _01electronics_marketing
         Employee loggedInUser;
         protected String errorMessage;
 
-       
-      
+        private CommonQueries commonQueries;
+        private SecuredCommonQueries securedCommonQueries;
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
 
-        public SignInPage()
+
+        public SignInPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks)
         {
             InitializeComponent();
-
             loggedInUser = new Employee();
+            commonFunctions = mCommonFunctions;
+            commonQueries = mCommonQueries;
+            integrityChecks = mIntegrityChecks;
 
             if (_01electronics_marketing.Properties.Settings.Default.Email != null)
             {
@@ -105,7 +110,7 @@ namespace _01electronics_marketing
 
             if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.SOFTWARE_DEVELOPMENT_DEPARTMENT_ID || loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID)
             {
-                adminWindow adminWindow = new adminWindow(loggedInUser);
+                adminWindow adminWindow = new adminWindow(ref commonQueries, ref commonFunctions, ref integrityChecks,ref loggedInUser);
                 adminWindow.Show();
                 NavigationWindow currentWindoww = (NavigationWindow)this.Parent;
                 currentWindoww.Close();
@@ -118,7 +123,7 @@ namespace _01electronics_marketing
                 return;
 
             }
-            MainWindow mainWindowOpen = new MainWindow(ref loggedInUser);
+            MainWindow mainWindowOpen = new MainWindow(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
 
             NavigationWindow currentWindow = (NavigationWindow)this.Parent;
             currentWindow.Close();
@@ -130,7 +135,7 @@ namespace _01electronics_marketing
 
         private void OnButtonClickedSignUp(object sender, RoutedEventArgs e)
         {
-            SignUpPage signUp = new SignUpPage();
+            SignUpPage signUp = new SignUpPage(ref commonQueries, ref commonFunctions, ref integrityChecks);
             this.NavigationService.Navigate(signUp);
         }
 
@@ -154,7 +159,7 @@ namespace _01electronics_marketing
         private void OnBtnClicklForgetPassword(object sender, MouseButtonEventArgs e)
         {
             employeeEmail = employeeEmailTextBox.Text;
-            ForgetPasswordPage forgetPasswordMail = new ForgetPasswordPage(ref employeeEmail);
+            ForgetPasswordPage forgetPasswordMail = new ForgetPasswordPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref employeeEmail);
             this.NavigationService.Navigate(forgetPasswordMail);
         }
 

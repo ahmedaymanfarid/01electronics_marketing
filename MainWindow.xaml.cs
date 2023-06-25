@@ -4,7 +4,6 @@ using System.ComponentModel;
 using _01electronics_windows_library;
 using System.IO;
 using System.Windows;
-using System.Timers;
 using System.Threading;
 using _01electronics_marketing;
 
@@ -19,20 +18,29 @@ namespace _01electronics_marketing
         bool canceled = false;
         int progress = 0;
         bool closedWindow = false;
-        private BackgroundWorker backgroundWorker = new BackgroundWorker();
+        private CommonQueries commonQueries;
+        private SecuredCommonQueries securedCommonQueries;
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
+        private Employee loggedInUser;
+        private BackgroundWorker backgroundWorker;
 
 
-        //Timer timer=new Timer(60000);
-
+        System.Timers.Timer timer = new System.Timers.Timer(300000);
         FTPServer ftpServer = new FTPServer();
         bool fileFound = true;
-        public MainWindow(ref Employee mLoggedInUser)
+
+
+        public MainWindow(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUserr)
         {
-
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
+            loggedInUser = mLoggedInUserr;
             this.Closing += NavigationWindow_Closing;
-
+            backgroundWorker = new BackgroundWorker();
             backgroundWorker.WorkerReportsProgress = true;
-  
+
 
             InitializeComponent();
 
@@ -52,7 +60,8 @@ namespace _01electronics_marketing
 
             }
 
-            if (!File.Exists(Directory.GetCurrentDirectory() + "\\LastInstruction.txt")) {
+            if (!File.Exists(Directory.GetCurrentDirectory() + "\\LastInstruction.txt"))
+            {
 
                 File.Create(Directory.GetCurrentDirectory() + "\\LastInstruction.txt").Close();
             }
@@ -63,31 +72,33 @@ namespace _01electronics_marketing
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Server");
             }
 
-            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Client.txt")) {
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Client.txt"))
+            {
 
-                 File.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Client.txt").Close();
-           
+                File.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Client.txt").Close();
+
             }
 
 
             if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Server.txt"))
             {
 
-                 File.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Server.txt").Close();
+                File.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Server.txt").Close();
 
             }
 
-            SystemWatcher watcher = new SystemWatcher(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics", BASIC_MACROS.CLIENT_ID,backgroundWorker);
 
 
-           String[] instructions=File.ReadAllLines(Directory.GetCurrentDirectory() + "\\LastInstruction.txt");
+
+            String[] instructions = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\LastInstruction.txt");
             File.Delete(Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
-           File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Server.txt", Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
+            File.Copy(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Server.txt", Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
 
-          string[]serverInstructions=File.ReadAllLines(Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
+            string[] serverInstructions = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\ServerDownload.txt");
 
-         
-       
+
+
+
 
             if (fileFound == false)
             {
@@ -96,38 +107,77 @@ namespace _01electronics_marketing
                 backgroundWorker.RunWorkerAsync();
             }
 
-
            else if (serverInstructions.Length != 0) {
 
                 DateTime dateTime = Convert.ToDateTime(serverInstructions[serverInstructions.Length - 1].Split(',')[0]);
 
                    if (instructions.Length != 0)
                    {
-
-
                          if (Convert.ToDateTime(instructions[0]) != dateTime)
                          {
+                            BackgroundWorker synchronize = new BackgroundWorker();
+                            synchronize.DoWork += SynchronizeDoWork;
 
-                            ftpServer.UploadForSynchronization();
+                            synchronize.RunWorkerAsync();
                          }
 
                    }
-
            }
 
+            timer.Elapsed += TimerElapsed;
+            timer.Start();
+
+
+
+            //else if (serverInstructions.Length != 0)
+            //{
+
+            //    DateTime dateTime = Convert.ToDateTime(serverInstructions[serverInstructions.Length - 1].Split(',')[0]);
+
+            //    if (instructions.Length != 0)
+            //    {
 
 
 
 
+            //        if (Convert.ToDateTime(instructions[0]) != dateTime)
+            //        {
 
-            //timer.Elapsed += (o, s) => Task.Factory.StartNew(() => OnTimerElapsed(o, s));
-            //timer.Start();
+            //            ftpServer.UploadForSynchronization();
+            //        }
 
-            CategoriesPage statisticsPage = new CategoriesPage(ref mLoggedInUser);
+            //    }
+
+            //}
+
+
+
+
+            CategoriesPage statisticsPage = new CategoriesPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(statisticsPage);
 
         }
 
+        private void TimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (backgroundWorker.IsBusy == true)
+                return;
+
+            BackgroundWorker sync = new BackgroundWorker();
+            sync.DoWork += SyncDoWork;
+            sync.RunWorkerAsync();
+        
+        }
+
+        private void SyncDoWork(object sender, DoWorkEventArgs e)
+        {
+            ftpServer.UploadForSynchronization();
+        }
+
+        private void SynchronizeDoWork(object sender, DoWorkEventArgs e)
+        {
+            ftpServer.UploadForSynchronization();
+        }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -148,12 +198,12 @@ namespace _01electronics_marketing
         {
         }
 
-        private void BackgroundStart(object sender,DoWorkEventArgs e)
+        private void BackgroundStart(object sender, DoWorkEventArgs e)
         {
             backgroundWorker.WorkerReportsProgress = true;
 
             String errorMessage = String.Empty;
-            if (!ftpServer.DownloadFolder(BASIC_MACROS.MODELS_PHOTOS_PATH,Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\", ref errorMessage))
+            if (!ftpServer.DownloadFolder(BASIC_MACROS.MODELS_PHOTOS_PATH, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\01 Electronics\\erp_system\\products_photos\\", ref errorMessage))
             {
                 return;
             }
@@ -213,12 +263,13 @@ namespace _01electronics_marketing
                     }
 
                 }
-                else {
+                else
+                {
                     e.Cancel = false;
                 }
 
             });
-           
+
         }
 
         private void NavigationWindow_Closed(object sender, EventArgs e)

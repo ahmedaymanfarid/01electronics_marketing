@@ -25,7 +25,8 @@ namespace _01electronics_marketing
         //SQL QUERY
         protected String sqlQuery;
         protected CommonQueries commonQueries;
-
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
         //SQL OBJECTS
         protected SQLServer sqlDatabase;
 
@@ -35,7 +36,7 @@ namespace _01electronics_marketing
         protected int mViewAddCondition;
         private Expander currentExpander;
         private Expander previousExpander;
-        public BrandsPage(ref Employee mLoggedInUser, ref Brand mSelectedProduct)
+        public BrandsPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUser, ref Brand mSelectedProduct)
         {
             InitializeComponent();
             loggedInUser = mLoggedInUser;
@@ -44,7 +45,11 @@ namespace _01electronics_marketing
 
             sqlDatabase = new SQLServer();
             ftpServer = new FTPServer();
-            commonQueries = new CommonQueries();
+
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
+
             brandsList = new List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT>();
             brandsNames = new List<String>();
 
@@ -296,7 +301,7 @@ namespace _01electronics_marketing
             SelectedModel.SetBrandName(selectedProduct.GetBrandName());
             SelectedModel.SetCategoryName(selectedProduct.GetCategoryName());
 
-            ModelsPage productsPage = new ModelsPage(ref loggedInUser, ref SelectedModel /*ref selectedProduct*/);
+            ModelsPage productsPage = new ModelsPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref SelectedModel /*ref selectedProduct*/);
             this.NavigationService.Navigate(productsPage);
 
 
@@ -355,7 +360,7 @@ namespace _01electronics_marketing
             SelectedModel.SetBrandName(selectedProduct.GetBrandName());
             SelectedModel.SetCategoryName(selectedProduct.GetCategoryName());
 
-            ModelsPage productsPage = new ModelsPage(ref loggedInUser, ref SelectedModel /*ref selectedProduct*/);
+            ModelsPage productsPage = new ModelsPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref SelectedModel /*ref selectedProduct*/);
             this.NavigationService.Navigate(productsPage);
         }
 
@@ -408,7 +413,7 @@ namespace _01electronics_marketing
         }
         private void OnButtonClickedProducts(object sender, MouseButtonEventArgs e)
         {
-            CategoriesPage productsPage = new CategoriesPage(ref loggedInUser);
+            CategoriesPage productsPage = new CategoriesPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(productsPage);
         }
 
@@ -467,7 +472,7 @@ namespace _01electronics_marketing
         private void onBtnAddClick(object sender, MouseButtonEventArgs e)
         {
             mViewAddCondition = COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION;
-            AddBrand addBrandWindow = new AddBrand(ref selectedProduct, ref loggedInUser, ref mViewAddCondition ,ref brandsList);
+            AddBrand addBrandWindow = new AddBrand(ref commonQueries, ref commonFunctions, ref integrityChecks, ref selectedProduct, ref loggedInUser, ref mViewAddCondition ,ref brandsList);
             addBrandWindow.Closed += OnCloseBrandsWindow;
             addBrandWindow.Show();
         }
@@ -490,7 +495,7 @@ namespace _01electronics_marketing
             
             
             mViewAddCondition = COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION;
-            AddBrand addBrandWindow = new AddBrand(ref selectedProduct, ref loggedInUser, ref mViewAddCondition, ref brandsList);
+            AddBrand addBrandWindow = new AddBrand(ref commonQueries, ref commonFunctions, ref integrityChecks, ref selectedProduct, ref loggedInUser, ref mViewAddCondition, ref brandsList);
             addBrandWindow.Show();
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -21,17 +21,23 @@ namespace _01electronics_marketing
         private Employee loggedInUser;
         private CommonQueries commonQueries;
         private List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT> categories;
+
+        private CommonFunctions commonFunctions;
+        private IntegrityChecks integrityChecks;
+
         protected List<String> categoriesSummaryPoints;
         protected String sqlQuery;
         protected SQLServer sqlDatabase;
         protected FTPServer ftpServer;
 
-        public CategoriesPage(ref Employee mLoggedInUser)
+        public CategoriesPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUserr)
         {
             InitializeComponent();
 
-            loggedInUser = mLoggedInUser;
-            commonQueries = new CommonQueries();
+            loggedInUser = mLoggedInUserr;
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecks = mIntegrityChecks;
             sqlDatabase = new SQLServer();
             ftpServer = new FTPServer();
             categories = new List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT>();
@@ -148,7 +154,7 @@ namespace _01electronics_marketing
         //}
         private void OnButtonClickedProducts(object sender, MouseButtonEventArgs e)
         {
-            CategoriesPage productsPage = new CategoriesPage(ref loggedInUser);
+            CategoriesPage productsPage = new CategoriesPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
             this.NavigationService.Navigate(productsPage);
         }
         private void OnButtonClickedStatistics(object sender, RoutedEventArgs e)
@@ -167,8 +173,14 @@ namespace _01electronics_marketing
             Product selectedProduct = new Product();
             selectedProduct.SetCategoryID(int.Parse(tmp));
 
-            ProductsPage productsPage = new ProductsPage(ref loggedInUser, ref selectedProduct);
+            ProductsPage productsPage = new ProductsPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser, ref selectedProduct);
             this.NavigationService.Navigate(productsPage);
+        }
+
+        private void OnButtonClickedPriceList(object sender, MouseButtonEventArgs e)
+        {
+            PriceListPage priceListPage = new PriceListPage(ref commonQueries, ref commonFunctions, ref integrityChecks, ref loggedInUser);
+            this.NavigationService.Navigate(priceListPage);
         }
 
         //private void OnButtonClickedMyProfile(object sender, MouseButtonEventArgs e)

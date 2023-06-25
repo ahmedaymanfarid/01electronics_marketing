@@ -31,7 +31,7 @@ namespace _01electronics_marketing
     public partial class AddProductWindow : Window
     {
         private Employee loggedInUser;
-        
+
         protected String errorMessage;
         protected SQLServer sqlDatabase;
 
@@ -40,7 +40,7 @@ namespace _01electronics_marketing
 
         //protected BackgroundWorker uploadBackground;
         //protected BackgroundWorker downloadBackground;
-        
+
         protected int counter;
         protected int viewAddCondition;
 
@@ -73,8 +73,8 @@ namespace _01electronics_marketing
 
         ProgressBar progressBar = new ProgressBar();
 
-        
-        public AddProductWindow(ref Product pProduct , ref Employee mLoggedInUser , ref int mViewAddCondition)
+
+        public AddProductWindow(ref Product pProduct, ref Employee mLoggedInUser, ref int mViewAddCondition)
         {
             counter = 0;
             loggedInUser = mLoggedInUser;
@@ -85,7 +85,7 @@ namespace _01electronics_marketing
             integrityChecks = new IntegrityChecks();
             product = pProduct;
             viewAddCondition = mViewAddCondition;
-            
+
 
             ftpFiles = new List<string>(); progressBar.Style = (Style)FindResource("ProgressBarStyle");
             progressBar.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
@@ -105,9 +105,9 @@ namespace _01electronics_marketing
             //downloadBackground.RunWorkerCompleted += OnDownloadBackgroundComplete;
             //downloadBackground.WorkerReportsProgress = true;
 
-               serverFolderPath = product.GetProductFolderServerPath();
+            serverFolderPath = product.GetProductFolderServerPath();
 
-            if(viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
+            if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_ADD_CONDITION)
             {
                 InsertDragAndDropOrBrowseGrid();
                 product.GetNewProductID();
@@ -115,12 +115,14 @@ namespace _01electronics_marketing
                 {
                     File.Delete(product.GetProductPhotoLocalPath());
 
-
                 }
 
-                catch { 
-                
-                
+
+                catch
+                {
+
+
+
                 }
             }
             else
@@ -136,7 +138,7 @@ namespace _01electronics_marketing
                     //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
                     BitmapImage src = new BitmapImage();
                     src.BeginInit();
-                      src.UriSource = new Uri(product.GetProductPhotoLocalPath(), UriKind.Relative);
+                    src.UriSource = new Uri(product.GetProductPhotoLocalPath(), UriKind.Relative);
                     src.CacheOption = BitmapCacheOption.OnLoad;
                     src.EndInit();
                     brandLogo.Source = src;
@@ -151,27 +153,26 @@ namespace _01electronics_marketing
                 catch
                 {
 
-
                     product.SetProductPhotoServerPath(product.GetProductFolderServerPath() + "/" + product.GetProductID() + ".jpg");
-                    if (product.DownloadPhotoFromServer(product.GetProductPhotoServerPath(),product.GetProductPhotoLocalPath()))
-                    {
 
-                        Image brandLogo = new Image();
-                        //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brand_id + ".jpg
-                        BitmapImage src = new BitmapImage();
-                        src.BeginInit();
-                        src.UriSource = new Uri(product.GetProductPhotoLocalPath(), UriKind.Relative);
-                        src.CacheOption = BitmapCacheOption.OnLoad;
-                        src.EndInit();
-                        brandLogo.Source = src;
-                        brandLogo.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-                        brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
-                        wrapPanel.Children.Add(brandLogo);
+                    //if (product.DownloadPhotoFromServer(product.GetProductPhotoServerPath(), product.GetProductPhotoLocalPath()))
+                    //{
+                    //    Image brandLogo = new Image();
+                    //    //string src = String.Format(@"/01electronics_crm;component/photos/brands/" + brandsList[i].brandId + ".jpg
+                    //    BitmapImage src = new BitmapImage();
+                    //    src.BeginInit();
+                    //    src.UriSource = new Uri(product.GetProductPhotoLocalPath(), UriKind.Relative);
+                    //    src.CacheOption = BitmapCacheOption.OnLoad;
+                    //    src.EndInit();
+                    //    brandLogo.Source = src;
+                    //    brandLogo.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                    //    brandLogo.VerticalAlignment = VerticalAlignment.Stretch;
+                    //    wrapPanel.Children.Add(brandLogo);
 
-                        uploadFilesStackPanel.Children.Add(wrapPanel);
+                    //    uploadFilesStackPanel.Children.Add(wrapPanel);
 
 
-                    }
+                    //}
                 }
                 uploadFilesStackPanel.Children.Clear();
                 uploadFilesStackPanel.Children.Add(wrapPanel);
@@ -179,7 +180,7 @@ namespace _01electronics_marketing
             checkEmployee();
         }
 
-  
+
         private void OnBtnClkSaveChanges(object sender, RoutedEventArgs e)
         {
 
@@ -206,18 +207,19 @@ namespace _01electronics_marketing
 
                 if (!product.IssueNewProduct())
                     return;
-                SystemWatcher.fromSoftware = true;
+                //SystemWatcher.fromSoftware = true;
                 File.Copy(localFolderPath, product.GetProductPhotoLocalPath());
+                ftpObject.Create(product.GetProductPhotoLocalPath());
                 this.Close();
-    
+
             }
             else
             {
                 product.SetProductName(ProductNameTextBox.Text);
-               // product.SetsummaryPoints(summerypointsTextBox.Text);
+                // product.SetsummaryPoints(summerypointsTextBox.Text);
                 if (productNameEdited)
                     product.UpdateIntoProductName();
-                if(productSummaryPointsEdited)
+                if (productSummaryPointsEdited)
                     product.UpdateIntoProductSummaryPoints();
 
             }
@@ -229,7 +231,7 @@ namespace _01electronics_marketing
         {
             if (summerypointsTextBox.Text.Length <= 150)
             {
-               // quotation.SetQuotationAdditionalDescription(summerypointsTextBox.Text.ToString());
+                // quotation.SetQuotationAdditionalDescription(summerypointsTextBox.Text.ToString());
                 counterLabel.Content = 150 - summerypointsTextBox.Text.Length;
             }
             else
@@ -238,7 +240,7 @@ namespace _01electronics_marketing
                 summerypointsTextBox.Select(summerypointsTextBox.Text.Length, 0);
             }
         }
-        
+
         private void OnDropUploadFilesStackPanel(object sender, DragEventArgs e)
         {
             if (ftpFiles.Count == 0)
@@ -322,7 +324,7 @@ namespace _01electronics_marketing
             Image icon = new Image();
 
             LoadIcon(ref icon);
-            
+
             //resizeImage(ref icon, 350, 150);
             UploadIconGrid.Children.Add(icon);
             Grid.SetRow(icon, 0);
@@ -333,7 +335,7 @@ namespace _01electronics_marketing
             name.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             UploadIconGrid.Children.Add(name);
             Grid.SetRow(name, 1);
-            
+
             Label status = new Label();
             BrushConverter brush = new BrushConverter();
             if (mStatus == "pending")
@@ -536,7 +538,7 @@ namespace _01electronics_marketing
         {
             BackgroundWorker uploadBackground = sender as BackgroundWorker;
 
-           // File.Delete(product.GetProductPhotoLocalPath());
+            // File.Delete(product.GetProductPhotoLocalPath());
 
             uploadBackground.ReportProgress(50);
             if (ftpObject.UploadFile(localFolderPath, serverFolderPath + serverFileName, BASIC_MACROS.SEVERITY_HIGH, ref errorMessage))
@@ -614,16 +616,16 @@ namespace _01electronics_marketing
         //            InsertIconGrid("failed", localFolderPath);
         //        }
 
-                
+
         //    }
 
         //    else
         //    {
         //        overwriteFileGrid.Children.Remove(progressBar);
-            
+
         //        BrushConverter brush = new BrushConverter();
         //        Label overwriteFileLabel = (Label)overwriteFileGrid.Children[2];
-                
+
         //        if (fileUploaded == true)
         //        {
         //            overwriteFileLabel.Content = "SUBMITTED";
@@ -656,7 +658,7 @@ namespace _01electronics_marketing
         ///INSERT FUNCTIONS
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-       
+
         private void InsertIconGridFromServer(int i)
         {
             UploadIconGrid.Margin = new Thickness(24);
@@ -701,7 +703,7 @@ namespace _01electronics_marketing
 
             wrapPanel.Children.Add(UploadIconGrid);
         }
-       
+
 
         private void InsertDragAndDropOrBrowseGrid()
         {
@@ -859,7 +861,7 @@ namespace _01electronics_marketing
                     if (ftpFiles[i] != "." || ftpFiles[i] != "..")
                         InsertIconGridFromServer(i);
                 }
-                
+
             }
             else if (ftpFiles.Count == 0)
             {
@@ -973,7 +975,7 @@ namespace _01electronics_marketing
         //    storyboard.Begin(this);
         //}
 
-     
+
 
 
 
@@ -993,7 +995,7 @@ namespace _01electronics_marketing
         {
             if (viewAddCondition == COMPANY_WORK_MACROS.PRODUCT_VIEW_CONDITION)
             {
-                if(ProductNameTextBox.Text == String.Empty)
+                if (ProductNameTextBox.Text == String.Empty)
                 {
                     MessageBox.Show("Product name can't be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -1002,8 +1004,8 @@ namespace _01electronics_marketing
                 ProductNameLabel.Visibility = Visibility.Visible;
                 ProductNameTextBox.Visibility = Visibility.Collapsed;
             }
-            
-            
+
+
             if (ProductNameTextBox.Text.ToString() != product.GetProductName())
             {
                 BrushConverter brushConverter = new BrushConverter();
@@ -1032,13 +1034,13 @@ namespace _01electronics_marketing
                 }
 
                 ProductSummeryPointstextblock.Text = summerypointsTextBox.Text;
-                
+
                 summerypointsTextBox.Visibility = Visibility.Collapsed;
                 ProductSummeryPointstextblock.Visibility = Visibility.Visible;
                 remainingCharactersWrapPanel.Visibility = Visibility.Collapsed;
             }
-            
-            if (summerypointsTextBox.Text.ToString() != product.GetSummaryPoints()) 
+
+            if (summerypointsTextBox.Text.ToString() != product.GetSummaryPoints())
             {
                 BrushConverter brushConverter = new BrushConverter();
                 ProductSummeryPointstextblock.Foreground = (Brush)brushConverter.ConvertFrom("#FF0000");
@@ -1083,7 +1085,7 @@ namespace _01electronics_marketing
                 ProductSummeryPointstextblock.Visibility = Visibility.Visible;
                 picHint.Visibility = Visibility.Hidden;
 
-                
+
                 saveChangesButton.IsEnabled = false;
                 remainingCharactersWrapPanel.Visibility = Visibility.Collapsed;
                 if (loggedInUser.GetEmployeeTeamId() == COMPANY_ORGANISATION_MACROS.ERP_SYSTEM_DEVELOPMENT_TEAM_ID ||
@@ -1094,8 +1096,8 @@ namespace _01electronics_marketing
                     editPictureButton.Visibility = Visibility.Visible;
                 }
             }
-          
-            
+
+
 
         }
 
@@ -1119,9 +1121,9 @@ namespace _01electronics_marketing
             product.SetProductPhotoLocalPath(localFolderPath + "/" + localFileName);
 
 
-                 wrapPanel.Children.Clear();
-                uploadFilesStackPanel.Children.Clear();
-                product.UploadPhotoToServer(product.GetProductPhotoServerPath(),product.GetProductPhotoLocalPath());
+            wrapPanel.Children.Clear();
+            uploadFilesStackPanel.Children.Clear();
+            //product.UploadPhotoToServer(product.GetProductPhotoServerPath(), product.GetProductPhotoLocalPath());
 
             serverFileName = (String)product.GetProductID().ToString() + ".jpg";
             //localFolderPath = product.GetProductPhotoLocalPath();
@@ -1134,7 +1136,7 @@ namespace _01electronics_marketing
             UploadIconGrid.Children.Clear();
             UploadIconGrid.RowDefinitions.Clear();
             InsertIconGrid("pending", localFolderPath);
-            
+
             progressBar.Visibility = Visibility.Visible;
             //currentSelectedFile.Children.Add(progressBar);
             Grid.SetRow(progressBar, 3);

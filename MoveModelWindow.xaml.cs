@@ -19,15 +19,21 @@ namespace _01electronics_marketing
     {
         CommonQueries commonQueries;
         Model currentModell;
-        List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT> categories=new List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT>();
-        List<PRODUCTS_STRUCTS.PRODUCT_TYPE_STRUCT> products = new List<PRODUCTS_STRUCTS.PRODUCT_TYPE_STRUCT>();
-        List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brands = new List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT>();
-        public MoveModelWindow(Model CurrentModel)
+
+        List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT> categories;
+        List<PRODUCTS_STRUCTS.PRODUCT_TYPE_STRUCT> products;
+        List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT> brands;
+
+        FTPServer ftbServer;
+        public MoveModelWindow(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks, ref Employee mLoggedInUserr, Model CurrentModel)
         {
             InitializeComponent();
             currentModell = CurrentModel;
-            commonQueries = new CommonQueries();
+            commonQueries = mCommonQueries;
 
+            categories = new List<PRODUCTS_STRUCTS.PRODUCT_CATEGORY_STRUCT>();
+            products = new List<PRODUCTS_STRUCTS.PRODUCT_TYPE_STRUCT>();
+            brands = new List<PRODUCTS_STRUCTS.PRODUCT_BRAND_STRUCT>();
             modelTextBox.Text = currentModell.GetModelName();
             modelTextBox.IsReadOnly = true;
 
@@ -75,7 +81,9 @@ namespace _01electronics_marketing
           
 
             int productId = products[ProductsCombo.SelectedIndex].type_id;
-            int brand_id = brands[BrandComboBox.SelectedIndex].brand_id;
+
+            int brandId = brands[BrandComboBox.SelectedIndex].brand_id;
+
 
             Model newModel = new Model();
 
@@ -101,13 +109,16 @@ namespace _01electronics_marketing
             newModel.GetNewModelPhotoLocalPath();
 
 
-            SystemWatcher.fromSoftware = true;
+            //SystemWatcher.fromSoftware = true;
             if (File.Exists(currentModell.GetModelPhotoLocalPath()))
             {
                 if (!File.Exists(newModel.GetModelPhotoLocalPath())) {
 
                     File.Copy(currentModell.GetModelPhotoLocalPath(), newModel.GetModelPhotoLocalPath());
                     File.Delete(currentModell.GetModelPhotoLocalPath());
+                    ftbServer.Create(newModel.GetModelPhotoLocalPath());
+                    ftbServer.Delete(currentModell.GetModelPhotoLocalPath());
+
                 }                
             }
 

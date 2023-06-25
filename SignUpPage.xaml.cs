@@ -15,8 +15,10 @@ namespace _01electronics_marketing
     public partial class SignUpPage : Page
     {
         private SQLServer sqlServer = new SQLServer();
-        private IntegrityChecks integrityChecks = new IntegrityChecks();
-        private CommonQueries commonQueries = new CommonQueries();
+
+        private IntegrityChecks integrityChecker;
+        private CommonQueries commonQueries;
+        private CommonFunctions commonFunctions;
 
         private Employee signupEmployee = new Employee();
 
@@ -25,8 +27,11 @@ namespace _01electronics_marketing
         String employeeHashedPassword;
 
         protected String errorMessage;
-        public SignUpPage()
+        public SignUpPage(ref CommonQueries mCommonQueries, ref CommonFunctions mCommonFunctions, ref IntegrityChecks mIntegrityChecks)
         {
+            commonQueries = mCommonQueries;
+            commonFunctions = mCommonFunctions;
+            integrityChecker = mIntegrityChecks;
             InitializeComponent();
         }
 
@@ -99,7 +104,7 @@ namespace _01electronics_marketing
             if (!InsertIntoEmployeePersonalEmails())
                 return;
 
-            SignInPage signIn = new SignInPage();
+            SignInPage signIn = new SignInPage(ref commonQueries, ref commonFunctions, ref integrityChecker);
             this.NavigationService.Navigate(signIn);
         }
 
